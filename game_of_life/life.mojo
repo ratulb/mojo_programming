@@ -15,3 +15,4 @@ fn main() -> None:
         List(0, 1, 1, 0, 0, 0, 0, 0),
     )
     print(String(Grid(glider)))
+    print(Grid(glider))

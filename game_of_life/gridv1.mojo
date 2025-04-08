@@ -1,6 +1,7 @@
 @value
-struct Grid(Stringable):
+struct Grid(Stringable, Writable):
     var data: List[List[Int]]
+
     fn __init__(out self, data: List[List[Int]]):
         self.data = data
 
@@ -17,7 +18,7 @@ struct Grid(Stringable):
             return 0
 
     fn __str__(self) -> String:
-        capacity = self.row_count() * self.col_count() 
+        capacity = self.row_count() * self.col_count()
         if capacity == 0:
             return String()
         s = String(capacity=capacity)
@@ -32,3 +33,6 @@ struct Grid(Stringable):
                 s += "\n"
             row_index += 1
         return s
+
+    fn write_to[W: Writer](self, mut writer: W) -> None:
+        writer.write(self.__str__())
