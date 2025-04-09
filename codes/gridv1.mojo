@@ -1,6 +1,5 @@
 import random
 
-
 @value
 struct Grid(Stringable, Writable):
     var data: List[List[Int, True]]
