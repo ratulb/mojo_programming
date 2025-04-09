@@ -19,7 +19,7 @@ jobs:
         uses: actions/configure-pages@v3
 
       - name: Upload Static Site Files
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           path: './docs'
 
