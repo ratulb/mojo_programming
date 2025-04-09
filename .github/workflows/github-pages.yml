@@ -12,16 +12,19 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages     # ✅ Required to trigger the GitHub Pages deployment
+
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4  # ✅ Use v3, not v4
+        uses: actions/configure-pages@v3
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3  # ✅ Use v2, not v3
+        uses: actions/upload-pages-artifact@v2
         with:
-          path: './docs'  # ✅ Points to your rendered static site (or markdown folder)
+          path: './docs'  # Make sure this is the directory with your index.md
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4  # ✅ Use v2, not v4
+        uses: actions/deploy-pages@v2
