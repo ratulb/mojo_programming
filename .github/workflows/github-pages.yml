@@ -10,30 +10,22 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
-
+      - uses: actions/checkout@v3
+      
+      # If you need to build your docs (e.g., with Jekyll, MkDocs, etc.)
+      # Add those build steps here. For plain markdown, this may not be needed.
+      
       - name: Setup Pages
         uses: actions/configure-pages@v3
-
-      - name: Upload docs as artifact
+        
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          path: ./docs
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
+          # If you're using Jekyll, you might need to use './_site' instead
+          path: './docs'
+          
       - name: Deploy to GitHub Pages
-        id: deployment
         uses: actions/deploy-pages@v2
