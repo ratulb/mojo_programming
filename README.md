@@ -1,15 +1,18 @@
-# mojo_programming
-Programming problems in mojo
+# Mojo 🔥 Programming
 
+Welcome to the **Mojo Programming** repository!  
+This repo contains programming problems and solutions implemented using the **[Mojo](https://www.modular.com/mojo)** language.
 
-Issues:
+---
 
-If running mojo in ubuntu complains with message like no suitable compiler found etc, run thefollowing command:
+## 📌 Issues & Fixes
 
-sudo apt update 
+If running Mojo on Ubuntu gives an error like:
+
+> **No suitable compiler found** or similar build issues,
+
+Run the following commands to install the necessary dependencies:
+
+```bash
+sudo apt update
 sudo apt install -y build-essential
-
-We, might need to run the following commands too:
-
-sudo apt-get update
-sudo apt-get install zlib1g-dev libtinfo-dev
