@@ -21,7 +21,7 @@ jobs:
       - name: Upload Static Site Files
         uses: actions/upload-pages-artifact@v2
         with:
-          path: '.'
+          path: './docs'
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
