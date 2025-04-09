@@ -24,4 +24,4 @@ jobs:
           path: './docs'  # ✅ Points to your rendered static site (or markdown folder)
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2  # ✅ Use v2, not v4
+        uses: actions/deploy-pages@v4  # ✅ Use v2, not v4
