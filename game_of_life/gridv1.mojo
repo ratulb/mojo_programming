@@ -1,3 +1,6 @@
+import random
+
+
 @value
 struct Grid(Stringable, Writable):
     var data: List[List[Int]]
@@ -36,3 +39,20 @@ struct Grid(Stringable, Writable):
 
     fn write_to[W: Writer](self, mut writer: W) -> None:
         writer.write(self.__str__())
+
+    fn __getitem__(self, row: Int, col: Int) -> Int:
+        return self.data[row][col]
+
+    fn __setitem__(mut self, row: Int, col: Int, value: Int) -> None:
+        self.data[row][col] = value
+
+    @staticmethod
+    fn new(rows: Int, cols: Int) -> Self:
+        random.seed()
+        data = List[List[Int]](capacity=rows)
+        for row in range(rows):
+            record = List[Int](capacity=cols)
+            for col in range(cols):
+                record.append(Int(random.random_si64(0, 1)))
+            data.append(record)
+        return Self(data)
