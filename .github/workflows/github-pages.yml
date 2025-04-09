@@ -25,7 +25,7 @@ jobs:
         uses: actions/upload-pages-artifact@v2
         with:
           # If you're using Jekyll, you might need to use './_site' instead
-          path: './docs'
+          path: './_site'
           
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v2
