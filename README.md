@@ -75,3 +75,9 @@ Run the mojo program:
 ```bash
 !magic run mojo hello.mojo
 ```
+---
+Build and run the binary if you want:
+```bash
+!magic run mojo build hello.mojo
+!./hello
+```
