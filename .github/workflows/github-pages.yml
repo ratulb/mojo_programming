@@ -13,19 +13,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       
       # If you need to build your docs (e.g., with Jekyll, MkDocs, etc.)
       # Add those build steps here. For plain markdown, this may not be needed.
       
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v4
         
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
         with:
           # If you're using Jekyll, you might need to use './_site' instead
-          path: './_site'
+          path: './docs'
           
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
