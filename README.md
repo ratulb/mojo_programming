@@ -37,4 +37,41 @@ sudo apt-get install zlib1g-dev libtinfo-dev
 * zlib1g-dev: Provides libz.so
 * libtinfo-dev: Provides libtinfo.so (used for terminal interfaces)
 
+## 📌 Running mojo in google colab
+Run the following commands in notebook cells.
 
+Install magic:
+```bash
+!curl -ssL https://magic.modular.com/ | bash
+```
+---
+Upadate PATH:
+
+```python
+import os
+os.environ['PATH'] += ':/root/.modular/bin'
+```
+---
+Create a example mojo project:
+```bash
+!magic init example --format mojoproject
+```
+---
+Go inside project folder:
+```bash
+%cd example/
+```
+Create a sample hello.mojo file:
+
+```bash
+%%bash
+cat > hello.mojo <<EOF
+fn main():
+  print("Hello word from mojo!")
+EOF
+```
+----
+Run the mojo program:
+```bash
+!magic run mojo hello.mojo
+```
