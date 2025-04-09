@@ -1,5 +1,15 @@
 from gridv1 import Grid
 
-fn main() -> None:
-    start = Grid.new(8,16)
-    print(start);
+fn run(owned grid: Grid) raises -> None:
+    while True:
+        print(grid)
+        print()
+        print()
+        if input("Enter 'q' to quit or press <Enter> to continue: ") == "q":
+            break
+        grid.mutate()
+
+
+fn main() raises -> None:
+    start = Grid.new(16, 16)
+    run(start)
