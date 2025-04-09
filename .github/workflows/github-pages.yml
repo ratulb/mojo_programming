@@ -27,4 +27,4 @@ jobs:
           path: './docs'  # Make sure this is the directory with your index.md
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
