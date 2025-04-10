@@ -1,5 +1,6 @@
 from gridv1 import Grid
 
+
 fn run(owned grid: Grid) raises -> None:
     while True:
         print("Current mutation:\n\n")
