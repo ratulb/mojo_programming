@@ -63,3 +63,6 @@ fn two_sum(nums: List[Int], target: Int) -> Tuple[Int, Int]:
     # Return the result tuple
     return indices
 ```
+
+
+[Source code](https://github.com/ratulb/mojo_programming/blob/main/codes/two_sum.mojo)
