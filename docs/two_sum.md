@@ -32,7 +32,7 @@ Output: [0,1]
 -109 <= target <= 109
 Only one valid answer exists.
  
-```mojo
+```python
 fn two_sum(nums: List[Int], target: Int) -> Tuple[Int, Int]:
     # Default return value: (-1, -1) if no valid pair is found
     indices = (-1, -1)
