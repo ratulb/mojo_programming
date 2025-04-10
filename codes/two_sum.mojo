@@ -1,20 +1,38 @@
+# Two Sum Problem:
+# Given an array of integers `nums` and a target value `target`,
+# return the indices of two numbers such that they add up to `target`.
+
 from collections import Dict
 
-
 fn two_sum(nums: List[Int], target: Int) -> Tuple[Int, Int]:
+    # Default return value: (-1, -1) if no valid pair is found
     indices = (-1, -1)
+
+    # Early exit: If list has 0 or 1 elements, no pair can be formed
     if len(nums) <= 1:
         return indices
-    var value_indices = Dict[Int, Int]()  # value -> index of value
+
+    # Create a dictionary to map each value to its index for quick lookup
+    # Format: value_indices[value] = index
+    var value_indices = Dict[Int, Int]()  # value -> index
+
+    # Iterate through the array
     for idx in range(len(nums)):
+        # Calculate the number needed to reach the target
         diff = target - nums[idx]
+
+        # If this difference was seen before, we found the pair
         if diff in value_indices:
+            # Retrieve the stored index of the matching number
             indices[0] = value_indices.get(diff).value()
+            # Store the current index as the second of the pair
             indices[1] = idx
         else:
+            # Store the current number and its index for future reference
             value_indices[nums[idx]] = idx
-    return indices
 
+    # Return the result tuple
+    return indices
 
 fn two_sum_costly(nums: List[Int], target: Int) -> Tuple[Int, Int]:
     if len(nums) <= 1:
