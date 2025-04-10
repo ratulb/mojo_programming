@@ -109,3 +109,4 @@ struct Grid(Stringable, Writable):
                 if self[row, col] == 0 and alive_neighbours == 3:
                     self[row, col] = 1
 
+```
