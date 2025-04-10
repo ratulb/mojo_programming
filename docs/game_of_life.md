@@ -1,4 +1,4 @@
-## [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) is a simulation where grid cells evolve over time according to rules based on the number of neighboring live cells, creating complex patterns from simple beginnings.
+### [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) is a simulation where grid cells evolve over time according to rules based on the number of neighboring live cells, creating complex patterns from simple beginnings.
 
 ```python
 import random
