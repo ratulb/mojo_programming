@@ -109,4 +109,4 @@ struct Grid(Stringable, Writable):
                 # Rule 4: Any dead cell with exactly 3 live neighbors becomes alive
                 if self[row, col] == 0 and alive_neighbours == 3:
                     self[row, col] = 1
-```
+
