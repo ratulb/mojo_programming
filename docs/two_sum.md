@@ -33,10 +33,6 @@ Output: [0,1]
 Only one valid answer exists.
  
 ```mojo
-# Two Sum Problem:
-# Given an array of integers `nums` and a target value `target`,
-# return the indices of two numbers such that they add up to `target`.
-
 fn two_sum(nums: List[Int], target: Int) -> Tuple[Int, Int]:
     # Default return value: (-1, -1) if no valid pair is found
     indices = (-1, -1)
