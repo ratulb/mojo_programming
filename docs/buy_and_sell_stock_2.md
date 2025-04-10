@@ -11,7 +11,7 @@
 fn total_profit(prices: List[UInt]) -> UInt:
     var total_profit: UInt = 0  # Stores the maximum profit found so far
 
-    # Loop until sell_day reaches the end of the price list
+    # Loop until sell day reaches the end of the price list
     for day in range(1, len(prices)):
         if prices[day - 1] < prices[day]:
             # If selling is profitable, sell it & add up profit
@@ -33,4 +33,4 @@ fn main():
 
 ```
 
-[Source]()
+[Source](https://github.com/ratulb/mojo_programming/blob/main/codes/buy_and_sell_stock_2.mojo)
