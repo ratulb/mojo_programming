@@ -1,4 +1,4 @@
-# Function to calculate the maximum profit from a list of stock prices where you are allowed to make only one buy and one sell transaction. You must buy before you sell.
+### Function to calculate the maximum profit from a list of stock prices where you are allowed to make only one buy and one sell transaction. You must buy before you sell.
 
 ```python
 
