@@ -30,4 +30,7 @@ fn main():
     debug_assert(max_profit(prices) == 0, "Assertion failed")
 
 ```
-[Source](../codes/buy_and_sell_stock.mojo)
+
+
+
+[Source](https://github.com/ratulb/mojo_programming/blob/main/codes/buy_and_sell_stock.mojo)
