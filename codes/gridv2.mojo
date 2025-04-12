@@ -1,8 +1,7 @@
 import random
 from collections import Optional
 from memory import UnsafePointer, memcpy, memset_zero
-from gridv1 import Grid as Grid1
-
+from gridv1 import Grid as GridV1
 
 struct Grid(Stringable, Writable):
     var data: UnsafePointer[UInt8]
@@ -13,6 +12,15 @@ struct Grid(Stringable, Writable):
         self.rows = rows
         self.cols = cols
         self.data = UnsafePointer[UInt8].alloc(rows * cols)
+
+    fn __init__(out self, source: GridV1):
+        rows = len(source.data)
+        cols = len(source.data[0])
+        self = Self(rows, cols)
+        for row in range(rows):
+            for col in range(cols):
+                value = UInt8(source[row, col])
+                (self.data + row * cols + col)[] = value
 
     fn __copyinit__(out self, existing: Self):
         self.rows = existing.rows
@@ -104,14 +112,9 @@ fn run(owned grid: Grid) raises -> None:
 
 
 fn main() raises -> None:
-    grid1 = Grid.new(None, 16, 16)
-    print("s1: \n")
-    print(grid1)
-    grid = Grid.new(None, 0, 0)
-    g = grid.__moveinit__(grid1^)
-    print("s2: \n")
-    print(g)
-    # run(grid)
-    grid1 = g.__copyinit__(g)
-    print("s3: \n")
-    print(grid1)
+    grid_1 = GridV1.new(16, 16)
+    # run(grid_1)
+    print(grid_1)
+    print("Implicit conversion\n\n")
+    grid_2 = Grid(grid_1)
+    print(grid_2)

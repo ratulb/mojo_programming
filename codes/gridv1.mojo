@@ -1,4 +1,5 @@
 import random
+from gridv2 import Grid as GridV2
 
 
 # Grid is a 2D structure holding cell states (0: dead, 1: alive)
@@ -10,6 +11,19 @@ struct Grid(Stringable, Writable):
     # Constructor to initialize the grid with given data
     fn __init__(out self, data: List[List[Int, True]]):
         self.data = data
+
+    @implicit
+    fn __init__(out self, source: GridV2):
+        data = source.data
+        rows = source.rows
+        cols = source.cols
+        grid = List[List[Int, True]]()
+        for row in range(rows):
+            curr_row = List[Int, True]()
+            for col in range(cols):
+                curr_row.append(Int((data + (row * cols + col))[]))
+            grid.append(curr_row)
+        self.data = grid^
 
     # Get the number of rows in the grid
     fn row_count(self) -> Int:
@@ -106,6 +120,7 @@ struct Grid(Stringable, Writable):
                 if self[row, col] == 0 and alive_neighbours == 3:
                     self[row, col] = 1
 
+
 fn run(owned grid: Grid) raises -> None:
     while True:
         print("Current mutation:\n\n")
@@ -118,5 +133,9 @@ fn run(owned grid: Grid) raises -> None:
 
 
 fn main() raises -> None:
-    start = Grid.new(16, 16)
-    run(start)
+    grid_2 = GridV2.new(42, 16, 16)
+    #run(grid_2)
+    print(grid_2)
+    print("Implicit conversion\n\n")
+    grid_1 = Grid(grid_2)
+    print(grid_1)
