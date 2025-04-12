@@ -33,6 +33,9 @@ struct Grid(Stringable, Writable):
         self.data = existing.data
         self.rows = existing.rows
         self.cols = existing.cols
+    
+    fn __del__(owned self):
+        self.data.free()    
 
     fn __str__(self) -> String:
         capacity = self.rows * self.cols
