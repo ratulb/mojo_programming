@@ -4,6 +4,14 @@ Welcome to the **Mojo Programming** repository!
 This repo contains programming problems and solutions implemented using the **[Mojo](https://www.modular.com/mojo)** language.
 
 ---
+## 📌 Running mojo in google colab
+Run the following commands in notebook cells.
+
+Install magic:
+```bash
+!curl -ssL https://magic.modular.com/ | bash
+```
+---
 
 ## 📌 Issues & Fixes
 
@@ -37,14 +45,6 @@ sudo apt-get install zlib1g-dev libtinfo-dev
 * zlib1g-dev: Provides libz.so
 * libtinfo-dev: Provides libtinfo.so (used for terminal interfaces)
 
-## 📌 Running mojo in google colab
-Run the following commands in notebook cells.
-
-Install magic:
-```bash
-!curl -ssL https://magic.modular.com/ | bash
-```
----
 Upadate PATH:
 
 ```python
