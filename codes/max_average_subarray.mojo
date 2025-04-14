@@ -1,4 +1,4 @@
-# Find the maximum average of any contiguous subarray of length k from the array.
+# Find the maximum average of any contiguous subarray of length k(window size) from the array.
 
 fn find_max_average(read nums: List[Int], window_size: UInt) -> Float16:
     length = len(nums)
