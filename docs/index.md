@@ -6,3 +6,4 @@
 - [ Buy and Sell Stock 2](buy_and_sell_stock_2.md) ➔ Maximize profit by buying and selling multiple times.
 - [ Longest Substring Without Repeating Characters](longest_substr_no_char_repeats.md) ➔ Given a string s, find the length of the longest substring without duplicate characters.
 - [ Product of Array Except Self](product_of_array_except_self.md) ➔ Return an array where each element is the product of all others in the input array.
+- [ Maximum Subarray](max_sum_sub_array.md) ➔ Given an integer array nums, find the subarray with the largest sum, and return its sum.
