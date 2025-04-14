@@ -41,3 +41,5 @@ fn main():
     # Print the result
     print(result.__str__())
 ```
+
+[Soure](https://github.com/ratulb/mojo_programming/blob/main/codes/product_of_array_except_self.mojo)
