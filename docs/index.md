@@ -7,3 +7,4 @@
 - [ Longest Substring Without Repeating Characters](longest_substr_no_char_repeats.md) ➔ Given a string s, find the length of the longest substring without duplicate characters.
 - [ Product of Array Except Self](product_of_array_except_self.md) ➔ Return an array where each element is the product of all others in the input array.
 - [ Maximum Subarray](max_sum_sub_array.md) ➔ Given an integer array nums, find the subarray with the largest sum, and return its sum.
+- [ Maximum Average Subarray](max_average_subarray.md) ➔ Find the maximum average of any contiguous subarray of length k from the array.
