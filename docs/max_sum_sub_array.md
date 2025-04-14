@@ -4,6 +4,7 @@
 
 ### It maintains the maximum sum seen so far and runs in O(n) time with O(1) space.
 
+```python
 # Function to find the subarray with the maximum sum
 fn max_sum_sub_array(nums: List[Int]) -> Int:
     # If the list is empty, return 0 as no subarray exists
@@ -32,3 +33,5 @@ def main():
     nums = List(5,4,-1,7,8)
     max_sum = max_sum_sub_array(nums)
     debug_assert(max_sum == 23, "Assertion failed")
+```
+[Source](https://github.com/ratulb/mojo_programming/blob/main/codes/max_sum_sub_array.mojo)
