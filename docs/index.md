@@ -9,4 +9,4 @@
 - [ Maximum Subarray](max_sum_sub_array.md) ➔ Given an integer array nums, find the subarray with the largest sum, and return its sum.
 - [ Maximum Average Subarray](max_average_subarray.md) ➔ Find the maximum average of any contiguous subarray of length k from the array.
 - [ Maximum Product Subarray](max_subarray_product.md) ➔ Find the maximum product of a contiguous subarray.
-- [ Minimum in Rotated Sorted Array](min_in_sorted_rotated_arr.md) ➔ Given a sorted and rotated array, find the minimum element.
+- [ Minimum in Rotated Sorted Array](min_in_sorted_rotated_arr.md) ➔ Given a sorted and rotated array, find the minimum element.  
