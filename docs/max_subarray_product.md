@@ -1,5 +1,5 @@
 ### Given an integer array nums, find a subarray that has the largest product, and return the product.
-### Maintaining both curr_max and curr_min is essential because a negative number
+### Maintaining both curr_max and curr_min is essential because a negative number can flip a large minimum into a maximum.
 ### Resetting on zero lets you "break" the subarray and start fresh.
 
 
