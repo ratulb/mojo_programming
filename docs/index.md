@@ -8,3 +8,4 @@
 - [ Product of Array Except Self](product_of_array_except_self.md) ➔ Return an array where each element is the product of all others in the input array.
 - [ Maximum Subarray](max_sum_sub_array.md) ➔ Given an integer array nums, find the subarray with the largest sum, and return its sum.
 - [ Maximum Average Subarray](max_average_subarray.md) ➔ Find the maximum average of any contiguous subarray of length k from the array.
+- [ Maximum Product Subarray](max_subarray_product.md) ➔ Find the maximum product of a contiguous subarray.
