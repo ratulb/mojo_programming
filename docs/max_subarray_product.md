@@ -1,6 +1,8 @@
 ### Given an integer array nums, find a subarray that has the largest product, and return the product.
 ### Maintaining both curr_max and curr_min is essential because a negative number
 ### Resetting on zero lets you "break" the subarray and start fresh.
+
+
 ```python
 # Function to find the maximum product of a contiguous subarray
 fn max_subarray_product(read nums: List[Int]) -> Int:
@@ -41,7 +43,6 @@ fn max_subarray_product(read nums: List[Int]) -> Int:
         return max_product
 
 
-# Entry point
 fn main():
     nums = List(2, 3, -2, 4)  # Expected maximum product subarray: [2, 3] => 6
     max_product = max_subarray_product(nums)
