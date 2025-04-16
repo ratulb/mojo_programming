@@ -128,3 +128,5 @@ fn main() raises -> None:
 
 
 [Source code](https://github.com/ratulb/mojo_programming/blob/main/codes/gridv1.mojo)
+
+[Pointer implementation of grid](https://github.com/ratulb/mojo_programming/blob/main/codes/gridv2.mojo)
