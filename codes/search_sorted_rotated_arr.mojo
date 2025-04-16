@@ -4,7 +4,7 @@
 alias ItemType = ComparableCollectionElement
 
 
-fn find[Itmype: ItemType](items: List[ItmType], target: ItmType) -> Int:
+fn find[ItmType: ItemType](items: List[ItmType], target: ItmType) -> Int:
     if len(items) == 0:
         return -1
 
