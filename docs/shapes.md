@@ -39,7 +39,7 @@ struct Rectangle(Shape):
         return self.area() >= other.area()
 
 ```
-## Driver code
+## [Driver code](https://github.com/ratulb/mojo_programming/blob/main/codes/custom_struct_compare.mojo)
 ```python
 
 from search_sorted_rotated_arr import find
@@ -61,3 +61,4 @@ fn main():
     debug_assert(item_index == 5, "Assertion failed")
 
 ```
+## [Find implementation]()
