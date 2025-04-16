@@ -1,21 +1,13 @@
-### Below we define a custome[trait](https://docs.modular.com/mojo/manual/traits) called Shape which extends [ComparableCollectionElement](https://docs.modular.com/mojo/stdlib/builtin/value/ComparableCollectionElement). The custom trait adds a method called `area`. 
-### We define a [struct] (https://docs.modular.com/mojo/manual/structs) called `Rectangle` which implements all the that `Shape` declares and the ones that it iherits by extending `ComparableCollectionElement`.
-
-### `ComparableCollectionElement` extends [CollectionElement](https://docs.modular.com/mojo/stdlib/builtin/value/CollectionElement) and hence `Rectangle` is supposed to implement methods inherited from `CollectionElement` as well. But we get free implementation of those methods by decorating the `Rectangle`struct with the [@value](https://docs.modular.com/mojo/manual/decorators/value/) decorator.
-
 ### Define a custom [trait](https://docs.modular.com/mojo/manual/traits) named `Shape`, which extends 
 ### [ComparableCollectionElement](https://docs.modular.com/mojo/stdlib/builtin/value/ComparableCollectionElement). 
+
 ### The `Shape` trait introduces a single abstract method: `area`.
 
-### Next, define a [struct](https://docs.modular.com/mojo/manual/structs) called `Rectangle` that implements 
-### the `Shape` trait, as well as all methods required by `ComparableCollectionElement`, which is inherited via `Shape`.
+### Next, define a [struct](https://docs.modular.com/mojo/manual/structs) called `Rectangle` that implements the `Shape` trait, as well as all methods required by `ComparableCollectionElement` which is inherited `Shape`.
 
-### Since `ComparableCollectionElement` itself extends 
-### [CollectionElement](https://docs.modular.com/mojo/stdlib/builtin/value/CollectionElement), the `Rectangle` 
-### struct is also expected to implement the corresponding methods. However, by annotating `Rectangle` with 
-### the [@value](https://docs.modular.com/mojo/manual/decorators/value/) decorator, implementations of 
-### these collection-related methods are automatically provided by the Mojo standard library.
+### Since `ComparableCollectionElement` itself extends [CollectionElement](https://docs.modular.com/mojo/stdlib/builtin/value/CollectionElement), the `Rectangle` struct is also expected to implement the corresponding methods. However, by annotating `Rectangle` with the [@value](https://docs.modular.com/mojo/manual/decorators/value/) decorator, implementations of these collection-related methods are automatically provided by the Mojo compiler by default.
 
+```python
 
 trait Shape(ComparableCollectionElement):
     fn area(self) -> UInt:
@@ -46,4 +38,4 @@ struct Rectangle(Shape):
 
     fn __ge__(self, other: Self) -> Bool:
         return self.area() >= other.area()
-
+```
