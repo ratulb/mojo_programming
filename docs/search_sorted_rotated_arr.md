@@ -3,13 +3,9 @@
 
 ```python
 
-# Search in Rotated Sorted Array
-
-# Function to search for a target in a rotated sorted array
 alias ItemType = ComparableCollectionElement
 
-
-fn find[ElemType: ItemType](items: List[ElemType], target: ElemType) -> Int:
+fn find[ItmType: ItemType](items: List[ItmType], target: ItmType) -> Int:
     if len(items) == 0:
         return -1
 
