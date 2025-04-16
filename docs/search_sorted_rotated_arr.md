@@ -1,5 +1,5 @@
 ### Function to search for a target in a rotated sorted array
-### This implentation makes use of mojo generics. This would work for any type that conforms to `ComparableCollectionElement`.
+### This implentation makes use of mojo generics. This would work for any type that conforms to [ComparableCollectionElement](https://docs.modular.com/mojo/stdlib/builtin/value/ComparableCollectionElement)
 
 ```python
 
