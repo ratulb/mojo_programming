@@ -10,3 +10,4 @@
 - [ Maximum Average Subarray](max_average_subarray.md) ➔ Find the maximum average of any contiguous subarray of length k from the array.
 - [ Maximum Product Subarray](max_subarray_product.md) ➔ Find the maximum product of a contiguous subarray.
 - [ Minimum in Rotated Sorted Array](min_in_sorted_rotated_arr.md) ➔ Given a sorted and rotated array, find the minimum element.  
+- [ Search in Rotated Sorted Array](search_sorted_rotated_arr.md) ➔ Find element location in sorted rotated array.  
