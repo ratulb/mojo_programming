@@ -61,4 +61,6 @@ fn main():
     debug_assert(item_index == 5, "Assertion failed")
 
 ```
-## [Find implementation]()
+
+
+## [Find implementation](https://github.com/ratulb/mojo_programming/blob/main/codes/search_sorted_rotated_arr.mojo)
