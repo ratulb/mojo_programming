@@ -1,30 +1,30 @@
 # Search in Rotated Sorted Array
 
 # Function to search for a target in a rotated sorted array
-alias Element = ComparableCollectionElement
+alias ItemType = ComparableCollectionElement
 
 
-fn find[Item: Element](nums: List[Item], target: Item) -> Int:
-    if len(nums) == 0:
+fn find[ElemType: ItemType](items: List[ElemType], target: ElemType) -> Int:
+    if len(items) == 0:
         return -1
 
     # Initialize pointers for binary search
-    left, right = 0, len(nums) - 1
+    left, right = 0, len(items) - 1
 
     # Perform binary search
     while left <= right:
         mid = (left + right) // 2  # Calculate middle index
 
         # If the middle element is the target, return the index
-        if nums[mid] == target:
+        if items[mid] == target:
             return mid
 
         # Determine which half is sorted
-        if nums[mid] >= nums[left]:
+        if items[mid] >= items[left]:
             # Left half is sorted
 
             # Check if target lies outside the sorted left half
-            if target < nums[left] or target > nums[mid]:
+            if target < items[left] or target > items[mid]:
                 # Target is in the right half
                 left = mid + 1
             else:
@@ -34,7 +34,7 @@ fn find[Item: Element](nums: List[Item], target: Item) -> Int:
             # Right half is sorted
 
             # Check if target lies outside the sorted right half
-            if target > nums[right] or target < nums[mid]:
+            if target > items[right] or target < items[mid]:
                 # Target is in the left half
                 right = mid - 1
             else:
@@ -47,19 +47,19 @@ fn find[Item: Element](nums: List[Item], target: Item) -> Int:
 
 fn main():
     # Example 1: Target exists in the array
-    nums = List(4, 5, 6, 7, 0, 1, 2)
+    items = List(4, 5, 6, 7, 0, 1, 2)
     target = 0
     # Expected output: 4 (index of 0)
-    # debug_assert(find(nums, target) == 4, "Assertion failed")
+    # debug_assert(find(items, target) == 4, "Assertion failed")
 
     # Example 2: Target does not exist
-    nums = List(4, 5, 6, 7, 0, 1, 2)
+    items = List(4, 5, 6, 7, 0, 1, 2)
     target = 3
     # Expected output: -1
-    # debug_assert(find(nums, target) == -1, "Assertion failed")
+    # debug_assert(find(items, target) == -1, "Assertion failed")
 
     # Example 3: Single-element array, target not present
-    nums = List(1)
+    items = List(1)
     target = 0
     # Expected output: -1
-    debug_assert(find(nums, target) == -1, "Assertion failed")
+    debug_assert(find(items, target) == -1, "Assertion failed")
