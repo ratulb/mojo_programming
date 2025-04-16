@@ -2,7 +2,7 @@
 
 ### The `Shape` trait introduces a single abstract method: `area`.
 
-### Next, define a [struct](https://docs.modular.com/mojo/manual/structs) called `Rectangle` that implements the `Shape` trait, as well as all methods required by [ComparableCollectionElement](https://docs.modular.com/mojo/stdlib/builtin/value/ComparableCollectionElement) which is inherited `Shape`.
+### Next, define a [struct](https://docs.modular.com/mojo/manual/structs) called `Rectangle` that implements the `Shape` trait, as well as all methods required by [ComparableCollectionElement](https://docs.modular.com/mojo/stdlib/builtin/value/ComparableCollectionElement) which is inherited by `Shape`.
 
 ### Since [ComparableCollectionElement](https://docs.modular.com/mojo/stdlib/builtin/value/ComparableCollectionElement) itself extends [CollectionElement](https://docs.modular.com/mojo/stdlib/builtin/value/CollectionElement), the `Rectangle` struct is also expected to implement the corresponding methods. However, by annotating `Rectangle` with the [@value](https://docs.modular.com/mojo/manual/decorators/value/) decorator, implementations of these collection-related methods are automatically provided by the Mojo compiler by default.
 
