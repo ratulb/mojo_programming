@@ -12,4 +12,5 @@
 - [ Minimum in Rotated Sorted Array](min_in_sorted_rotated_arr.md) ➔ Given a sorted and rotated array, find the minimum element.  
 - [ Search in Rotated Sorted Array](search_sorted_rotated_arr.md) ➔ Find item index in sorted rotated array of items.
   - [ Find custom struct index](shapes.md) ➔ 🔍 Binary Search for Rectangle (a Shape) in a Rotated Sorted List.
+  - [ Search in Rotated sorted Array 2 ](search_sorted_rotated_duplicates.md) ➔ 🔍 Search in a rotated sorted array that may contain duplicates.
 
