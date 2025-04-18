@@ -58,40 +58,50 @@ fn atoi(s: String) raises -> Int:
 
 from testing import assert_equal
 
-
 fn main() raises:
     s = "   -           13   37    c0d3"
     number = atoi(s)
-    print(number)
+    assert_equal(number, -1337)
 
     s1 = "13   37    c0d3"
     number = atoi(s1)
-    print(number)
+    assert_equal(number, 1337)
 
     s2 = "1337c0d3"
     number = atoi(s2)
-    print(number)
+    assert_equal(number, 1337)
 
     s3 = "   -042"
     number = atoi(s3)
-    print(number)
+    assert_equal(number, -42)
 
     s4 = "42"
     number = atoi(s4)
-    print(number)
+    assert_equal(number, 42)
 
     s5 = "0-1"
     number = atoi(s5)
-    print(number)
+    assert_equal(number, 0)
 
     s6 = "words and 987"
     number = atoi(s6)
-    print(number)
+    assert_equal(number, 0)
 
     s7 = "    words and 987"
     number = atoi(s7)
-    print(number)
+    assert_equal(number, 0)
 
+    s8 = "+987"
+    number = atoi(s8)
+    assert_equal(number, 987)
+
+    s9 = " + 98700 www"
+    number = atoi(s9)
+    assert_equal(number, 98700)
+
+    s10 = " - 98700 www"
+    number = atoi(s10)
+    assert_equal(number, -98700)
 ```
 
 [Source](https://github.com/ratulb/mojo_programming/blob/main/codes/atoi.mojo)
