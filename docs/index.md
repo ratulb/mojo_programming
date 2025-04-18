@@ -14,3 +14,4 @@
   - [ Find custom struct index](shapes.md) ➔ 🔍 Binary Search for Rectangle (a Shape) in a Rotated Sorted List.
   - [ Search in Rotated sorted Array 2 ](search_sorted_rotated_duplicates.md) ➔ 🔍 Search in a rotated sorted array that may contain duplicates.
 
+- [ Convert String to Signed Integer](atoi.md) ➔ Implement the atoi(string s) function, which converts a string to a 64-bit signed integer.  

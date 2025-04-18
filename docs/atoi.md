@@ -1,6 +1,7 @@
 ### String to Integer (atoi)
 ### Implement the atoi(string s) function, which converts a string to a signed integer.
 
+```python
 
 fn atoi(s: String) raises -> Int:
     # Return 0 for an empty string (edge case)
@@ -90,3 +91,7 @@ fn main() raises:
     s7 = "    words and 987"
     number = atoi(s7)
     print(number)
+
+```
+
+[Source](https://github.com/ratulb/mojo_programming/blob/main/codes/atoi.mojo)
