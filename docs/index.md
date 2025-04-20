@@ -17,3 +17,4 @@
   - [ Search in Rotated sorted Array 2 ](search_sorted_rotated_duplicates.md) ➔ 🔍 Search in a rotated sorted array that may contain duplicates.
 - [ Convert String to Signed Integer](atoi.md) ➔ Implement the atoi(string s) function, which converts a string to a 64-bit signed integer.  
 - [ Remove Duplicate](remove_duplicates_sorted_arr.md) ➔ Remove duplicates from sorted array.  
+- [ Merge Sorted Array In Place](merge_shorted_arr_in_place.md) ➔ A has extra space to hold B. Merge B into A as one sorted array.  
