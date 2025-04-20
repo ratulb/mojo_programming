@@ -53,8 +53,7 @@ fn main() raises:
     remove_duplicates(nums)
     assert_equal(nums, List(1, 2, 3, 5, 6, 8, 9, 10, 11), "Assertion failed")
 
-
 ```
 
-[Source code](https://github.com/ratulb/mojo_programming/blob/main/codes/remove_duplicates_sorted_arr.md)
+[Source code](https://github.com/ratulb/mojo_programming/blob/main/codes/remove_duplicates_sorted_arr.mojo)
 
