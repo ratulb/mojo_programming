@@ -18,3 +18,4 @@
 - [ Convert String to Signed Integer](atoi.md) ➔ Implement the atoi(string s) function, which converts a string to a 64-bit signed integer.  
 - [ Remove Duplicate](remove_duplicates_sorted_arr.md) ➔ Remove duplicates from sorted array.  
 - [ Merge Sorted Array In Place](merge_shorted_arr_in_place.md) ➔ A has extra space to hold B. Merge B into A as one sorted array.  
+- [ Container With Most Water](water_container_max_area.md) ➔ Given an array of line heights, find the two lines that form the container holding the most water.  
