@@ -8,6 +8,7 @@
 🟢 [Three sum](3sum.md) ➔ Find all unique triplets [a, b, c] in the array such that a + b + c = 0.
 
 🟢 [ Buy and Sell Stock 1](buy_and_sell_stock.md) ➔ Maximize profit by buying once and selling later on a future day.
+
 🟢 [ Buy and Sell Stock 2](buy_and_sell_stock_2.md) ➔ Maximize profit by buying and selling multiple times.
 
 🟢 [ Longest Substring Without Repeating Characters](longest_substr_no_char_repeats.md) ➔ Given a string s, find the length of the longest substring without duplicate characters.
@@ -17,6 +18,7 @@
 🟢 [ Maximum Subarray](max_sum_sub_array.md) ➔ Given an integer array nums, find the subarray with the largest sum, and return its sum.
 
 🟢 [ Maximum Average Subarray](max_average_subarray.md) ➔ Find the maximum average of any contiguous subarray of length k from the array.
+
 🟢 [ Maximum Product Subarray](max_subarray_product.md) ➔ Find the maximum product of a contiguous subarray.
 
 🟢 [ Minimum in Rotated Sorted Array](min_in_sorted_rotated_arr.md) ➔ Given a sorted and rotated array, find the minimum element.  
