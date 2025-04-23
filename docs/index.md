@@ -7,6 +7,8 @@
 
 🟢 [Three sum](3sum.md) ➔ Find all unique triplets [a, b, c] in the array such that a + b + c = 0.
 
+🟢 [Four sum](4sum.md) ➔ Find all unique quadrulets [a, b, c, d] in the array such that a + b + c + d = target.
+
 🟢 [ Buy and Sell Stock 1](buy_and_sell_stock.md) ➔ Maximize profit by buying once and selling later on a future day.
 
 🟢 [ Buy and Sell Stock 2](buy_and_sell_stock_2.md) ➔ Maximize profit by buying and selling multiple times.
