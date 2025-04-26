@@ -19,4 +19,4 @@ fn main() raises:
 	assert_equal(30, count_bits(num))
 ```
 
-[Soure](https://github.com/ratulb/mojo_programming/blob/main/codes/num_ones.md)
+[Soure](https://github.com/ratulb/mojo_programming/blob/main/codes/num_ones.mojo)
