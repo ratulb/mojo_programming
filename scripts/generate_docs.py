@@ -69,6 +69,8 @@ def update_index(title, description, md_filename):
     index_lines.append(new_entry)
     INDEX_MD.write_text("\n".join(index_lines) + "\n", encoding="utf-8")
     print(f"Updated {INDEX_MD}")
-
+    print()
+    print(INDEX_MD.read_text(encoding="utf-8").splitlines()[-1])
+    print()
 
 main()
