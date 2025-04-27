@@ -10,6 +10,7 @@
 fn add(a: Int, b: Int) -> Int:
     return a + b
 
+
 fn main() raises:
     let result = add(2, 3)
     print(result)
