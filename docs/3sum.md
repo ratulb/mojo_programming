@@ -2,6 +2,7 @@
 ### This solution also returns indices of the triplets along with their values
 
 ```python
+
 import random
 from collections import InlineArray
 
@@ -88,5 +89,5 @@ fn main():
 
 ```
 
-[Source code](https://github.com/ratulb/mojo_programming/blob/main/codes/3sum.mojo)
 
+[Source](https://github.com/ratulb/mojo_programming/blob/main/codes/3sum.mojo)
