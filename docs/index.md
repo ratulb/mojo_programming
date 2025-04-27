@@ -39,3 +39,4 @@
 
 🟢 [ Container With Most Water](water_container_max_area.md) ➔ Given an array of line heights, find the two lines that form the container holding the most water.  
 🟢 [ Count 1s](num_ones.md) ➔ Count the number of set bits (Hamming weight) in the binary representation of a positive integer n.  
+🟢 [ Test Function](test_example.md) ➔ A simple test to add two numbers.
