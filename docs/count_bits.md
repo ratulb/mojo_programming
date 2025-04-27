@@ -31,3 +31,5 @@ fn main() raises:
 
 
 [Source](https://github.com/ratulb/mojo_programming/blob/main/codes/count_bits.mojo)
+
+[Rust solution](https://ratulb.github.io/programming_problems_and_datastructures_in_rust/count_bits/introduction.html)
