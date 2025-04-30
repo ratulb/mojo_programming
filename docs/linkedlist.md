@@ -112,5 +112,5 @@ fn main():
 
 ```
 
-[Source](https://github.com/ratulb/mojo_programming/blob/main/codes/linkedlist.md)
+[Source](https://github.com/ratulb/mojo_programming/blob/main/codes/linkedlist.mojo)
 
