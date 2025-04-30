@@ -1,6 +1,6 @@
-# Generic singnly link list
-## A singly linked list with parametric polymorphism.
-## Current supports adding multiple elements at one go via the `append` method
+### Generic singnly link list
+### A singly linked list with parametric polymorphism.
+### Current supports adding multiple elements at one go via the `append` method
 
 from memory import Pointer, UnsafePointer
 
