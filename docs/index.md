@@ -40,4 +40,5 @@
 🟢 [ Container With Most Water](water_container_max_area.md) ➔ Given an array of line heights, find the two lines that form the container holding the most water.  
 🟢 [ Count 1s](num_ones.md) ➔ Count the number of set bits (Hamming weight) in the binary representation of a positive integer n.  
 🟢 [Count 1s For Each Entry](count_bits.md) ➔ Return an array where each element at index i (0 ≤ i ≤ n) is the number of 1's in the binary representation of i.
-🟢 [ # Generic singnly link list](linkedlist.md) ➔ A singly linked list with parametric polymorphism.
+
+🟢 [Generic singnly link list](linkedlist.md) ➔ A singly linked list with parametric polymorphism.
