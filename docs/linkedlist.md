@@ -1,13 +1,13 @@
 ### Generic singnly link list
 ### A singly linked list with parametric polymorphism.
 
-
 ```python
-## Current supports adding multiple elements at one go via the `append` method
+### Current supports adding multiple elements at one go via the `append` method
 
 from memory import Pointer, UnsafePointer
 
 alias ElementType = CollectionElement
+
 
 @value
 struct Node[
@@ -41,13 +41,16 @@ struct Node[
         return String.write(self.value)
 
 
-struct LinkedList[T: ElementType]:
+struct LinkedList[T: ElementType](Sized):
     var head: Optional[Node[T]]
     var len: UInt
 
     fn __init__(out self):
         self.head = None
         self.len = 0
+
+    fn __len__(self) -> Int:
+        return self.len
 
     fn __init__(out self, *elems: T):
         self = Self()
@@ -96,6 +99,41 @@ struct LinkedList[T: ElementType]:
             s.write("]")
             return s
 
+    fn __iter__(self) -> _LinkedListIter[T, __origin_of(self)]:
+        return _LinkedListIter(Pointer(to=self))
+
+
+@value
+struct _LinkedListIter[
+    mut: Bool, //,
+    ElementType: CollectionElement,
+    origin: Origin[mut],
+]:
+    var src: Pointer[LinkedList[ElementType], origin]
+    var curr: UnsafePointer[Node[ElementType]]
+    var moved: Int
+
+    fn __init__(out self, src: Pointer[LinkedList[ElementType], origin]):
+        self.src = src
+        self.curr = UnsafePointer(to=self.src[].head.value())
+        self.moved = 0
+
+    fn __itr__(self) -> Self:
+        return self
+
+    fn __next__(mut self) -> Pointer[ElementType, origin]:
+        out = Pointer[ElementType, origin](to=self.curr[].value)
+        self.moved += 1
+        self.curr = self.curr[].next
+        return out
+
+    fn __has_next__(self) -> Bool:
+        return self.curr.__bool__()
+
+    fn __len__(self) -> Int:
+        return self.src[].len - self.moved
+
+
 fn main():
     linkedlist = LinkedList[Int]()
     print(linkedlist.__str__())
@@ -109,8 +147,10 @@ fn main():
     linkedlist.append(4, 5, 6)
     print(linkedlist.len)
     print(linkedlist.__str__())
+    for e in linkedlist:
+        print(e[].__str__())
 
 ```
 
-[Source](https://github.com/ratulb/mojo_programming/blob/main/codes/linkedlist.mojo)
 
+[Source](https://github.com/ratulb/mojo_programming/blob/main/codes/linkedlist.mojo)
