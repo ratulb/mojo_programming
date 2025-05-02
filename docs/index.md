@@ -2,7 +2,7 @@
 
 🟢 [Game of life](game_of_life.md) ➔
  Contains an implementation of [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) cellular automation.
- 
+
 🟢 [Two sum](two_sum.md) ➔ Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
 
 🟢 [Three sum](3sum.md) ➔ Find all unique triplets [a, b, c] in the array such that a + b + c = 0.
@@ -23,23 +23,24 @@
 
 🟢 [ Maximum Product Subarray](max_subarray_product.md) ➔ Find the maximum product of a contiguous subarray.
 
-🟢 [ Minimum in Rotated Sorted Array](min_in_sorted_rotated_arr.md) ➔ Given a sorted and rotated array, find the minimum element.  
+🟢 [ Minimum in Rotated Sorted Array](min_in_sorted_rotated_arr.md) ➔ Given a sorted and rotated array, find the minimum element.
 
 🟢 [ Search in Rotated Sorted Array](search_sorted_rotated_arr.md) ➔ Find item index in sorted rotated array of items.
 
   🟢 [ Find custom struct index](shapes.md) ➔ 🔍 Binary Search for Rectangle (a Shape) in a Rotated Sorted List.
-  
+
   🟢 [ Search in Rotated sorted Array 2 ](search_sorted_rotated_duplicates.md) ➔ 🔍 Search in a rotated sorted array that may contain duplicates.
-  
-🟢 [ Convert String to Signed Integer](atoi.md) ➔ Implement the atoi(string s) function, which converts a string to a 64-bit signed integer.  
 
-🟢 [ Remove Duplicate](remove_duplicates_sorted_arr.md) ➔ Remove duplicates from sorted array.  
+🟢 [ Convert String to Signed Integer](atoi.md) ➔ Implement the atoi(string s) function, which converts a string to a 64-bit signed integer.
 
-🟢 [ Merge Sorted Array In Place](merge_shorted_arr_in_place.md) ➔ A has extra space to hold B. Merge B into A as one sorted array.  
+🟢 [ Remove Duplicate](remove_duplicates_sorted_arr.md) ➔ Remove duplicates from sorted array.
 
-🟢 [ Container With Most Water](water_container_max_area.md) ➔ Given an array of line heights, find the two lines that form the container holding the most water.  
-🟢 [ Count 1s](num_ones.md) ➔ Count the number of set bits (Hamming weight) in the binary representation of a positive integer n.  
+🟢 [ Merge Sorted Array In Place](merge_shorted_arr_in_place.md) ➔ A has extra space to hold B. Merge B into A as one sorted array.
+
+🟢 [ Container With Most Water](water_container_max_area.md) ➔ Given an array of line heights, find the two lines that form the container holding the most water.
+🟢 [ Count 1s](num_ones.md) ➔ Count the number of set bits (Hamming weight) in the binary representation of a positive integer n.
 🟢 [Count 1s For Each Entry](count_bits.md) ➔ Return an array where each element at index i (0 ≤ i ≤ n) is the number of 1's in the binary representation of i.
 
 [Generic singnly link list](linkedlist.md) ➔ A singly linked list with parametric polymorphism.
+
 [Combination sum](combination_sum.md) ➔ Find all unique combinations of numbers from candidates (reusable unlimited times) that sum to target.
