@@ -50,3 +50,5 @@
 🟢 [Word Search](wordsearch.md) ➔ Check if a word can be formed in a grid by sequentially adjacent (non-repeating) horizontal or vertical letters.
 
 🟢 [Longest Common Subsequence Recursive](longest_common_subeq.md) ➔ Return the length of the longest common subsequence between two strings, or 0 if none exists
+
+🟢 [Longest Common Subsequence Dynamic](longest_common_subeq_dyn.md) ➔ Return the length of the longest common subsequence between two strings, or 0 if none exists
