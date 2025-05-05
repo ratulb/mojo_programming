@@ -52,3 +52,5 @@
 🟢 [Longest Common Subsequence Recursive](longest_common_subeq.md) ➔ Return the length of the longest common subsequence between two strings, or 0 if none exists
 
 🟢 [Longest Common Subsequence Dynamic](longest_common_subeq_dyn.md) ➔ Return the length of the longest common subsequence between two strings, or 0 if none exists
+
+🟢 [Longest Palindromic Substring](longest_palidromic_substr.md) ➔ Given a string s, return the longest palindromic substring therein
