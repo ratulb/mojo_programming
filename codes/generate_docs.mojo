@@ -86,8 +86,9 @@ def update_index(
     print(new_entry)
 
     # Append new entry
-    index_lines.append(new_entry)
-    INDEX_MD.write_text(StringSlice("\n").join(index_lines) + "\n")
+    index_lines.append("\n"+ new_entry)
+    #INDEX_MD.write_text(StringSlice("\n").join(index_lines) + "\n")
+    INDEX_MD.write_text(StringSlice("\n").join(index_lines))
     print("Updated: ", INDEX_MD)
     print()
     print(INDEX_MD.read_text().splitlines()[-1])

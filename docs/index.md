@@ -48,3 +48,5 @@
 🟢 [Combination sum](combination_sum.md) ➔ Find all unique combinations of numbers from candidates (reusable unlimited times) that sum to target.
 
 🟢 [Word Search](wordsearch.md) ➔ Check if a word can be formed in a grid by sequentially adjacent (non-repeating) horizontal or vertical letters.
+
+🟢 [Longest Common Subsequence Recursive](longest_common_subeq.md) ➔ Return the length of the longest common subsequence between two strings, or 0 if none exists
