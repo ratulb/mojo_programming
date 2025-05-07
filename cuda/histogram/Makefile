@@ -18,13 +18,13 @@ all: $(TARGET)
 
 # Linking and compilation
 $(TARGET): $(SRCS) | $(BUILD_DIR)
-    $(NVCC) $(NVCC_FLAGS) $(SRCS) -o $@
+	$(NVCC) $(NVCC_FLAGS) $(SRCS) -o $@
 
 # Create build directory if it doesn't exist
 $(BUILD_DIR):
-    mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)
 
 # Cleanup rule
 clean:
-    rm -rf $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 
