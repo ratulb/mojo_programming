@@ -69,6 +69,9 @@ cat > hello.mojo <<EOF
 fn main():
   print("Hello word from mojo!")
 EOF
+
+
+
 ```
 ----
 Run the mojo program:
@@ -80,4 +83,35 @@ Build and run the binary if you want:
 ```bash
 !magic run mojo build hello.mojo
 !./hello
+
+```
+## 📌 Check out only the cuda folder
+
+**Use the following shell script snippet to checkout only the cuda folder**
+
+```bash
+#!/bin/bash
+
+REPO_URL="https://github.com/ratulb/mojo_programming"
+FOLDER_PATH="cuda"
+TARGET_DIR="${3:-$(basename "$REPO_URL" .git)}"
+
+if [ -z "$FOLDER_PATH" ]; then
+  echo "Usage: $0 [<target-dir>]"
+  exit 1
+fi
+
+echo "Cloning $FOLDER_PATH from $REPO_URL into $TARGET_DIR..."
+
+git clone --filter=blob:none --no-checkout "$REPO_URL" "$TARGET_DIR"
+cd "$TARGET_DIR" || exit 1
+
+git sparse-checkout init --cone
+git sparse-checkout set "$FOLDER_PATH"
+git checkout
+
+echo "✅ Done. Folder '$FOLDER_PATH' is checked out in '$TARGET_DIR'."
+
+```
+
 ```
