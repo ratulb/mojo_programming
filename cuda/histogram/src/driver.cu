@@ -1,11 +1,14 @@
 #include <iostream>
 #include <cuda_runtime.h>
 #include "../include/kernel.cuh"
+#include <cstdlib>
+#include <ctime>
 
 const int IMG_SIZE = 1024 * 1024;
 const int HIST_SIZE = 256;
 
 int main() {
+    srand(time(NULL));
     unsigned char* h_image = new unsigned char[IMG_SIZE];
     for (int i = 0; i < IMG_SIZE; i++)
         h_image[i] = rand() % 256;
