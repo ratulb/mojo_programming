@@ -56,3 +56,5 @@
 🟢 [Longest Palindromic Substring](longest_palidromic_substr.md) ➔ Given a string s, return the longest palindromic substring therein
 
 🟢 [Interleaving String](interleave_string.md) ➔ Determine if s3 is an interleaving of s1 and s2.
+
+🟢 [Check device core](cores.md) ➔ Check physical and logical cores of the device
