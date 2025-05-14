@@ -1,12 +1,10 @@
 ### SIMD Select
 ### Select based on a SIMD (Single Instruction, Multiple Data) mask
-
-```python
 ### This example demonstrates how to use SIMD.select() to perform element-wise conditional selection between two SIMD vectors based on a boolean mask.
 
+```python
 
 from testing import assert_true
-
 
 fn main() raises:
     # Create a SIMD (Single Instruction, Multiple Data) boolean selector vector of size 4.
