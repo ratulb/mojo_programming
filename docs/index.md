@@ -58,3 +58,5 @@
 🟢 [Interleaving String](interleave_string.md) ➔ Determine if s3 is an interleaving of s1 and s2.
 
 🟢 [Check device core](cores.md) ➔ Check physical and logical cores of the device
+
+🟢 [SIMD Select](simd_select.md) ➔ Select based on a SIMD (Single Instruction, Multiple Data) mask
