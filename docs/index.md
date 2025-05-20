@@ -62,3 +62,5 @@
 🟢 [SIMD Select](simd_select.md) ➔ Select based on a SIMD (Single Instruction, Multiple Data) mask
 
 🟢 [Last word length](last_word_length.md) ➔ Return the length of the last word in a given space-separated string
+
+🟢 [Largest Number](largest_number.md) ➔ Arrange non-negative integers to form the largest possible number and return it as a string.
