@@ -64,3 +64,5 @@
 🟢 [Last word length](last_word_length.md) ➔ Return the length of the last word in a given space-separated string
 
 🟢 [Largest Number](largest_number.md) ➔ Arrange non-negative integers to form the largest possible number and return it as a string.
+
+🟢 [Find All Anagrams in a String](all_anagrams.md) ➔ Return all start indices of anagrams of string p in string s.
