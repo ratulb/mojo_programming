@@ -66,3 +66,5 @@
 🟢 [Largest Number](largest_number.md) ➔ Arrange non-negative integers to form the largest possible number and return it as a string.
 
 🟢 [Find All Anagrams in a String](all_anagrams.md) ➔ Return all start indices of anagrams of string p in string s.
+
+🟢 [Find First/Last](find_first_last.md) ➔ Find first and last index of a target value in a sorted array
