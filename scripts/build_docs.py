@@ -182,7 +182,7 @@ def main():
         "  --md-hue: 210;\n"
         "  --md-default-fg-color: #E6EDF3;\n"
         "  --md-default-bg-color: #0D1117;\n"
-        "  --md-primary-fg-color: #FF6B00;\n"
+        "  --md-primary-fg-color: #58A6FF;\n"
         "  --md-primary-bg-color: #FFFFFF;\n"
         "  --md-accent-fg-color: #58A6FF;\n"
         "  --md-typeset-a-color: #58A6FF;\n"
