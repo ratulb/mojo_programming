@@ -185,6 +185,8 @@ def main():
         "  --md-primary-bg-color: #ffffff;\n"
         "  --md-accent-fg-color: #7c3aed;\n"
         "  --md-typeset-a-color: #7c3aed;\n"
+        "  --md-code-bg-color: #e8e8ee;\n"
+        "  --md-code-fg-color: #1a1a2e;\n"
         "}\n"
         "h1, h2, h3, h4, h5, h6 {\n"
         "  color: #1a1a2e !important;\n"
