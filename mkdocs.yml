@@ -5,7 +5,7 @@ repo_name: ratulb/mojo_programming
 theme:
   name: material
   palette:
-  - scheme: slate
+  - scheme: default
     primary: custom
     accent: custom
   font:
