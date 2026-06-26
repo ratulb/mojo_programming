@@ -176,7 +176,7 @@ def main():
 
     (SITE_SOURCE / "extra.css").write_text(
         ".md-nav--primary .md-nav__item--section .md-nav__list {\n"
-        "  padding-left: 0.8rem;\n"
+        "  padding-left: 1.6rem;\n"
         "}\n"
     )
     print(f"  ✓  site_source/extra.css")
