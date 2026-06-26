@@ -114,9 +114,13 @@ def generate_index_page(categories):
         first_url = first_md.replace(".md", "/")
         cards.append(
             f"-   **{cat_name}**\n"
+            f"\n"
             f"    ---\n"
+            f"\n"
             f"    {count} problem{'s' if count > 1 else ''}\n"
-            f"    [:octicons-arrow-right-24: Browse]({first_url})\n"
+            f"\n"
+            f"    [Browse]({first_url})\n"
+            f"\n"
         )
     return (
         f"# Mojo 🔥 Programming\n\n"
