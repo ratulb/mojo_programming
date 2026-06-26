@@ -178,6 +178,27 @@ def main():
         ".md-nav--primary .md-nav__item--section .md-nav__list {\n"
         "  padding-left: 1.6rem;\n"
         "}\n"
+        "[data-md-color-scheme=\"slate\"] {\n"
+        "  --md-hue: 210;\n"
+        "  --md-default-fg-color: #E6EDF3;\n"
+        "  --md-default-bg-color: #0D1117;\n"
+        "  --md-primary-fg-color: #FF6B00;\n"
+        "  --md-primary-bg-color: #FFFFFF;\n"
+        "  --md-accent-fg-color: #58A6FF;\n"
+        "  --md-typeset-a-color: #58A6FF;\n"
+        "}\n"
+        "h1, h2, h3, h4, h5, h6 {\n"
+        "  color: #FFFFFF !important;\n"
+        "}\n"
+        ".md-typeset .grid.cards > ul > li {\n"
+        "  background-color: #161B22;\n"
+        "  border: 1px solid #30363D;\n"
+        "  border-radius: 8px;\n"
+        "}\n"
+        ".md-typeset .grid.cards hr + * {\n"
+        "  color: #FF6B00;\n"
+        "  font-weight: bold;\n"
+        "}\n"
     )
     print(f"  ✓  site_source/extra.css")
 
@@ -189,6 +210,17 @@ def main():
         "repo_name": "ratulb/mojo_programming",
         "theme": {
             "name": "material",
+            "palette": [
+                {
+                    "scheme": "slate",
+                    "primary": "custom",
+                    "accent": "custom",
+                },
+            ],
+            "font": {
+                "text": "Inter",
+                "code": "JetBrains Mono",
+            },
             "features": [
                 "navigation.sections",
                 "navigation.expand",
