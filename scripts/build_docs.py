@@ -111,11 +111,12 @@ def generate_index_page(categories):
             continue
         first_md = mojo_to_md_rel(mojo_path)
         count = len(files)
+        first_url = first_md.replace(".md", "/")
         cards.append(
             f"-   **{cat_name}**\n"
             f"    ---\n"
             f"    {count} problem{'s' if count > 1 else ''}\n"
-            f"    [:octicons-arrow-right-24: Browse]({first_md})\n"
+            f"    [:octicons-arrow-right-24: Browse]({first_url})\n"
         )
     return (
         f"# Mojo 🔥 Programming\n\n"
@@ -185,6 +186,7 @@ def main():
             ],
         },
         "markdown_extensions": [
+            "md_in_html",
             "pymdownx.highlight",
             "pymdownx.superfences",
             "admonition",
