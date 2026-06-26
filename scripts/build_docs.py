@@ -186,6 +186,7 @@ def main():
             ],
         },
         "markdown_extensions": [
+            "attr_list",
             "md_in_html",
             "pymdownx.highlight",
             "pymdownx.superfences",
