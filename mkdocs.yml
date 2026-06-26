@@ -9,6 +9,8 @@ theme:
   - navigation.expand
   - navigation.top
   - content.code.copy
+extra_css:
+- extra.css
 markdown_extensions:
 - attr_list
 - md_in_html
