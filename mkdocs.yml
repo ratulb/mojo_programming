@@ -21,15 +21,13 @@ nav:
 - Home: index.md
 - Arrays & Hashing:
   - Two Sum: codes/two_sum.md
-  - Find all unique triplets [a, b, c] in the array such that a + b + c = 0.: codes/3sum.md
-  - ? Given an array nums, return all unique quadruplets [a, b, c, d] such that a
-      + b + c + d == target and all indices are distinct.
-    : codes/4sum.md
+  - 3Sum: codes/3sum.md
+  - 4Sum: codes/4sum.md
   - Product Of Array Except Self: codes/product_of_array_except_self.md
   - Max Sum Sub Array: codes/max_sum_sub_array.md
   - Max Average Subarray: codes/max_average_subarray.md
   - Max Subarray Product: codes/max_subarray_product.md
-  - Given an array of line heights, find the two lines that form the container holding the most water.: codes/water_container_max_area.md
+  - Water Container Max Area: codes/water_container_max_area.md
   - Largest Number: codes/largest_number.md
   - Remove duplicates from sorted array: codes/remove_duplicates_sorted_arr.md
   - Merge nums2 into nums1 (in-place): codes/merge_shorted_arr_in_place.md
@@ -48,7 +46,7 @@ nav:
 - Search & Sort:
   - Min In Sorted Rotated Arr: codes/min_in_sorted_rotated_arr.md
   - Search Sorted Rotated Arr: codes/search_sorted_rotated_arr.md
-  - Search in a rotated sorted array that may contain duplicates: codes/search_sorted_rotated_arr_with_duplicates.md
+  - Search Sorted Rotated Arr With Duplicates: codes/search_sorted_rotated_arr_with_duplicates.md
   - Find First/Last: codes/find_first_last.md
   - Merge Itervals: codes/merge_intervals.md
   - Shapes: codes/shapes.md
@@ -59,7 +57,7 @@ nav:
   - Longest Common Subsequence Dynamic: codes/longest_common_subeq_dyn.md
   - Combination sum: codes/combination_sum.md
 - Bit Manipulation & Math:
-  - Count the number of set bits (Hamming weight) in the binary representation of a positive integer n.: codes/num_ones.md
+  - Num Ones: codes/num_ones.md
   - Count 1s For Each Entry: codes/count_bits.md
 - Grid & Matrix:
   - Game Of Life: codes/game_of_life.md
@@ -84,7 +82,7 @@ nav:
   - Dumb matrix multiplication: gpu_puzzles/naive_matmul_one_thread_per_row.md
   - Dumb matrix multiplication: gpu_puzzles/naive_matmul_single_thread_layout_tensor.md
   - Dumb matrix multiplication: gpu_puzzles/matmul_thread_per_output_cell.md
-  - Use one one GPU thread for each column of the output matrix: gpu_puzzles/matmul_thread_per_output_cell_vectorized.md
+  - Matmul Thread Per Output Cell Vectorized: gpu_puzzles/matmul_thread_per_output_cell_vectorized.md
 - CUDA:
   - Histogram: mojo_kernels/histogram.md
 docs_dir: site_source

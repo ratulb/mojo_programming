@@ -34,12 +34,20 @@ def find_mojo_file(stem):
 
 
 def read_mojo_title(filepath):
-    """Short title for nav / heading — first ### line or humanized filename."""
+    """Short title for nav / heading.
+    
+    Uses the first ### line only if it's a concise title (≤55 chars).
+    Otherwise falls back to humanized filename.
+    """
     with open(filepath) as f:
         first_lines = [next(f, "") for _ in range(5)]
     for line in first_lines:
-        if line.strip().startswith("###"):
-            return line.strip().replace("###", "").strip()
+        s = line.strip()
+        if s.startswith("###"):
+            candidate = s.replace("###", "").strip()
+            if len(candidate) <= 55:
+                return candidate
+            break
     stem = filepath.stem
     return stem.replace("_", " ").replace("-", " ").title()
 
@@ -97,20 +105,18 @@ def generate_index_page(categories):
     for cat_name, files in categories.items():
         if not files:
             continue
-        items = []
-        for stem in files:
-            mojo_path = find_mojo_file(stem)
-            if not mojo_path:
-                continue
-            title = read_mojo_title(mojo_path)
-            md_rel = mojo_to_md_rel(mojo_path)
-            items.append(f"    - [{title}]({md_rel})")
-        if items:
-            cards.append(
-                f"-   **{cat_name}**\n"
-                f"    ---\n"
-                f"{chr(10).join(items)}\n"
-            )
+        first = files[0]
+        mojo_path = find_mojo_file(first)
+        if not mojo_path:
+            continue
+        first_md = mojo_to_md_rel(mojo_path)
+        count = len(files)
+        cards.append(
+            f"-   **{cat_name}**\n"
+            f"    ---\n"
+            f"    {count} problem{'s' if count > 1 else ''}\n"
+            f"    [:octicons-arrow-right-24: Browse]({first_md})\n"
+        )
     return (
         f"# Mojo 🔥 Programming\n\n"
         f"> CPU & GPU algorithm implementations in the "
