@@ -1,0 +1,80 @@
+# Maps .mojo files (by stem) to left-nav categories.
+# Add a new entry here when you create a new .mojo file.
+# Order in this file determines the order in the nav.
+
+Arrays & Hashing:
+  - two_sum
+  - 3sum
+  - 4sum
+  - product_of_array_except_self
+  - max_sum_sub_array
+  - max_average_subarray
+  - max_subarray_product
+  - water_container_max_area
+  - largest_number
+  - remove_duplicates_sorted_arr
+  - merge_shorted_arr_in_place
+  - sum_1d_tensor
+
+Strings:
+  - atoi
+  - longest_substr_no_char_repeats
+  - longest_palidromic_substr
+  - interleave_string
+  - last_word_length
+  - all_anagrams
+  - wordsearch
+
+Greedy & Two Pointers:
+  - buy_and_sell_stock
+  - buy_and_sell_stock_2
+
+Search & Sort:
+  - min_in_sorted_rotated_arr
+  - search_sorted_rotated_arr
+  - search_sorted_rotated_arr_with_duplicates
+  - find_first_last
+  - merge_intervals
+  - shapes
+
+Linked Lists:
+  - linkedlist
+
+Dynamic Programming:
+  - longest_common_subeq
+  - longest_common_subeq_dyn
+  - combination_sum
+
+Bit Manipulation & Math:
+  - num_ones
+  - count_bits
+
+Grid & Matrix:
+  - game_of_life
+  - gridv1
+  - gridv2
+
+Mojo Concepts:
+  - cyclic_reference_1
+  - cyclic_reference_2
+  - buffer_reduce
+  - custom_struct_compare
+  - simd_select
+  - cores
+
+GPU Puzzles:
+  - add_10
+  - add_10_2d
+  - add_10_2dlayout
+  - add_10_with_guard
+  - add_vectors
+  - layout_basics
+  - naive_matmul
+  - naive_matmul_one_thread_per_col
+  - naive_matmul_one_thread_per_row
+  - naive_matmul_single_thread_layout_tensor
+  - matmul_thread_per_output_cell
+  - matmul_thread_per_output_cell_vectorized
+
+CUDA:
+  - histogram

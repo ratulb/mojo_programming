@@ -1,0 +1,16 @@
+# pixi environment
+.pixi
+
+# magic environment (legacy)
+.magic
+
+# Generated site content (MkDocs source & output)
+site_source/
+site/
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.egg-info

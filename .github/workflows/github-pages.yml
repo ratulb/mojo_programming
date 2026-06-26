@@ -13,18 +13,27 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
-      name: github-pages     # ✅ Required to trigger the GitHub Pages deployment
+      name: github-pages
 
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
+      - name: Set up pixi
+        uses: prefix-dev/setup-pixi@v0
+        with:
+          pixi-version: latest
+          environments: default
+
+      - name: Generate site content
+        run: pixi run python scripts/build_docs.py
+
+      - name: Build site
+        run: pixi run mkdocs build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './docs'  # Make sure this is the directory with your index.md
+          path: './site'
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4

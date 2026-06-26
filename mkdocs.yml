@@ -1,0 +1,91 @@
+site_name: Mojo Programming
+site_description: CPU & GPU algorithm implementations in the Mojo programming language
+repo_url: https://github.com/ratulb/mojo_programming
+repo_name: ratulb/mojo_programming
+theme:
+  name: material
+  features:
+  - navigation.sections
+  - navigation.expand
+  - navigation.top
+  - content.code.copy
+markdown_extensions:
+- pymdownx.highlight
+- pymdownx.superfences
+- admonition
+- pymdownx.details
+- pymdownx.tabbed
+plugins:
+- search
+nav:
+- Home: index.md
+- Arrays & Hashing:
+  - Two Sum: codes/two_sum.md
+  - Find all unique triplets [a, b, c] in the array such that a + b + c = 0.: codes/3sum.md
+  - ? Given an array nums, return all unique quadruplets [a, b, c, d] such that a
+      + b + c + d == target and all indices are distinct.
+    : codes/4sum.md
+  - Product Of Array Except Self: codes/product_of_array_except_self.md
+  - Max Sum Sub Array: codes/max_sum_sub_array.md
+  - Max Average Subarray: codes/max_average_subarray.md
+  - Max Subarray Product: codes/max_subarray_product.md
+  - Given an array of line heights, find the two lines that form the container holding the most water.: codes/water_container_max_area.md
+  - Largest Number: codes/largest_number.md
+  - Remove duplicates from sorted array: codes/remove_duplicates_sorted_arr.md
+  - Merge nums2 into nums1 (in-place): codes/merge_shorted_arr_in_place.md
+  - Sum 1D Tensor: codes/sum_1d_tensor.md
+- Strings:
+  - String to Integer (atoi): codes/atoi.md
+  - Longest Substr No Char Repeats: codes/longest_substr_no_char_repeats.md
+  - Longest Palindromic Substring: codes/longest_palidromic_substr.md
+  - Interleaving String: codes/interleave_string.md
+  - Last word length: codes/last_word_length.md
+  - Find All Anagrams in a String: codes/all_anagrams.md
+  - Word Search: codes/wordsearch.md
+- Greedy & Two Pointers:
+  - Buy And Sell Stock: codes/buy_and_sell_stock.md
+  - Buy And Sell Stock 2: codes/buy_and_sell_stock_2.md
+- Search & Sort:
+  - Min In Sorted Rotated Arr: codes/min_in_sorted_rotated_arr.md
+  - Search Sorted Rotated Arr: codes/search_sorted_rotated_arr.md
+  - Search in a rotated sorted array that may contain duplicates: codes/search_sorted_rotated_arr_with_duplicates.md
+  - Find First/Last: codes/find_first_last.md
+  - Merge Itervals: codes/merge_intervals.md
+  - Shapes: codes/shapes.md
+- Linked Lists:
+  - Generic singnly link list: codes/linkedlist.md
+- Dynamic Programming:
+  - Longest Common Subsequence Recursive: codes/longest_common_subeq.md
+  - Longest Common Subsequence Dynamic: codes/longest_common_subeq_dyn.md
+  - Combination sum: codes/combination_sum.md
+- Bit Manipulation & Math:
+  - Count the number of set bits (Hamming weight) in the binary representation of a positive integer n.: codes/num_ones.md
+  - Count 1s For Each Entry: codes/count_bits.md
+- Grid & Matrix:
+  - Game Of Life: codes/game_of_life.md
+  - Gridv1: codes/gridv1.md
+  - Gridv2: codes/gridv2.md
+- Mojo Concepts:
+  - Cyclic Reference 1: codes/cyclic_reference_1.md
+  - Cyclic Reference 2: codes/cyclic_reference_2.md
+  - Buffer Reduce: codes/buffer_reduce.md
+  - Custom Struct Compare: codes/custom_struct_compare.md
+  - SIMD Select: codes/simd_select.md
+  - Check device core: codes/cores.md
+- GPU Puzzles:
+  - Add 10: gpu_puzzles/add_10.md
+  - Add a constant 10: gpu_puzzles/add_10_2d.md
+  - Add constant to 2D Layout tensor: gpu_puzzles/add_10_2dlayout.md
+  - Add 10: gpu_puzzles/add_10_with_guard.md
+  - Add vectors: gpu_puzzles/add_vectors.md
+  - Layout Basics: gpu_puzzles/layout_basics.md
+  - Dumb matrix multiplication: gpu_puzzles/naive_matmul.md
+  - Matrix multiplication 1 GPU thread per output column: gpu_puzzles/naive_matmul_one_thread_per_col.md
+  - Dumb matrix multiplication: gpu_puzzles/naive_matmul_one_thread_per_row.md
+  - Dumb matrix multiplication: gpu_puzzles/naive_matmul_single_thread_layout_tensor.md
+  - Dumb matrix multiplication: gpu_puzzles/matmul_thread_per_output_cell.md
+  - Use one one GPU thread for each column of the output matrix: gpu_puzzles/matmul_thread_per_output_cell_vectorized.md
+- CUDA:
+  - Histogram: mojo_kernels/histogram.md
+docs_dir: site_source
+site_dir: site
