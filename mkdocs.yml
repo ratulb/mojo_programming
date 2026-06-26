@@ -4,6 +4,13 @@ repo_url: https://github.com/ratulb/mojo_programming
 repo_name: ratulb/mojo_programming
 theme:
   name: material
+  palette:
+  - scheme: slate
+    primary: custom
+    accent: custom
+  font:
+    text: Inter
+    code: JetBrains Mono
   features:
   - navigation.sections
   - navigation.expand
