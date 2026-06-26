@@ -178,25 +178,24 @@ def main():
         ".md-nav--primary .md-nav__item--section .md-nav__list {\n"
         "  padding-left: 1.6rem;\n"
         "}\n"
-        "[data-md-color-scheme=\"slate\"] {\n"
-        "  --md-hue: 210;\n"
-        "  --md-default-fg-color: #E6EDF3;\n"
-        "  --md-default-bg-color: #0D1117;\n"
-        "  --md-primary-fg-color: #58A6FF;\n"
-        "  --md-primary-bg-color: #FFFFFF;\n"
-        "  --md-accent-fg-color: #58A6FF;\n"
-        "  --md-typeset-a-color: #58A6FF;\n"
+        "[data-md-color-scheme=\"default\"] {\n"
+        "  --md-default-fg-color: #333;\n"
+        "  --md-default-bg-color: #f5f5f7;\n"
+        "  --md-primary-fg-color: #1a1a2e;\n"
+        "  --md-primary-bg-color: #ffffff;\n"
+        "  --md-accent-fg-color: #7c3aed;\n"
+        "  --md-typeset-a-color: #7c3aed;\n"
         "}\n"
         "h1, h2, h3, h4, h5, h6 {\n"
-        "  color: #FFFFFF !important;\n"
+        "  color: #1a1a2e !important;\n"
         "}\n"
         ".md-typeset .grid.cards > ul > li {\n"
-        "  background-color: #161B22;\n"
-        "  border: 1px solid #30363D;\n"
+        "  background-color: #ffffff;\n"
+        "  border: 1px solid #e0e0e0;\n"
         "  border-radius: 8px;\n"
         "}\n"
         ".md-typeset .grid.cards hr + * {\n"
-        "  color: #FF6B00;\n"
+        "  color: #7c3aed;\n"
         "  font-weight: bold;\n"
         "}\n"
     )
@@ -212,7 +211,7 @@ def main():
             "name": "material",
             "palette": [
                 {
-                    "scheme": "slate",
+                    "scheme": "default",
                     "primary": "custom",
                     "accent": "custom",
                 },
