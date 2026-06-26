@@ -174,6 +174,13 @@ def main():
     (SITE_SOURCE / "index.md").write_text(generate_index_page(categories))
     print(f"  ✓  site_source/index.md")
 
+    (SITE_SOURCE / "extra.css").write_text(
+        ".md-nav--primary .md-nav__item--section > .md-nav__list {\n"
+        "  padding-left: 0.8rem;\n"
+        "}\n"
+    )
+    print(f"  ✓  site_source/extra.css")
+
     nav = generate_nav(categories)
     config = {
         "site_name": "Mojo Programming",
@@ -189,6 +196,7 @@ def main():
                 "content.code.copy",
             ],
         },
+        "extra_css": ["extra.css"],
         "markdown_extensions": [
             "attr_list",
             "md_in_html",
