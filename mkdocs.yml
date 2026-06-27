@@ -82,18 +82,18 @@ nav:
   - SIMD Select: codes/simd_select.md
   - Check device core: codes/cores.md
 - GPU Puzzles:
-  - Add 10: gpu_puzzles/add_10.md
-  - Add a constant 10: gpu_puzzles/add_10_2d.md
-  - Add constant to 2D Layout tensor: gpu_puzzles/add_10_2dlayout.md
-  - Add 10: gpu_puzzles/add_10_with_guard.md
-  - Vector Add (GPU + CPU): gpu_puzzles/vector_add.md
-  - Layout Basics: gpu_puzzles/layout_basics.md
-  - Dumb matrix multiplication: gpu_puzzles/naive_matmul.md
-  - Matrix multiplication 1 GPU thread per output column: gpu_puzzles/naive_matmul_one_thread_per_col.md
-  - Dumb matrix multiplication: gpu_puzzles/naive_matmul_one_thread_per_row.md
-  - Dumb matrix multiplication: gpu_puzzles/naive_matmul_single_thread_layout_tensor.md
-  - Dumb matrix multiplication: gpu_puzzles/matmul_thread_per_output_cell.md
-  - Matmul Thread Per Output Cell Vectorized: gpu_puzzles/matmul_thread_per_output_cell_vectorized.md
+  - Add 10: gpu/add_10.md
+  - Add a constant 10: gpu/add_10_2d.md
+  - Add constant to 2D Layout tensor: gpu/add_10_2dlayout.md
+  - Add 10: gpu/add_10_with_guard.md
+  - Vector Add (GPU + CPU): gpu/vector_add.md
+  - Layout Basics: gpu/layout_basics.md
+  - Dumb matrix multiplication: gpu/naive_matmul.md
+  - Matrix multiplication 1 GPU thread per output column: gpu/naive_matmul_one_thread_per_col.md
+  - Dumb matrix multiplication: gpu/naive_matmul_one_thread_per_row.md
+  - Dumb matrix multiplication: gpu/naive_matmul_single_thread_layout_tensor.md
+  - Dumb matrix multiplication: gpu/matmul_thread_per_output_cell.md
+  - Matmul Thread Per Output Cell Vectorized: gpu/matmul_thread_per_output_cell_vectorized.md
 - CUDA:
   - Histogram: mojo_kernels/histogram.md
 docs_dir: site_source

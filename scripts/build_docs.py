@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CATEGORIES_FILE = ROOT / "categories.yml"
 SITE_SOURCE = ROOT / "site_source"
 GITHUB_REPO = "https://github.com/ratulb/mojo_programming"
-MOJO_DIRS = ["codes", "gpu_puzzles", "mojo_kernels"]
+MOJO_DIRS = ["codes", "gpu", "mojo_kernels"]
 
 
 def load_categories():
