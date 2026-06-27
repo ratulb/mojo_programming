@@ -1,5 +1,19 @@
+### Timer utility
+### A simple RAII / context-manager timer that prints elapsed wall-clock time in nanoseconds.
+
 from std.time import global_perf_counter_ns
 
+
+# Timer struct used via Python-style `with` blocks.
+#
+# Records the time at `__enter__` and prints the elapsed duration at `__exit__`.
+# The label prefix is a templated `StringSlice` to avoid allocation.
+#
+# Usage:
+#   with Timer("My computation: "):
+#       do_something()
+#   # Prints: "My computation:  12345000 nanoseconds"
+#
 @fieldwise_init
 struct Timer[origin: Origin, //](ImplicitlyCopyable):
     var start_time: UInt64

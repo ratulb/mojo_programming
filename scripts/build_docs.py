@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CATEGORIES_FILE = ROOT / "categories.yml"
 SITE_SOURCE = ROOT / "site_source"
 GITHUB_REPO = "https://github.com/ratulb/mojo_programming"
-MOJO_DIRS = ["codes", "gpu", "mojo_kernels"]
+MOJO_DIRS = ["codes", "gpu", "mojo_kernels", "."]  # "." = project root (utils.mojo etc.)
 
 
 def load_categories():
@@ -156,8 +156,10 @@ def main():
 
     if SITE_SOURCE.exists():
         shutil.rmtree(SITE_SOURCE)
+    SITE_SOURCE.mkdir()
     for d in MOJO_DIRS:
-        (SITE_SOURCE / d).mkdir(parents=True)
+        if d != ".":
+            (SITE_SOURCE / d).mkdir()
 
     for cat_name, files in categories.items():
         for stem in files:
