@@ -16,6 +16,7 @@ theme:
   - navigation.expand
   - navigation.top
   - content.code.copy
+  - toc.integrate   # moves ToC into the left nav, frees right column
 extra_css:
 - extra.css
 markdown_extensions:
