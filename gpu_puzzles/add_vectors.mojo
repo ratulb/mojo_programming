@@ -79,17 +79,20 @@ def main() raises:
         var gpu_ctx = DeviceContext()
 
         var result_gpu_buffer = gpu_ctx.enqueue_create_buffer[dtype](size)
+        var lhs_gpu_buffer = gpu_ctx.enqueue_create_buffer[dtype](size)
+        var rhs_gpu_buffer = gpu_ctx.enqueue_create_buffer[dtype](size)
 
-        lhs_host_buffer.reassign_ownership_to(gpu_ctx)
-        rhs_host_buffer.reassign_ownership_to(gpu_ctx)
+        lhs_host_buffer.enqueue_copy_to(dst=lhs_gpu_buffer)
+        rhs_host_buffer.enqueue_copy_to(dst=rhs_gpu_buffer)
+
         var max_blocks = gpu_ctx.get_attribute(
             DeviceAttribute.MAX_BLOCKS_PER_MULTIPROCESSOR
         )
 
         gpu_ctx.enqueue_function[vector_add[dtype]](
             result_gpu_buffer.unsafe_ptr(),
-            lhs_host_buffer.unsafe_ptr(),
-            rhs_host_buffer.unsafe_ptr(),
+            lhs_gpu_buffer.unsafe_ptr(),
+            rhs_gpu_buffer.unsafe_ptr(),
             size,
             grid_dim=max_blocks,
             block_dim=256,
