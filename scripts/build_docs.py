@@ -212,6 +212,7 @@ def main():
         "  }\n"
         "  .md-grid {\n"
         "    max-width: 1400px !important;\n"
+        "    padding-left: 1.6rem;\n"
         "  }\n"
         "  .md-content__inner.md-typeset {\n"
         "    margin-right: 0;\n"
