@@ -92,7 +92,7 @@ def main() raises:
 
     fill(lhs_host_buffer, init_seed=42)
     fill(rhs_host_buffer, init_seed=123)
-    with Timer("CPU addition took: "):
+    with Timer("CPU execution took: "):
         vector_add_cpu(
             result_host_buffer, lhs_host_buffer, rhs_host_buffer, size
         )
@@ -115,7 +115,7 @@ def main() raises:
             DeviceAttribute.MULTIPROCESSOR_COUNT
         )
         var threads_per_block = 256
-        var blocks_count = max_blocks * sm_count * 2
+        var blocks_count = max_blocks * sm_count * 32
         print("Max block per sm: ", max_blocks, "sm count: ", sm_count)
         print(
             "Launching",
