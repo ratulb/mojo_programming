@@ -211,7 +211,7 @@ def main():
         "  font-size: 18px;\n"
         "  }\n"
         "  .md-grid {\n"
-        "    max-width: 1400px !important;\n"
+        "    max-width: 100% !important;\n"
         "  }\n"
         "  .md-content__inner.md-typeset {\n"
         "    margin-right: 0;\n"
