@@ -58,7 +58,7 @@ def fill[
 
 def main() raises:
     comptime dtype = DType.float32
-    var size = 1000000
+    var size = 100000000
     var cpu_ctx = DeviceContext(api="cpu")
 
     var lhs_host_buffer = cpu_ctx.enqueue_create_host_buffer[dtype](size)
