@@ -1,5 +1,6 @@
-### Add vectors
-### Mojo kernel that adds vectors with grid strides, simd and loop unrolling
+### Vector Add (GPU + CPU)
+### Demonstrates a vector addition kernel with grid-stride loops, SIMD vectorization,
+### and loop unrolling — runnable on both CPU and GPU (when available).
 
 from std.gpu.host import DeviceContext, HostBuffer, DeviceAttribute
 from std.gpu import thread_idx, block_idx, block_dim, grid_dim
@@ -9,6 +10,20 @@ from std.random import random_float64, seed
 from std.sys import has_accelerator, simd_width_of
 
 
+# GPU kernel: element-wise vector addition with grid-stride loop, SIMD loads,
+# and compile-time loop unrolling. Each thread processes CHUNK_SIZE elements
+# per iteration, then advances by the total grid stride.
+#
+# Parameters:
+#   result: output pointer (mutably addressed)
+#   a, b: input pointers (immutably addressed)
+#   size: number of elements in each vector
+#
+# Template parameters:
+#   dtype: element data type (e.g. DType.float32)
+#   simd_width: SIMD width, auto-detected from dtype
+#   simd_vectors_per_thread: number of SIMD vectors per thread per grid step
+#
 def vector_add[
     dtype: DType,
     simd_width: Int = simd_width_of[dtype](),
@@ -49,6 +64,13 @@ def vector_add[
         start_index += grid_stride * CHUNK_SIZE
 
 
+# CPU reference implementation: simple sequential element-wise vector addition.
+#
+# Parameters:
+#   result: output host buffer
+#   a, b: input host buffers
+#   size: number of elements
+#
 def vector_add_cpu[
     dtype: DType,
     //,
@@ -64,6 +86,14 @@ def vector_add_cpu[
         i += 1
 
 
+# Fill a host buffer with random float64 values cast to the target dtype.
+# Optionally accepts a seed for reproducible results.
+#
+# Parameters:
+#   buffer_a: host buffer to fill
+#   init_seed: optional RNG seed (deterministic if provided)
+#   min, max: range for random values
+#
 def fill[
     dtype: DType,
     //,
@@ -81,6 +111,9 @@ def fill[
         buffer_a[i] = random_float64(min, max).cast[dtype]()
 
 
+# Benchmark vector addition on CPU and (if available) GPU, then validate that
+# all GPU results match the CPU reference within a small tolerance.
+#
 def main() raises:
     comptime dtype = DType.float32
     var size = 100000000
