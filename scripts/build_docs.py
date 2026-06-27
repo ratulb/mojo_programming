@@ -211,8 +211,7 @@ def main():
         "  font-size: 18px;\n"
         "  }\n"
         "  .md-typeset .highlight {\n"
-        "    margin-right: -2.4rem;\n"
-        "    padding-right: 2.4rem;\n"
+        "    margin-right: -1.2rem;\n"
         "  }\n"
         "}\n"
     )
