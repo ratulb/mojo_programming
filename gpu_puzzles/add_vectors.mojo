@@ -1,57 +1,101 @@
-
 ### Add vectors
-### Mojo kernel for adding corresponding elements of vectors a and b, store in out.
+### Mojo kernel for adding corresponding elements of vectors a and b, store in result.
 
-from gpu.host import DeviceContext
-from memory import UnsafePointer
-from gpu import thread_idx, block_idx, block_dim
-from std.testing import assert_equal
-
-comptime SIZE = 4
-comptime BLOCKS_PER_GRID = 1
-comptime THREADS_PER_BLOCK = SIZE
-comptime dtype = DType.float32
+from std.gpu.host import DeviceContext, HostBuffer, DeviceAttribute
+from std.gpu import thread_idx, block_idx, block_dim, grid_dim
+from std.testing import assert_almost_equal
+from utils import Timer
+from std.random import random_float64, seed
+from std.sys import has_accelerator
 
 
-def add(
-    out: UnsafePointer[Scalar[dtype]],
-    a: UnsafePointer[Scalar[dtype]],
-    b: UnsafePointer[Scalar[dtype]],
+def vector_add[
+    dtype: DType,
+](
+    result: UnsafePointer[Scalar[dtype], MutAnyOrigin],
+    a: UnsafePointer[Scalar[dtype], ImmutAnyOrigin],
+    b: UnsafePointer[Scalar[dtype], ImmutAnyOrigin],
+    size: Int,
 ):
-    tid = block_idx.x * block_dim.x + thread_idx.x
-    if tid < SIZE:
-        out[tid] = a[tid] + b[tid]
+    var tid = block_idx.x * block_dim.x + thread_idx.x
+    var stride = grid_dim.x * block_dim.x
+    while tid < size:
+        result[tid] = a[tid] + b[tid]
+        tid += stride
+
+
+def vector_add_cpu[
+    dtype: DType,
+    //,
+](
+    result: HostBuffer[dtype],
+    a: HostBuffer[dtype],
+    b: HostBuffer[dtype],
+    size: Int,
+):
+    var i = 0
+    while i < size:
+        result[i] = a[i] + b[i]
+        i += 1
+
+
+def fill[
+    dtype: DType,
+    //,
+](
+    buffer_a: HostBuffer[dtype],
+    init_seed: Optional[Int] = None,
+    min: Float64 = 1.0,
+    max: Float64 = 10.0,
+):
+    if init_seed:
+        seed(init_seed.value())
+    else:
+        seed()
+    for i in range(len(buffer_a)):
+        buffer_a[i] = random_float64(min, max).cast[dtype]()
 
 
 def main() raises:
-    ctx = DeviceContext()
-    d_array_buff_1 = ctx.enqueue_create_buffer[dtype](SIZE)
-    d_array_buff_2 = ctx.enqueue_create_buffer[dtype](SIZE)
-    d_out_buff = ctx.enqueue_create_buffer[dtype](SIZE)
-    expected = ctx.enqueue_create_host_buffer[dtype](SIZE)
-    _ = d_out_buff.enqueue_fill(0)
-    _ = expected.enqueue_fill(SIZE - 1)
+    comptime dtype = DType.float32
+    var size = 1000000
+    var cpu_ctx = DeviceContext(api="cpu")
 
-    with d_array_buff_1.map_to_host() as h_array_buff_1:
-        for i in range(SIZE):
-            h_array_buff_1[i] = i
+    var lhs_host_buffer = cpu_ctx.enqueue_create_host_buffer[dtype](size)
+    var rhs_host_buffer = cpu_ctx.enqueue_create_host_buffer[dtype](size)
+    var result_host_buffer = cpu_ctx.enqueue_create_host_buffer[dtype](size)
 
-    with d_array_buff_2.map_to_host() as h_array_buff_2:
-        for i in range(SIZE - 1, -1, -1):
-            h_array_buff_2[SIZE - 1 - i] = i
+    fill(lhs_host_buffer, init_seed=42)
+    fill(rhs_host_buffer, init_seed=123)
+    with Timer("CPU addition took: "):
+        vector_add_cpu(
+            result_host_buffer, lhs_host_buffer, rhs_host_buffer, size
+        )
+    # Post cpu addition make a copy of buff_c_h
+    cpu_ctx.synchronize()
+    print(result_host_buffer)
 
-    ctx.enqueue_function[add](
-        d_out_buff.unsafe_ptr(),
-        d_array_buff_1.unsafe_ptr(),
-        d_array_buff_2.unsafe_ptr(),
-        grid_dim=BLOCKS_PER_GRID,
-        block_dim=THREADS_PER_BLOCK,
-    )
+    comptime if has_accelerator():
+        var gpu_ctx = DeviceContext()
 
-    ctx.synchronize()
+        var result_gpu_buffer = gpu_ctx.enqueue_create_buffer[dtype](size)
 
-    with d_out_buff.map_to_host() as h_out_buff:
-        print(h_out_buff)
-        for i in range(SIZE):
-            assert_equal(h_out_buff[i], expected[i])
+        lhs_host_buffer.reassign_ownership_to(gpu_ctx)
+        rhs_host_buffer.reassign_ownership_to(gpu_ctx)
+        var max_blocks = gpu_ctx.get_attribute(
+            DeviceAttribute.MAX_BLOCKS_PER_MULTIPROCESSOR
+        )
 
+        gpu_ctx.enqueue_function[vector_add[dtype]](
+            result_gpu_buffer.unsafe_ptr(),
+            lhs_host_buffer.unsafe_ptr(),
+            rhs_host_buffer.unsafe_ptr(),
+            size,
+            grid_dim=max_blocks,
+            block_dim=256,
+        )
+        gpu_ctx.synchronize()
+
+        with result_gpu_buffer.map_to_host() as gpu_result:
+            for i in range(size):
+                assert_almost_equal(gpu_result[i], result_host_buffer[i])
