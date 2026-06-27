@@ -88,16 +88,16 @@ def main() raises:
         var max_blocks = gpu_ctx.get_attribute(
             DeviceAttribute.MAX_BLOCKS_PER_MULTIPROCESSOR
         )
-
-        gpu_ctx.enqueue_function[vector_add[dtype]](
-            result_gpu_buffer.unsafe_ptr(),
-            lhs_gpu_buffer.unsafe_ptr(),
-            rhs_gpu_buffer.unsafe_ptr(),
-            size,
-            grid_dim=max_blocks,
-            block_dim=256,
-        )
-        gpu_ctx.synchronize()
+        with Timer("GPU execution took: "):
+            gpu_ctx.enqueue_function[vector_add[dtype]](
+                result_gpu_buffer.unsafe_ptr(),
+                lhs_gpu_buffer.unsafe_ptr(),
+                rhs_gpu_buffer.unsafe_ptr(),
+                size,
+                grid_dim=max_blocks,
+                block_dim=256,
+            )
+            gpu_ctx.synchronize()
 
         with result_gpu_buffer.map_to_host() as gpu_result:
             for i in range(size):
