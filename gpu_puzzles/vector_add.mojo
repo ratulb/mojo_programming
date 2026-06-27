@@ -108,14 +108,19 @@ def main() raises:
         lhs_host_buffer.enqueue_copy_to(dst=lhs_gpu_buffer)
         rhs_host_buffer.enqueue_copy_to(dst=rhs_gpu_buffer)
 
-        var max_blocks = gpu_ctx.get_attribute(
+        var max_blocks_per_sm = gpu_ctx.get_attribute(
             DeviceAttribute.MAX_BLOCKS_PER_MULTIPROCESSOR
         )
         var sm_count = gpu_ctx.get_attribute(
             DeviceAttribute.MULTIPROCESSOR_COUNT
         )
         var threads_per_block = 256
-        var blocks_count = max_blocks * sm_count * 2
+        #var blocks_count = max_blocks * sm_count * 32
+        var max_threads_per_sm = gpu_ctx.get_attribute(
+           DeviceAttribute.MAX_THREADS_PER_MULTIPROCESSOR
+        )
+        max_blocks = max_threads_per_sm // threads_per_block
+        var blocks_count = min(max_blocks_per_sm, max_blocks) * sm_count
         print("Max block per sm: ", max_blocks, "sm count: ", sm_count)
         print(
             "Launching",
