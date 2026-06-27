@@ -210,8 +210,8 @@ def main():
         "  .md-nav {\n"
         "  font-size: 18px;\n"
         "  }\n"
-        "  .md-typeset .highlight {\n"
-        "    margin-right: -1.2rem;\n"
+        "  .md-content__inner.md-typeset {\n"
+        "    margin-right: 0;\n"
         "  }\n"
         "}\n"
     )
