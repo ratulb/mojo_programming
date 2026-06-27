@@ -67,7 +67,7 @@ GPU Puzzles:
   - add_10_2d
   - add_10_2dlayout
   - add_10_with_guard
-  - add_vectors
+  - vector_add
   - layout_basics
   - naive_matmul
   - naive_matmul_one_thread_per_col

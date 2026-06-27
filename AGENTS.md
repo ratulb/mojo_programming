@@ -9,7 +9,7 @@ Each directory with a `mojoproject.toml` was its own `magic` project with a sepa
 | Directory | What | Original tool |
 |-----------|------|---------------|
 | `codes/` | LeetCode-style algorithm problems, each in one `.mojo` file. Tests in `codes/test/` | `magic run mojo` |
-| `gpu_puzzles/` | GPU programming examples (matmul, broadcast, layouts) | `magic run mojo` |
+| `gpu/` | GPU programming examples (matmul, broadcast, layouts) | `magic run mojo` |
 | `cuda/histogram/` | CUDA histogram example (standalone, still buildable) | `make` (uses `nvcc`) |
 
 ## Original commands (for reference, run from project subdirectory)
@@ -52,7 +52,7 @@ root/
 ├── site_source/        # Generated markdown (gitignored)
 ├── site/               # Built HTML site (gitignored)
 ├── codes/              # Algorithm problem .mojo files
-├── gpu_puzzles/        # GPU example .mojo files
+├── gpu/        # GPU example .mojo files
 └── mojo_kernels/       # Kernel .mojo files
 ```
 
