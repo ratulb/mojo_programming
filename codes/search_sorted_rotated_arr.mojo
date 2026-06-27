@@ -1,10 +1,10 @@
 # Search in Rotated Sorted Array
 
 # Function to search for a target in a rotated sorted array
-alias ItemType = ComparableCollectionElement
+comptime ItemType = ComparableCollectionElement
 
 
-fn find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -> Int:
+def find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -> Int:
     if len(items) == 0:
         return -1
 
@@ -45,21 +45,21 @@ fn find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -> Int:
     return -1
 
 
-fn main():
+def main():
     # Example 1: Target exists in the array
-    items = List(4, 5, 6, 7, 0, 1, 2)
+    items = [4, 5, 6, 7, 0, 1, 2]
     target = 0
     # Expected output: 4 (index of 0)
     # debug_assert(find(items, target) == 4, "Assertion failed")
 
     # Example 2: Target does not exist
-    items = List(4, 5, 6, 7, 0, 1, 2)
+    items = [4, 5, 6, 7, 0, 1, 2]
     target = 3
     # Expected output: -1
     # debug_assert(find(items, target) == -1, "Assertion failed")
 
     # Example 3: Single-element array, target not present
-    items = List(1)
+    items = [1]
     target = 0
     # Expected output: -1
     debug_assert(find(items, target) == -1, "Assertion failed")

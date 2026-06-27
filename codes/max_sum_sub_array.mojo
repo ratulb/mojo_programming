@@ -2,7 +2,7 @@
 
 
 # Function to find the subarray with the maximum sum
-fn max_sum_sub_array(nums: List[Int]) -> Int:
+def max_sum_sub_array(nums: List[Int]) -> Int:
     # If the list is empty, return 0 as no subarray exists
     if len(nums) == 0:
         return 0
@@ -25,9 +25,9 @@ fn max_sum_sub_array(nums: List[Int]) -> Int:
 
 
 def main():
-    nums = List(-2, 1, -3, 4, -1, 2, 1, -5, 4)
+    nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
     max_sum = max_sum_sub_array(nums)
     debug_assert(max_sum == 6, "Assertion failed")
-    nums = List(5,4,-1,7,8)
+    nums = [5,4,-1,7,8]
     max_sum = max_sum_sub_array(nums)
     debug_assert(max_sum == 23, "Assertion failed")

@@ -2,7 +2,7 @@
 ### Find all unique combinations of numbers from candidates (reusable unlimited times) that sum to target.
 
 
-fn combination_sum(candidates: List[Int], target: Int) -> List[List[Int]]:
+def combination_sum(candidates: List[Int], target: Int) -> List[List[Int]]:
     combinations = List[List[Int]]()
     if len(candidates) == 0:
         return combinations
@@ -11,7 +11,7 @@ fn combination_sum(candidates: List[Int], target: Int) -> List[List[Int]]:
     find_combinations(candidates, 0, curr_combination, 0, target, combinations)
     return combinations
 
-fn find_combinations(
+def find_combinations(
     candidates: List[Int],
     curr_index: Int,
     mut curr_combination: List[Int],
@@ -46,48 +46,48 @@ fn find_combinations(
     )
 
 
-from testing import assert_true
+from std.testing import assert_true
 
 
-fn main() raises:
-    candidates = List(2, 3, 6, 7)
+def main() raises:
+    candidates = [2, 3, 6, 7]
     target = 7
     var result: List[List[Int]] = combination_sum(candidates, target)
-    expected = List(2, 2, 3)
+    expected = [2, 2, 3]
     count = 0
     for each in result:
         if each[] == expected:
             count += 1
     assert_true(count == 1, "assertion failed")
-    expected = List(7)
+    expected = [7]
     count = 0
     for each in result:
         if each[] == expected:
             count += 1
     assert_true(count == 1, "assertion failed")
 
-    candidates = List(2, 3, 5)
+    candidates = [2, 3, 5]
     target = 8
     result = combination_sum(candidates, target)
-    expected = List(2, 2, 2, 2)
+    expected = [2, 2, 2, 2]
     count = 0
     for each in result:
         if each[] == expected:
             count += 1
     assert_true(count == 1, "assertion failed")
-    expected = List(2, 3, 3)
+    expected = [2, 3, 3]
     count = 0
     for each in result:
         if each[] == expected:
             count += 1
     assert_true(count == 1, "assertion failed")
-    expected = List(3, 5)
+    expected = [3, 5]
     count = 0
     for each in result:
         if each[] == expected:
             count += 1
     assert_true(count == 1, "assertion failed")
-    candidates = List(2)
+    candidates = [2]
     target = 1
     result = combination_sum(candidates, target)
     assert_true(len(result) == 0, "assertion failed")

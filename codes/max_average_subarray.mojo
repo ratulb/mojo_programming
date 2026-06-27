@@ -1,6 +1,6 @@
 # Find the maximum average of any contiguous subarray of length k(window size) from the array.
 
-fn find_max_average(read nums: List[Int], window_size: UInt) -> Float16:
+def find_max_average(read nums: List[Int], window_size: UInt) -> Float16:
     length = len(nums)
     if length == 0 or window_size == 0:
         return 0.0  # Return 0 if input is invalid
@@ -23,8 +23,8 @@ fn find_max_average(read nums: List[Int], window_size: UInt) -> Float16:
     return max_average
 
 
-fn main():
-    nums = List(1, 12, -5, -6, 50, 3)
+def main():
+    nums = [1, 12, -5, -6, 50, 3]
     window_size = 4
     max_average = find_max_average(nums, window_size)
     debug_assert(max_average == 12.75, "Assertion failed")  # Test case check

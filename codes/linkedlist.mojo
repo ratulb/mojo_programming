@@ -4,25 +4,25 @@
 
 from memory import Pointer, UnsafePointer
 
-alias ElementType = CollectionElement
+comptime ElementType = CollectionElement
 
 
 @value
 struct Node[
     T: ElementType,
 ]:
-    alias NextNode = UnsafePointer[Self]
+    comptime NextNode = UnsafePointer[Self]
     var value: T
     var next: Self.NextNode
 
-    fn __init__(
+    def __init__(
         out self,
         owned value: T,
     ):
         self.value = value
         self.next = Self.NextNode()
 
-    fn __init__(
+    def __init__(
         out self,
         owned value: T,
         next: Optional[Self.NextNode],
@@ -30,10 +30,10 @@ struct Node[
         self.value = value^
         self.next = next.value() if next else Self.NextNode()
 
-    fn __bool__(self) -> Bool:
+    def __bool__(self) -> Bool:
         return True
 
-    fn __str__[
+    def __str__[
         ElementType: WritableCollectionElement
     ](self: Node[ElementType]) -> String:
         return String.write(self.value)
@@ -43,21 +43,21 @@ struct LinkedList[T: ElementType](Sized):
     var head: Optional[Node[T]]
     var len: UInt
 
-    fn __init__(out self):
+    def __init__(out self):
         self.head = None
         self.len = 0
 
-    fn __len__(self) -> Int:
+    def __len__(self) -> Int:
         return self.len
 
-    fn __init__(out self, *elems: T):
+    def __init__(out self, *elems: T):
         self = Self()
         self.append(elems)
 
-    fn append(mut self, *elems: T):
+    def append(mut self, *elems: T):
         self.append(elems)
 
-    fn append(mut self, elems: VariadicListMem[T]):
+    def append(mut self, elems: VariadicListMem[T]):
         if len(elems) == 0:
             return
         next = 0
@@ -79,7 +79,7 @@ struct LinkedList[T: ElementType](Sized):
             current = current[].next
             self.len += 1
 
-    fn __str__[
+    def __str__[
         ElementType: WritableCollectionElement
     ](self: LinkedList[ElementType]) -> String:
         if self.len == 0:
@@ -97,7 +97,7 @@ struct LinkedList[T: ElementType](Sized):
             s.write("]")
             return s
 
-    fn __iter__(self) -> _LinkedListIter[T, __origin_of(self)]:
+    def __iter__(self) -> _LinkedListIter[T, __origin_of(self)]:
         return _LinkedListIter(Pointer(to=self))
 
 
@@ -111,28 +111,28 @@ struct _LinkedListIter[
     var curr: UnsafePointer[Node[ElementType]]
     var moved: Int
 
-    fn __init__(out self, src: Pointer[LinkedList[ElementType], origin]):
+    def __init__(out self, src: Pointer[LinkedList[ElementType], origin]):
         self.src = src
         self.curr = UnsafePointer(to=self.src[].head.value())
         self.moved = 0
 
-    fn __itr__(self) -> Self:
+    def __itr__(self) -> Self:
         return self
 
-    fn __next__(mut self) -> Pointer[ElementType, origin]:
+    def __next__(mut self) -> Pointer[ElementType, origin]:
         out = Pointer[ElementType, origin](to=self.curr[].value)
         self.moved += 1
         self.curr = self.curr[].next
         return out
 
-    fn __has_next__(self) -> Bool:
+    def __has_next__(self) -> Bool:
         return self.curr.__bool__()
 
-    fn __len__(self) -> Int:
+    def __len__(self) -> Int:
         return self.src[].len - self.moved
 
 
-fn main():
+def main():
     linkedlist = LinkedList[Int]()
     print(linkedlist.__str__())
 

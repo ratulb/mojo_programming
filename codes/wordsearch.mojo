@@ -3,11 +3,11 @@
 
 from collections import Set
 
-alias SString = List[StaticString]
-alias SStrings = List[SString]
+comptime SString = List[StaticString]
+comptime SStrings = List[SString]
 
 
-fn present(board: SStrings, word: StaticString) raises -> Bool:
+def present(board: SStrings, word: StaticString) raises -> Bool:
     if len(board) == 0:
         return False
     rows, cols = len(board), len(board[0])
@@ -19,7 +19,7 @@ fn present(board: SStrings, word: StaticString) raises -> Bool:
     return False
 
 
-fn trace(
+def trace(
     rows: UInt,
     cols: UInt,
     board: SStrings,
@@ -52,10 +52,10 @@ fn trace(
     return exists
 
 
-from testing import assert_true, assert_false
+from std.testing import assert_true, assert_false
 
 
-fn main() raises:
+def main() raises:
     board = SStrings(
         SString("A", "B", "C", "E"),
         SString("S", "F", "C", "S"),

@@ -3,10 +3,10 @@
 ### This example demonstrates how to use SIMD.select() to perform element-wise conditional selection between two SIMD vectors based on a boolean mask.
 
 
-from testing import assert_true
+from std.testing import assert_true
 
 
-fn main() raises:
+def main() raises:
     # Create a SIMD (Single Instruction, Multiple Data) boolean selector vector of size 4.
     # Each element is a boolean value (True or False), indicating which value to select from `left` or `right`.
     # - If selector[i] == True, take the value from `left[i]`

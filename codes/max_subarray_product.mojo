@@ -1,5 +1,5 @@
 # Function to find the maximum product of a contiguous subarray
-fn max_subarray_product(read nums: List[Int]) -> Int:
+def max_subarray_product(read nums: List[Int]) -> Int:
     # Handle edge case: empty array
     if len(nums) == 0:
         return 0
@@ -38,8 +38,8 @@ fn max_subarray_product(read nums: List[Int]) -> Int:
 
 
 # Entry point
-fn main():
-    nums = List(2, 3, -2, 4)  # Expected maximum product subarray: [2, 3] => 6
+def main():
+    nums = [2, 3, -2, 4]  # Expected maximum product subarray: [2, 3] => 6
     max_product = max_subarray_product(nums)
     print(max_product)
     debug_assert(max_product == 6, "Assertion failed")

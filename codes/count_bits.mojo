@@ -2,7 +2,7 @@
 ### Return an array where each element at index i (0 ≤ i ≤ n) is the number of 1's in the binary representation of i.
 
 
-fn count_bits(n: Int) -> List[Int]:
+def count_bits(n: Int) -> List[Int]:
     result = List(length=n + 1, fill=0)
     power = 1
     for i in range(1, n + 1):
@@ -13,14 +13,14 @@ fn count_bits(n: Int) -> List[Int]:
     return result
 
 
-from testing import assert_equal
+from std.testing import assert_equal
 
 
-fn main() raises:
+def main() raises:
     n = 2
     result = count_bits(n)
-    assert_equal(List(0, 1, 1), result, "Assertion failed")
+    assert_equal([0, 1, 1], result, "Assertion failed")
 
     n = 5
     result = count_bits(n)
-    assert_equal(List(0, 1, 1, 2, 1, 2), result, "Assertion failed")
+    assert_equal([0, 1, 1, 2, 1, 2], result, "Assertion failed")

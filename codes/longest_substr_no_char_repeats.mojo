@@ -5,7 +5,7 @@ from collections import Set
 
 # Function to compute the length of the longest substring without repeating characters.
 # Takes a StringLiteral `s` and returns an unsigned 16-bit integer.
-fn len_longest_substr_no_char_repeats(s: StringLiteral) raises -> UInt16:
+def len_longest_substr_no_char_repeats(s: StringLiteral) raises -> UInt16:
     # If the input string is empty, return 0 immediately
     if len(s) == 0:
         return 0
@@ -38,7 +38,7 @@ fn len_longest_substr_no_char_repeats(s: StringLiteral) raises -> UInt16:
     return max_length
 
 
-fn main() raises:
+def main() raises:
     s = "abcabcbb"
     print(len_longest_substr_no_char_repeats(s))  # 3
     s = "bbbbb"

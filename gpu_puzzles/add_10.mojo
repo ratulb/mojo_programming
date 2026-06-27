@@ -5,20 +5,20 @@ from gpu.host import DeviceContext
 from memory import UnsafePointer
 from gpu import thread_idx
 
-alias SIZE = 4
-alias BLOCKS_PER_GRID = 1
-alias THREADS_PER_BLOCK = SIZE
-alias dtype = DType.float32
+comptime SIZE = 4
+comptime BLOCKS_PER_GRID = 1
+comptime THREADS_PER_BLOCK = SIZE
+comptime dtype = DType.float32
 
 
-fn add_10(
+def add_10(
     out: UnsafePointer[Scalar[dtype]], array: UnsafePointer[Scalar[dtype]]
 ):
     tid = thread_idx.x
     out[tid] = array[tid] + 10
 
 
-fn main() raises:
+def main() raises:
     ctx = DeviceContext()
     d_array_buff = ctx.enqueue_create_buffer[dtype](SIZE)
     expected = ctx.enqueue_create_buffer[dtype](SIZE)

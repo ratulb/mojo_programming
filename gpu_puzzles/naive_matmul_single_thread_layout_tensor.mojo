@@ -7,35 +7,35 @@ import random
 from layout import Layout, LayoutTensor
 from memory import UnsafePointer, memcpy
 from python import Python, PythonObject
-from testing import assert_true
+from std.testing import assert_true
 
-alias ROWS_A = 64
-alias COLS_A = 16
-alias ROWS_B = 16
-alias COLS_B = 8
-alias ROWS_C = ROWS_A
-alias COLS_C = COLS_B
+comptime ROWS_A = 64
+comptime COLS_A = 16
+comptime ROWS_B = 16
+comptime COLS_B = 8
+comptime ROWS_C = ROWS_A
+comptime COLS_C = COLS_B
 
-alias MATRIX_MIN_ELEM = -5.0
-alias MATRIX_MAX_ELEM = 5.0
+comptime MATRIX_MIN_ELEM = -5.0
+comptime MATRIX_MAX_ELEM = 5.0
 
-alias dtype = DType.float32
+comptime dtype = DType.float32
 # Num threads per block
-alias THREADS = 1
+comptime THREADS = 1
 # Total numbers blocks in the grid
-alias BLOCKS = 1
+comptime BLOCKS = 1
 
-alias layout_a = Layout.row_major(ROWS_A, COLS_A)
-alias layout_b = Layout.row_major(ROWS_B, COLS_B)
-alias layout_c = Layout.row_major(ROWS_C, COLS_C)
-
-
-alias MatrixA = LayoutTensor[dtype, layout_a, MutableAnyOrigin]
-alias MatrixB = LayoutTensor[dtype, layout_b, MutableAnyOrigin]
-alias MatrixC = LayoutTensor[dtype, layout_c, MutableAnyOrigin]
+comptime layout_a = Layout.row_major(ROWS_A, COLS_A)
+comptime layout_b = Layout.row_major(ROWS_B, COLS_B)
+comptime layout_c = Layout.row_major(ROWS_C, COLS_C)
 
 
-fn naive_matmul_single_thread_layout_tensor[
+comptime MatrixA = LayoutTensor[dtype, layout_a, MutableAnyOrigin]
+comptime MatrixB = LayoutTensor[dtype, layout_b, MutableAnyOrigin]
+comptime MatrixC = LayoutTensor[dtype, layout_c, MutableAnyOrigin]
+
+
+def naive_matmul_single_thread_layout_tensor[
     a: Layout, b: Layout, c: Layout
 ](A: MatrixA, B: MatrixB, C: MatrixC,):
     var tid = block_idx.x * block_dim.x + thread_idx.x
@@ -48,7 +48,7 @@ fn naive_matmul_single_thread_layout_tensor[
 
 
 # Initialize the matrix buffer with values in the range 0 to 100
-fn fill_buffer(buffer: HostBuffer[dtype]):
+def fill_buffer(buffer: HostBuffer[dtype]):
     # Randomize
     random.seed()
     for i in range(len(buffer)):
@@ -57,7 +57,7 @@ fn fill_buffer(buffer: HostBuffer[dtype]):
         ).cast[dtype]()[0]
 
 
-fn main():
+def main():
     try:
         ctx = DeviceContext()
 
@@ -108,7 +108,7 @@ fn main():
         print("Prininting here: ", e)
 
 
-fn assert_allclose(
+def assert_allclose(
     buff_a_with_dims: (Int, Int, HostBuffer[dtype]),
     buff_b_with_dims: (Int, Int, HostBuffer[dtype]),
     buff_c_with_dims: (Int, Int, HostBuffer[dtype]),
@@ -126,7 +126,7 @@ fn assert_allclose(
     print("Assertion was successful")
 
 
-fn to_ndarray(buffer: HostBuffer[dtype]) raises -> PythonObject:
+def to_ndarray(buffer: HostBuffer[dtype]) raises -> PythonObject:
     np = Python.import_module("numpy")
     ndarray = np.zeros(len(buffer), dtype=np.float32)
     ndarray_ptr = ndarray_ptr[dtype](ndarray)
@@ -135,11 +135,11 @@ fn to_ndarray(buffer: HostBuffer[dtype]) raises -> PythonObject:
     return ndarray
 
 
-fn reshape(ndarray: PythonObject, rows: Int, cols: Int) raises -> PythonObject:
+def reshape(ndarray: PythonObject, rows: Int, cols: Int) raises -> PythonObject:
     return ndarray.reshape(rows, cols)
 
 
-fn ndarray_ptr[
+def ndarray_ptr[
     dtype: DType
 ](ndarray: PythonObject) raises -> UnsafePointer[Scalar[dtype]]:
     return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()

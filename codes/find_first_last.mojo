@@ -2,7 +2,7 @@
 ### Find first and last index of a target value in a sorted array
 
 
-fn find_first_last(arr: List[Int], target: Int) -> (Int, Int):
+def find_first_last(arr: List[Int], target: Int) -> (Int, Int):
     result = (-1, -1)
     if len(arr) == 0:
         return result
@@ -34,11 +34,11 @@ fn find_first_last(arr: List[Int], target: Int) -> (Int, Int):
     return result
 
 
-from testing import assert_true
+from std.testing import assert_true
 
 
-fn main() raises:
-    arr = List(5, 7, 7, 8, 8, 10)
+def main() raises:
+    arr = [5, 7, 7, 8, 8, 10]
     target = 8
     result = find_first_last(arr, target)
     assert_true(result[0] == 3 and result[1] == 4, "Assertion failed")
@@ -46,7 +46,7 @@ fn main() raises:
     result = find_first_last(arr, target)
     assert_true(result[0] == -1 and result[1] == -1, "Assertion failed")
 
-    arr = List(5, 7, 7, 8, 10)
+    arr = [5, 7, 7, 8, 10]
     target = 8
     result = find_first_last(arr, target)
     assert_true(result[0] == 3 and result[1] == 3, "Assertion failed")

@@ -10,25 +10,25 @@ from layout import Layout, LayoutTensor
 from os import Atomic
 from os.atomic import Consistency
 
-alias dtype = DType.int64
+comptime dtype = DType.int64
 # How many numbers to bin? 2 ^ 20 (default)
-alias ELEMS_COUNT = 1 << 20
+comptime ELEMS_COUNT = 1 << 20
 # How many bins?
-alias NUM_BINS = 10
+comptime NUM_BINS = 10
 # Num threads per block
-alias THREADS = 256
+comptime THREADS = 256
 # Total numbers blocks in the grid
-alias BLOCKS = ceildiv(ELEMS_COUNT, THREADS)
+comptime BLOCKS = ceildiv(ELEMS_COUNT, THREADS)
 
 # Max value of any binned element
-alias MAX_ELEM = 101
-alias MIN_ELEM = 1
+comptime MAX_ELEM = 101
+comptime MIN_ELEM = 1
 
-alias BIN_WIDTH = (MAX_ELEM - MIN_ELEM + 1) // NUM_BINS
-alias input_layout = Layout.row_major(ELEMS_COUNT)
+comptime BIN_WIDTH = (MAX_ELEM - MIN_ELEM + 1) // NUM_BINS
+comptime input_layout = Layout.row_major(ELEMS_COUNT)
 
 
-fn histogram(
+def histogram(
     input: LayoutTensor[dtype, input_layout, MutableAnyOrigin],
     output: UnsafePointer[Scalar[dtype]],
     total_elems: Int,
@@ -43,7 +43,7 @@ fn histogram(
 
 
 # Initialize the input buffer with values in the range 0 to 100
-fn fill_buffer(buffer: HostBuffer[dtype]):
+def fill_buffer(buffer: HostBuffer[dtype]):
     # Randomize
     random.seed()
     for i in range(len(buffer)):
@@ -52,7 +52,7 @@ fn fill_buffer(buffer: HostBuffer[dtype]):
 
 # Find the bin index given a number
 @always_inline
-fn bin_index(elem: Int64) -> Int:
+def bin_index(elem: Int64) -> Int:
     bin_index = Int((elem - MIN_ELEM) // BIN_WIDTH)
     if bin_index >= NUM_BINS:
         bin_index = NUM_BINS - 1
@@ -61,7 +61,7 @@ fn bin_index(elem: Int64) -> Int:
     return bin_index
 
 
-fn main():
+def main():
     try:
         ctx = DeviceContext()
 

@@ -2,7 +2,7 @@
 ### Given a string s, return the longest palindromic substring therein
 
 
-fn longest_palindrome(s: String) -> String:
+def longest_palindrome(s: String) -> String:
     if len(s) == 0:
         return s
     longest = String("")
@@ -14,7 +14,7 @@ fn longest_palindrome(s: String) -> String:
     return longest
 
 
-fn find_longest(mut left: Int, mut right: Int, s: String, mut longest: String):
+def find_longest(mut left: Int, mut right: Int, s: String, mut longest: String):
     while 0 <= left and right < len(s) and s[left] == s[right]:
         if right - left + 1 > len(longest):
             longest = s[left : right + 1]
@@ -22,10 +22,10 @@ fn find_longest(mut left: Int, mut right: Int, s: String, mut longest: String):
         right += 1
 
 
-from testing import assert_true
+from std.testing import assert_true
 
 
-fn main() raises:
+def main() raises:
     var s: String = "babad"
     var expected: String = "bab"
     result = longest_palindrome(s)

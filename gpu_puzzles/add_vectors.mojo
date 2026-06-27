@@ -5,15 +5,15 @@
 from gpu.host import DeviceContext
 from memory import UnsafePointer
 from gpu import thread_idx, block_idx, block_dim
-from testing import assert_equal
+from std.testing import assert_equal
 
-alias SIZE = 4
-alias BLOCKS_PER_GRID = 1
-alias THREADS_PER_BLOCK = SIZE
-alias dtype = DType.float32
+comptime SIZE = 4
+comptime BLOCKS_PER_GRID = 1
+comptime THREADS_PER_BLOCK = SIZE
+comptime dtype = DType.float32
 
 
-fn add(
+def add(
     out: UnsafePointer[Scalar[dtype]],
     a: UnsafePointer[Scalar[dtype]],
     b: UnsafePointer[Scalar[dtype]],
@@ -23,7 +23,7 @@ fn add(
         out[tid] = a[tid] + b[tid]
 
 
-fn main() raises:
+def main() raises:
     ctx = DeviceContext()
     d_array_buff_1 = ctx.enqueue_create_buffer[dtype](SIZE)
     d_array_buff_2 = ctx.enqueue_create_buffer[dtype](SIZE)

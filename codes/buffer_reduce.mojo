@@ -3,13 +3,13 @@ from algorithm import vectorize
 from sys import simdwidthof
 
 
-fn summer[
+def summer[
     type: DType, //, simdwidth: Int = simdwidthof[type]()
 ](buffer: NDBuffer[type=type, rank=1]) -> Scalar[type]:
     result = Scalar[type](0)
 
     @parameter
-    fn sum[simd_width: Int](idx: Int):
+    def sum[simd_width: Int](idx: Int):
         result += buffer.load[width=simd_width](idx).reduce_add()
 
     vectorize[sum, simdwidth](len(buffer))
@@ -20,8 +20,8 @@ from collections import InlineArray
 from math import iota
 
 
-fn main() raises:
-    alias elem_count = 30
+def main() raises:
+    comptime elem_count = 30
     var array = InlineArray[Scalar[DType.float64], elem_count](
         uninitialized=True
     )

@@ -1,5 +1,5 @@
 # Function to compute the product of all elements in the list except the one at each index
-fn product_except_self(nums: List[Int]) -> List[Int]:
+def product_except_self(nums: List[Int]) -> List[Int]:
     # If the input list is empty, return it as is
     if len(nums) == 0:
         return nums
@@ -8,7 +8,7 @@ fn product_except_self(nums: List[Int]) -> List[Int]:
     len = len(nums)
 
     # Initialize the result list with all 1s. This will store our final answer.
-    result = List(1) * len
+    result = [1] * len
 
     # prefix_product holds the product of all elements to the *left* of the current index
     prefix_product = 1
@@ -31,9 +31,9 @@ fn product_except_self(nums: List[Int]) -> List[Int]:
 
 
 # Entry point
-fn main():
+def main():
     # Example input
-    nums = List(1, 2, 3, 4)
+    nums = [1, 2, 3, 4]
     # Call the function to get result
     result = product_except_self(nums)  # Output should be [24, 12, 8, 6]
     # Print the result

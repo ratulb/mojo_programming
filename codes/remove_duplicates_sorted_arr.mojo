@@ -4,7 +4,7 @@
 ### After the last unique element, all entries which have been shifted are discarded.
 
 
-fn remove_duplicates(mut nums: List[Int]) -> None:
+def remove_duplicates(mut nums: List[Int]) -> None:
     # If the list has 0 or 1 element, it's already unique
     if len(nums) < 2:
         return
@@ -27,27 +27,27 @@ fn remove_duplicates(mut nums: List[Int]) -> None:
 
 
 # Import testing helper for assertions
-from testing import assert_equal
+from std.testing import assert_equal
 
 
-fn main() raises:
+def main() raises:
     # Each test validates that the function keeps only unique sorted elements
-    nums = List(1, 1)
+    nums = [1, 1]
     remove_duplicates(nums)
-    assert_equal(nums, List(1), "Assertion failed")
+    assert_equal(nums, [1], "Assertion failed")
 
-    nums = List(1, 1, 1)
+    nums = [1, 1, 1]
     remove_duplicates(nums)
-    assert_equal(nums, List(1), "Assertion failed")
+    assert_equal(nums, [1], "Assertion failed")
 
-    nums = List(1, 1, 1, 2)
+    nums = [1, 1, 1, 2]
     remove_duplicates(nums)
-    assert_equal(nums, List(1, 2), "Assertion failed")
+    assert_equal(nums, [1, 2], "Assertion failed")
 
-    nums = List(1, 1, 1, 2, 3, 3, 3, 5, 5, 6, 6, 8, 8, 8, 9, 10, 10)
+    nums = [1, 1, 1, 2, 3, 3, 3, 5, 5, 6, 6, 8, 8, 8, 9, 10, 10]
     remove_duplicates(nums)
-    assert_equal(nums, List(1, 2, 3, 5, 6, 8, 9, 10), "Assertion failed")
+    assert_equal(nums, [1, 2, 3, 5, 6, 8, 9, 10], "Assertion failed")
 
-    nums = List(1, 1, 1, 2, 3, 3, 3, 5, 5, 6, 6, 8, 8, 8, 9, 10, 10, 11)
+    nums = [1, 1, 1, 2, 3, 3, 3, 5, 5, 6, 6, 8, 8, 8, 9, 10, 10, 11]
     remove_duplicates(nums)
-    assert_equal(nums, List(1, 2, 3, 5, 6, 8, 9, 10, 11), "Assertion failed")
+    assert_equal(nums, [1, 2, 3, 5, 6, 8, 9, 10, 11], "Assertion failed")

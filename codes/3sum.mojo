@@ -5,19 +5,19 @@ import random
 from collections import InlineArray
 
 # Define a fixed-size array type to store triplets: each element is a tuple (value: Int, index: UInt)
-alias Triplet = InlineArray[(Int, UInt), 3]
+comptime Triplet = InlineArray[(Int, UInt), 3]
 
 
 # Comparison function used for sorting the array of tuples (value, original_index)
 @parameter
-fn compare_fn(left: (Int, UInt), right: (Int, UInt)) -> Bool:
+def compare_fn(left: (Int, UInt), right: (Int, UInt)) -> Bool:
     return (
         left[0] < right[0]
     )  # Compare based on the actual value, not the index
 
 
 # Function to find all unique triplets that sum up to 0
-fn find_triplets(nums: List[Int]) -> List[Triplet]:
+def find_triplets(nums: List[Int]) -> List[Triplet]:
     # Create a new list of tuples (value, original index)
     numbers = List[(Int, UInt)](capacity=len(nums))
     for idx in range(len(nums)):
@@ -70,7 +70,7 @@ fn find_triplets(nums: List[Int]) -> List[Triplet]:
 
 
 # Helper function to nicely print triplet values and their original indices
-fn pretty_print(triplets: List[Triplet]):
+def pretty_print(triplets: List[Triplet]):
     for triplet in triplets:
         print("Elem1 value: ", triplet[][0][0], ", index: ", triplet[][0][1])
         print("Elem2 value: ", triplet[][1][0], ", index: ", triplet[][1][1])
@@ -79,8 +79,8 @@ fn pretty_print(triplets: List[Triplet]):
 
 
 # Entry point: generates a test list, shuffles it, finds triplets and prints them
-fn main():
-    list = List(-3, -3, -2, -1, 0, 1, 2, 2, 3)
+def main():
+    list = [-3, -3, -2, -1, 0, 1, 2, 2, 3]
     random.shuffle(list)  # Randomize input to simulate unordered input
     triplets = find_triplets(list)
     pretty_print(triplets)

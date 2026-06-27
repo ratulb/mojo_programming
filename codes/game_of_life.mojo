@@ -3,10 +3,10 @@ from gridv2 import Grid as GridV2
 from utils import Variant
 import random
 
-alias Grid = Variant[GridV1, GridV2]
+comptime Grid = Variant[GridV1, GridV2]
 
 
-fn run(owned grid: Grid) raises -> None:
+def run(owned grid: Grid) raises -> None:
     var inner: GridV1
     if grid.isa[GridV1]():
         inner = grid[GridV1]
@@ -24,7 +24,7 @@ fn run(owned grid: Grid) raises -> None:
         inner.mutate()
 
 
-fn main() raises -> None:
+def main() raises -> None:
     random.seed()
     var grid: Grid
     if random.random_ui64(0, 1):

@@ -2,7 +2,7 @@
 ### Implement the atoi(string s) function, which converts a string to a signed integer.
 
 
-fn atoi(s: String) raises -> Int:
+def atoi(s: String) raises -> Int:
     # Return 0 for an empty string (edge case)
     if len(s) == 0:
         return 0
@@ -56,10 +56,10 @@ fn atoi(s: String) raises -> Int:
     return number
 
 
-from testing import assert_equal
+from std.testing import assert_equal
 
 
-fn main() raises:
+def main() raises:
     s = "   -           13   37    c0d3"
     number = atoi(s)
     assert_equal(number, -1337)

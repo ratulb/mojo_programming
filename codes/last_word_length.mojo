@@ -2,7 +2,7 @@
 ### Return the length of the last word in a given space-separated string
 
 
-fn last_word_length(s: String) -> Int:
+def last_word_length(s: String) -> Int:
     if len(s) == 0:
         return 0
     i, length = len(s) - 1, 0
@@ -14,8 +14,8 @@ fn last_word_length(s: String) -> Int:
     return length
 
 
-fn main() raises:
-    from testing import assert_true
+def main() raises:
+    from std.testing import assert_true
 
     result = last_word_length("Hello World")
     assert_true(result == 5, "Assertion failed")

@@ -7,14 +7,14 @@ from layout import Layout, LayoutTensor
 from math import iota
 
 
-alias SIZE = 2
-alias BLOCKS_PER_GRID = 1
-alias THREADS_PER_BLOCK = (3, 3)
-alias dtype = DType.float32
-alias layout = Layout.row_major(SIZE, SIZE)
+comptime SIZE = 2
+comptime BLOCKS_PER_GRID = 1
+comptime THREADS_PER_BLOCK = (3, 3)
+comptime dtype = DType.float32
+comptime layout = Layout.row_major(SIZE, SIZE)
 
 
-fn add_10_2dlayout(
+def add_10_2dlayout(
     out: LayoutTensor[mut=True, dtype, layout],
     a: LayoutTensor[mut=True, dtype, layout],
     size: Int,
@@ -26,7 +26,7 @@ fn add_10_2dlayout(
         out[row, col] = a[row, col] + 10
 
 
-fn main():
+def main():
     try:
         ctx = DeviceContext()
 

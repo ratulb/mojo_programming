@@ -2,7 +2,7 @@
 ### Given two sorted arrays nums1 (size m + n, with m valid elements followed by n zeros) and nums2 (size n), merge them in-place into nums1 as one sorted array.
 
 
-fn merge(mut nums1: List[Int], nums2: List[Int]):
+def merge(mut nums1: List[Int], nums2: List[Int]):
     if len(nums1) == 0 or len(nums2) == 0:
         return
     # Set pointer m to the last valid element in nums1 (i.e., excluding trailing zeros)
@@ -35,20 +35,20 @@ fn merge(mut nums1: List[Int], nums2: List[Int]):
     # No need to handle leftover nums1 elements, they are already in place 1
 
 
-from testing import assert_equal
+from std.testing import assert_equal
 
 
-fn main() raises:
+def main() raises:
     nums1 = List[Int](5, 8, 11, 13, 0, 0, 0)
     nums2 = List[Int](3, 9, 19)
     merge(nums1, nums2)
-    assert_equal(nums1, List(3, 5, 8, 9, 11, 13, 19), "Assertion failed")
-    nums1 = List(1, 2, 3, 0, 0, 0)
-    nums2 = List(2, 5, 6)
+    assert_equal(nums1, [3, 5, 8, 9, 11, 13, 19], "Assertion failed")
+    nums1 = [1, 2, 3, 0, 0, 0]
+    nums2 = [2, 5, 6]
     merge(nums1, nums2)
-    assert_equal(nums1, List(1, 2, 2, 3, 5, 6), "Assertion failed")
+    assert_equal(nums1, [1, 2, 2, 3, 5, 6], "Assertion failed")
 
-    nums1 = List(1)
+    nums1 = [1]
     nums2 = List[Int]()
     merge(nums1, nums2)
-    assert_equal(nums1, List(1), "Assertion failed")
+    assert_equal(nums1, [1], "Assertion failed")

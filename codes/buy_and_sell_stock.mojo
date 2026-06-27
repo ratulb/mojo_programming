@@ -3,7 +3,7 @@
 # You must buy before you sell.
 
 
-fn max_profit(prices: List[UInt]) -> UInt:
+def max_profit(prices: List[UInt]) -> UInt:
     var max_profit: UInt = 0  # Stores the maximum profit found so far
     buy_day = 0  # Pointer to track the day to buy the stock
     sell_day = 1  # Pointer to track the day to sell the stock
@@ -21,7 +21,7 @@ fn max_profit(prices: List[UInt]) -> UInt:
     return max_profit  # Return the highest profit found
 
 
-fn main():
+def main():
     # First test: Best profit is buying at 1 and selling at 6 => profit = 5
     prices = List[UInt](7, 1, 5, 3, 6, 4)
     debug_assert(max_profit(prices) == 5, "Assertion failed")

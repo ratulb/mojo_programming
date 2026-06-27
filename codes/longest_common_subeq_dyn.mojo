@@ -2,7 +2,7 @@
 ### Return the length of the longest common subsequence between two strings, or 0 if none exists
 
 
-fn longest_subseq(mut text1: String, mut text2: String) raises -> Int:
+def longest_subseq(mut text1: String, mut text2: String) raises -> Int:
     if len(text1) == 0 or len(text2) == 0:
         return 0
     dp = List[List[Int]](
@@ -17,10 +17,10 @@ fn longest_subseq(mut text1: String, mut text2: String) raises -> Int:
     return dp[0][0]
 
 
-from testing import assert_equal
+from std.testing import assert_equal
 
 
-fn main() raises:
+def main() raises:
     var text1: String = "abcde"
     var text2: String = "ace"
     result = longest_subseq(text1, text2)

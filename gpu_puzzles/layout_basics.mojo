@@ -1,15 +1,15 @@
 from gpu.host import DeviceContext
 from layout import Layout, LayoutTensor
 
-alias HEIGHT = 2
-alias WIDTH = 3
-alias dtype = DType.float32
-alias layout = Layout.row_major(HEIGHT, WIDTH)
-alias BLOCKS_PER_GRID = 1
-alias THREADS_PER_BLOCK = 1
+comptime HEIGHT = 2
+comptime WIDTH = 3
+comptime dtype = DType.float32
+comptime layout = Layout.row_major(HEIGHT, WIDTH)
+comptime BLOCKS_PER_GRID = 1
+comptime THREADS_PER_BLOCK = 1
 
 
-fn kernel[
+def kernel[
     dtype: DType, layout: Layout
 ](tensor: LayoutTensor[mut=True, dtype, layout]):
     print("Before\n")

@@ -2,10 +2,10 @@
 
 from collections import InlineArray
 
-alias Quadruplet = InlineArray[Int, 4]
+comptime Quadruplet = InlineArray[Int, 4]
 
 # Function to find all unique triplets that sum up to target
-fn quadruplets(mut nums: List[Int], target: Int) -> List[Quadruplet]:
+def quadruplets(mut nums: List[Int], target: Int) -> List[Quadruplet]:
     result = List[Quadruplet]()
     if len(nums) == 0:
         return result
@@ -37,8 +37,8 @@ fn quadruplets(mut nums: List[Int], target: Int) -> List[Quadruplet]:
     return result
 
 
-fn main():
-    nums = List(1, 0, -1, 0, -2, 2)
+def main():
+    nums = [1, 0, -1, 0, -2, 2]
     target = 0
     result = quadruplets(nums, target)
     for each in result:

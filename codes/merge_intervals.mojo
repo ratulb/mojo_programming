@@ -3,11 +3,11 @@
 
 
 @parameter
-fn compare_fn(interval1: (Int, Int), interval2: (Int, Int)) -> Bool:
+def compare_fn(interval1: (Int, Int), interval2: (Int, Int)) -> Bool:
     return interval1[0] < interval2[0]
 
 
-fn merge_intervals(mut intervals: List[(Int, Int)]) -> List[(Int, Int)]:
+def merge_intervals(mut intervals: List[(Int, Int)]) -> List[(Int, Int)]:
     if len(intervals) == 0:
         return List[(Int, Int)]()
 
@@ -27,10 +27,10 @@ fn merge_intervals(mut intervals: List[(Int, Int)]) -> List[(Int, Int)]:
     return result
 
 
-from testing import assert_true
+from std.testing import assert_true
 
 
-fn main() raises:
+def main() raises:
     intervals = List[(Int, Int)]((1, 3), (2, 6), (8, 10), (15, 18))
     expected = List[(Int, Int)]((1, 6), (8, 10), (15, 18))
     result = merge_intervals(intervals)

@@ -3,10 +3,10 @@
 ### Works for any type that implements ComparableCollectionElement (e.g., Int, Float, etc.).
 
 # Define an alias for types that support comparison operations.
-alias ItemType = ComparableCollectionElement
+comptime ItemType = ComparableCollectionElement
 
 
-fn find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -> Int:
+def find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -> Int:
     if len(items) == 0:
         return -1
     left, right = 0, len(items) - 1
@@ -47,13 +47,13 @@ fn find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -> Int:
     return -1
 
 
-from testing import assert_equal
+from std.testing import assert_equal
 
 
-fn main() raises:
-    items = List(7, 7, 8, 9, 10, 10, 12, 1, 2, 3, 3, 4, 4, 5, 5, 6)
-    targets = List(12, 7, 3, 10, 1, 6, 4)
-    expected_indices = List(6, 0, 9, 5, 7, 15, 11)
+def main() raises:
+    items = [7, 7, 8, 9, 10, 10, 12, 1, 2, 3, 3, 4, 4, 5, 5, 6]
+    targets = [12, 7, 3, 10, 1, 6, 4]
+    expected_indices = [6, 0, 9, 5, 7, 15, 11]
 
     results = List[Int](capacity=len(targets))
     for i in range(len(targets)):
@@ -61,17 +61,17 @@ fn main() raises:
         results.append(index)
     assert_equal(expected_indices, results, "Assertion failed!")
 
-    items = List(6)
+    items = [6]
     target = 6
     index = find(items, target)
     assert_equal(index, 0, "Assertion failed")
 
-    items = List(7, 7, 7)
+    items = [7, 7, 7]
     target = 7
     index = find(items, target)
     assert_equal(index, 1, "Assertion failed")
 
-    items = List(7, 8, 4, 5)
+    items = [7, 8, 4, 5]
     target = 3
     index = find(items, target)
     assert_equal(index, -1, "Assertion failed")

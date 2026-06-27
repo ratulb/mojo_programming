@@ -6,7 +6,7 @@
 # Note the problem is confusing - given per day prices, you make no profit buying
 # and selling on the same day! 
 
-fn total_profit(prices: List[UInt]) -> UInt:
+def total_profit(prices: List[UInt]) -> UInt:
     var total_profit: UInt = 0  # Stores the maximum profit found so far
 
     # Loop until sell day reaches the end of the price list
@@ -17,7 +17,7 @@ fn total_profit(prices: List[UInt]) -> UInt:
     return total_profit  # Return the highest profit found
 
 
-fn main():
+def main():
     # First test: Best profit is buying at 1 and selling at 6 => profit = 5
     prices = List[UInt](7, 1, 5, 3, 6, 4)
     debug_assert(total_profit(prices) == 7, "Assertion failed")

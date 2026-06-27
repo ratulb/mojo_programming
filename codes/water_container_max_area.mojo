@@ -1,7 +1,7 @@
 ### Given an array of line heights, find the two lines that form the container holding the most water.
 
 
-fn max_area(heights: List[Int]) -> Int:
+def max_area(heights: List[Int]) -> Int:
     # If there are fewer than 2 lines, no container can be formed
     if len(heights) < 2:
         return 0
@@ -27,14 +27,14 @@ fn max_area(heights: List[Int]) -> Int:
     return max_area
 
 
-from testing import assert_equal
+from std.testing import assert_equal
 
 
-fn main():
-    heights = List(1, 8, 6, 2, 5, 4, 8, 3, 7)
+def main():
+    heights = [1, 8, 6, 2, 5, 4, 8, 3, 7]
     mx_area = max_area(heights)
     assert_equal(mx_area, 49, "Assertion failed")
 
-    heights = List(1, 1)
+    heights = [1, 1]
     mx_area = max_area(heights)
     assert_equal(mx_area, 1, "Assertion failed")

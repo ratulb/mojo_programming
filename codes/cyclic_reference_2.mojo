@@ -4,13 +4,13 @@ from cyclic_reference_1 import Reference1
 
 
 struct Reference2:
-    fn __init__(out self):
+    def __init__(out self):
         Reference1.print("Reference1 inside Reference2 constructor")
 
     @staticmethod
-    fn print(s: String):
+    def print(s: String):
         print(s)
 
 
-fn main():
+def main():
     var ref2 = Reference2()

@@ -8,12 +8,12 @@ struct Grid(Stringable, Writable):
     var rows: Int
     var cols: Int
 
-    fn __init__(out self, rows: Int, cols: Int):
+    def __init__(out self, rows: Int, cols: Int):
         self.rows = rows
         self.cols = cols
         self.data = UnsafePointer[UInt8].alloc(rows * cols)
 
-    fn __init__(out self, source: GridV1):
+    def __init__(out self, source: GridV1):
         rows = len(source.data)
         cols = len(source.data[0])
         self = Self(rows, cols)
@@ -22,22 +22,22 @@ struct Grid(Stringable, Writable):
                 value = UInt8(source[row, col])
                 (self.data + row * cols + col)[] = value
 
-    fn __copyinit__(out self, existing: Self):
+    def __copyinit__(out self, existing: Self):
         self.rows = existing.rows
         self.cols = existing.cols
         count = self.rows * self.cols
         self.data = UnsafePointer[UInt8].alloc(count)
         memcpy(dest=self.data, src=existing.data, count=count)
 
-    fn __moveinit__(out self, owned existing: Self):
+    def __moveinit__(out self, owned existing: Self):
         self.data = existing.data
         self.rows = existing.rows
         self.cols = existing.cols
     
-    fn __del__(owned self):
+    def __del__(owned self):
         self.data.free()    
 
-    fn __str__(self) -> String:
+    def __str__(self) -> String:
         capacity = self.rows * self.cols
         if capacity == 0:
             return String()
@@ -53,17 +53,17 @@ struct Grid(Stringable, Writable):
                 s += "\n"  # Line break between rows
         return s
 
-    fn write_to[W: Writer](self, mut writer: W) -> None:
+    def write_to[W: Writer](self, mut writer: W) -> None:
         writer.write(self.__str__())
 
-    fn __getitem__(self, row: Int, col: Int) -> UInt8:
+    def __getitem__(self, row: Int, col: Int) -> UInt8:
         return (self.data + row * self.cols + col)[]
 
-    fn __setitem__(mut self, row: Int, col: Int, value: UInt8) -> None:
+    def __setitem__(mut self, row: Int, col: Int, value: UInt8) -> None:
         (self.data + row * self.cols + col)[] = value
 
     @staticmethod
-    fn new(seed: Optional[Int], rows: Int, cols: Int) -> Self:
+    def new(seed: Optional[Int], rows: Int, cols: Int) -> Self:
         if seed:
             random.seed(seed.value())
         else:
@@ -72,7 +72,7 @@ struct Grid(Stringable, Writable):
         random.randint(grid.data, rows * cols, 0, 1)
         return grid
 
-    fn mutate(mut self) -> None:
+    def mutate(mut self) -> None:
         rows = self.rows
         cols = self.cols
         for row in range(rows):
@@ -103,7 +103,7 @@ struct Grid(Stringable, Writable):
                         self[row, col] = 1
 
 
-fn run(owned grid: Grid) raises -> None:
+def run(owned grid: Grid) raises -> None:
     while True:
         print("Current mutation:\n\n")
         print(grid)
@@ -114,7 +114,7 @@ fn run(owned grid: Grid) raises -> None:
         grid.mutate()
 
 
-fn main() raises -> None:
+def main() raises -> None:
     grid_1 = GridV1.new(16, 16)
     # run(grid_1)
     print(grid_1)

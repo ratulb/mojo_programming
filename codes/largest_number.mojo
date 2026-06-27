@@ -2,7 +2,7 @@
 ### Arrange non-negative integers to form the largest possible number and return it as a string.
 
 
-fn largest_number(nums: List[Int]) raises -> String:
+def largest_number(nums: List[Int]) raises -> String:
     if len(nums) == 0:
         return ""
     strs = List[String](capacity=len(nums))
@@ -14,23 +14,23 @@ fn largest_number(nums: List[Int]) raises -> String:
 
 
 @parameter
-fn compare_fn(left: String, right: String) -> Bool:
+def compare_fn(left: String, right: String) -> Bool:
     return left + right > right + left
 
 
-from testing import assert_true
+from std.testing import assert_true
 
 
-fn main() raises:
-    nums = List(10, 2)
+def main() raises:
+    nums = [10, 2]
     result = largest_number(nums)
     assert_true(result == "210", "Assertion failed")
 
-    nums = List(3, 30, 34, 5, 9)
+    nums = [3, 30, 34, 5, 9]
     result = largest_number(nums)
     assert_true(result == "9534330", "Assertion failed")
 
-    nums = List(0, 0, 0, 0, 0)
+    nums = [0, 0, 0, 0, 0]
     result = largest_number(nums)
     assert_true(result == "0", "Assertion failed")
 

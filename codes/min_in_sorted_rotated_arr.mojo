@@ -1,7 +1,7 @@
 # Given a sorted, rotated array `nums`, find and return the minimum element.
 # The solution uses binary search to achieve O(log n) time complexity.
 
-fn find_min(nums: List[Int]) -> Int:
+def find_min(nums: List[Int]) -> Int:
     # Handle edge case: empty list
     if len(nums) == 0:
         return Int.MIN  # Return the minimum representable integer
@@ -37,28 +37,28 @@ fn find_min(nums: List[Int]) -> Int:
         # Fallback return — should never be reached in a rotated sorted array
         return curr_min  # Keeps compiler happy
 
-fn main():
+def main():
     nums = List[Int]()
     minimum = find_min(nums)
     debug_assert(minimum == Int.MIN, "Assertion failed")
-    nums = List(4, 5, 6, 7, 0, 1, 2)
+    nums = [4, 5, 6, 7, 0, 1, 2]
     minimum = find_min(nums)
     debug_assert(minimum == 0, "Assertion failed")
-    nums = List(4)
+    nums = [4]
     minimum = find_min(nums)
     debug_assert(minimum == 4, "Assertion failed")
-    nums = List(4, 5)
+    nums = [4, 5]
     minimum = find_min(nums)
     debug_assert(minimum == 4, "Assertion failed")
-    nums = List(5, 4)
+    nums = [5, 4]
     minimum = find_min(nums)
     debug_assert(minimum == 4, "Assertion failed")
-    nums = List(3, 4, 5, 1, 2)
+    nums = [3, 4, 5, 1, 2]
     minimum = find_min(nums)
     debug_assert(minimum == 1, "Assertion failed")
-    nums = List(11, 13, 15, 17)
+    nums = [11, 13, 15, 17]
     minimum = find_min(nums)
     debug_assert(minimum == 11, "Assertion failed")
-    nums = List(11, 13, 15, 17, 1, 1, 2, 2)
+    nums = [11, 13, 15, 17, 1, 1, 2, 2]
     minimum = find_min(nums)
     debug_assert(minimum == 1, "Assertion failed")

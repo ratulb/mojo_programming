@@ -2,7 +2,7 @@
 ### Determine if s3 is an interleaving of s1 and s2.
 
 
-fn is_interleave(s1: String, s2: String, s3: String) -> Bool:
+def is_interleave(s1: String, s2: String, s3: String) -> Bool:
     if len(s1) + len(s2) != len(s3):
         return False
     dp = List[List[Bool]](
@@ -19,10 +19,10 @@ fn is_interleave(s1: String, s2: String, s3: String) -> Bool:
     return dp[0][0]
 
 
-from testing import assert_true, assert_false
+from std.testing import assert_true, assert_false
 
 
-fn main() raises:
+def main() raises:
     var s1: String = "aabcc"
     var s2: String = "dbbca"
     var s3: String = "aadbbcbcac"

@@ -9,11 +9,11 @@ struct Grid(Stringable, Writable):
     var data: List[List[Int, True]]  # 2D grid of integers (1 = alive, 0 = dead)
 
     # Constructor to initialize the grid with given data
-    fn __init__(out self, data: List[List[Int, True]]):
+    def __init__(out self, data: List[List[Int, True]]):
         self.data = data
 
     @implicit
-    fn __init__(out self, source: GridV2):
+    def __init__(out self, source: GridV2):
         data = source.data
         rows = source.rows
         cols = source.cols
@@ -26,21 +26,21 @@ struct Grid(Stringable, Writable):
         self.data = grid^
 
     # Get the number of rows in the grid
-    fn row_count(self) -> Int:
+    def row_count(self) -> Int:
         if self.data:
             return len(self.data)
         else:
             return 0
 
     # Get the number of columns in the grid
-    fn col_count(self) -> Int:
+    def col_count(self) -> Int:
         if self.data[0]:
             return len(self.data[0])
         else:
             return 0
 
     # Convert the grid to a string for pretty-printing
-    fn __str__(self) -> String:
+    def __str__(self) -> String:
         capacity = self.row_count() * self.col_count()
         if capacity == 0:
             return String()
@@ -58,20 +58,20 @@ struct Grid(Stringable, Writable):
         return s
 
     # Allow writing the grid to any output writer
-    fn write_to[W: Writer](self, mut writer: W) -> None:
+    def write_to[W: Writer](self, mut writer: W) -> None:
         writer.write(self.__str__())
 
     # Access cell at (row, col)
-    fn __getitem__(self, row: Int, col: Int) -> Int:
+    def __getitem__(self, row: Int, col: Int) -> Int:
         return self.data[row][col]
 
     # Update cell at (row, col)
-    fn __setitem__(mut self, row: Int, col: Int, value: Int) -> None:
+    def __setitem__(mut self, row: Int, col: Int, value: Int) -> None:
         self.data[row][col] = value
 
     # Static method to create a random grid with specified size
     @staticmethod
-    fn new(rows: Int, cols: Int) -> Self:
+    def new(rows: Int, cols: Int) -> Self:
         random.seed()
         data = List[List[Int, True]](capacity=rows)
         for row in range(rows):
@@ -83,7 +83,7 @@ struct Grid(Stringable, Writable):
         return Self(data)
 
     # Perform one step of mutation (Game of Life rules)
-    fn mutate(mut self):
+    def mutate(mut self):
         rows = self.row_count()
         cols = self.col_count()
         for row in range(rows):
@@ -121,7 +121,7 @@ struct Grid(Stringable, Writable):
                     self[row, col] = 1
 
 
-fn run(owned grid: Grid) raises -> None:
+def run(owned grid: Grid) raises -> None:
     while True:
         print("Current mutation:\n\n")
         print(grid)
@@ -132,7 +132,7 @@ fn run(owned grid: Grid) raises -> None:
         grid.mutate()
 
 
-fn main() raises -> None:
+def main() raises -> None:
     grid_2 = GridV2.new(42, 16, 16)
     #run(grid_2)
     print(grid_2)
