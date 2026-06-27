@@ -208,7 +208,11 @@ def main():
         "@media screen and (min-width: 76.25em) {\n"
         "  .md-typeset,\n"
         "  .md-nav {\n"
-        "    font-size: 18px;\n"
+        "  font-size: 18px;\n"
+        "  }\n"
+        "  .md-typeset .highlight {\n"
+        "    margin-right: -2.4rem;\n"
+        "    padding-right: 2.4rem;\n"
         "  }\n"
         "}\n"
     )
