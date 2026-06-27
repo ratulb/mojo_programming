@@ -199,6 +199,8 @@ def main():
         "  --md-code-hl-comment-color: #64748B;\n"
         "  --md-code-hl-generic-color: #94A3B8;\n"
         "  --md-code-hl-variable-color: #E6EDF3;\n"
+        "  --md-footer-bg-color: #1a1a2e;\n"
+        "  --md-footer-bg-color--dark: #0f0f1f;\n"
         "}\n"
         "h1, h2, h3, h4, h5, h6 {\n"
         "  color: #1a1a2e !important;\n"
