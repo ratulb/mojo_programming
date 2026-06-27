@@ -200,6 +200,15 @@ def main():
         "  color: #60a5fa;\n"
         "  font-weight: bold;\n"
         "}\n"
+        "@media screen and (min-width: 76.25em) {\n"
+        "  .md-content__inner {\n"
+        "    margin-right: 0;\n"
+        "  }\n"
+        "  .md-typeset .highlight {\n"
+        "    margin-right: -1.2rem;\n"
+        "    padding-right: 1.2rem;\n"
+        "  }\n"
+        "}\n"
     )
     print(f"  ✓  site_source/extra.css")
 
