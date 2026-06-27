@@ -7,7 +7,7 @@ def combination_sum(candidates: List[Int], target: Int) -> List[List[Int]]:
     if len(candidates) == 0:
         return combinations
 
-    var curr_combination = List[Int]()
+    var curr_combination = []
     find_combinations(candidates, 0, curr_combination, 0, target, combinations)
     return combinations
 

@@ -6,7 +6,7 @@ comptime Quadruplet = InlineArray[Int, 4]
 
 # Function to find all unique triplets that sum up to target
 def quadruplets(mut nums: List[Int], target: Int) -> List[Quadruplet]:
-    result = List[Quadruplet]()
+    result = []
     if len(nums) == 0:
         return result
     length = len(nums)

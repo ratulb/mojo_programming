@@ -19,12 +19,12 @@ def total_profit(prices: List[UInt]) -> UInt:
 
 def main():
     # First test: Best profit is buying at 1 and selling at 6 => profit = 5
-    prices = List[UInt](7, 1, 5, 3, 6, 4)
+    prices = [7, 1, 5, 3, 6, 4]
     debug_assert(total_profit(prices) == 7, "Assertion failed")
 
     # Second test: No profitable day to sell => profit = 0
-    prices = List[UInt](7, 6, 4, 3, 1)
+    prices = [7, 6, 4, 3, 1]
     debug_assert(total_profit(prices) == 0, "Assertion failed")
     # 3rd test: Best profit is buying at every day and selling next day
-    prices = List[UInt](1, 2, 3, 4, 5)
+    prices = [1, 2, 3, 4, 5]
     debug_assert(total_profit(prices) == 4, "Assertion failed")

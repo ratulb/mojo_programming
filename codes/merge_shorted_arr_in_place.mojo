@@ -39,8 +39,8 @@ from std.testing import assert_equal
 
 
 def main() raises:
-    nums1 = List[Int](5, 8, 11, 13, 0, 0, 0)
-    nums2 = List[Int](3, 9, 19)
+    nums1 = [5, 8, 11, 13, 0, 0, 0]
+    nums2 = [3, 9, 19]
     merge(nums1, nums2)
     assert_equal(nums1, [3, 5, 8, 9, 11, 13, 19], "Assertion failed")
     nums1 = [1, 2, 3, 0, 0, 0]
@@ -49,6 +49,6 @@ def main() raises:
     assert_equal(nums1, [1, 2, 2, 3, 5, 6], "Assertion failed")
 
     nums1 = [1]
-    nums2 = List[Int]()
+    nums2 = []
     merge(nums1, nums2)
     assert_equal(nums1, [1], "Assertion failed")

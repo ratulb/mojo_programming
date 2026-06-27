@@ -27,7 +27,7 @@ def find_triplets(nums: List[Int]) -> List[Triplet]:
     sort[compare_fn](numbers)
 
     # List to store the result triplets
-    outcome = List[Triplet]()
+    outcome = []
 
     # Iterate through the sorted list using a fixed pivot at index `idx`
     for idx in range(len(numbers) - 2):
