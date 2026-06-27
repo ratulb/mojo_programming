@@ -2,9 +2,8 @@
 # Given an array of integers `nums` and a target value `target`,
 # return the indices of two numbers such that they add up to `target`.
 
-from collections import Dict
 
-fn two_sum(nums: List[Int], target: Int) -> Tuple[Int, Int]:
+def two_sum(nums: List[Int], target: Int) -> Tuple[Int, Int]:
     # Default return value: (-1, -1) if no valid pair is found
     indices = (-1, -1)
 
@@ -34,7 +33,7 @@ fn two_sum(nums: List[Int], target: Int) -> Tuple[Int, Int]:
     # Return the result tuple
     return indices
 
-fn two_sum_costly(nums: List[Int], target: Int) -> Tuple[Int, Int]:
+def two_sum_costly(nums: List[Int], target: Int) -> Tuple[Int, Int]:
     if len(nums) <= 1:
         return (-1, -1)
     for i in range(len(nums)):
@@ -44,8 +43,8 @@ fn two_sum_costly(nums: List[Int], target: Int) -> Tuple[Int, Int]:
     return (-1, -1)
 
 
-fn main():
-    nums = List(2, 7, 11, 15)
+def main():
+    nums = [2, 7, 11, 15]
     target = 9
     indices = two_sum(nums, target)
     debug_assert(indices[0] == 0 and indices[1] == 1, "Assertion failed")
