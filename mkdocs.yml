@@ -16,7 +16,6 @@ theme:
   - navigation.expand
   - navigation.top
   - content.code.copy
-  - toc.integrate   # moves ToC into the left nav, frees right column
 extra_css:
 - extra.css
 markdown_extensions:
@@ -87,7 +86,7 @@ nav:
   - Add a constant 10: gpu_puzzles/add_10_2d.md
   - Add constant to 2D Layout tensor: gpu_puzzles/add_10_2dlayout.md
   - Add 10: gpu_puzzles/add_10_with_guard.md
-  - Add vectors: gpu_puzzles/add_vectors.md
+  - Vector Add (GPU + CPU): gpu_puzzles/vector_add.md
   - Layout Basics: gpu_puzzles/layout_basics.md
   - Dumb matrix multiplication: gpu_puzzles/naive_matmul.md
   - Matrix multiplication 1 GPU thread per output column: gpu_puzzles/naive_matmul_one_thread_per_col.md
