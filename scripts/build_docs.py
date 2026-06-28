@@ -126,8 +126,6 @@ def generate_index_page(categories):
         f"# Mojo 🔥 Programming\n\n"
         f"> CPU & GPU algorithm implementations in the "
         f"[Mojo](https://www.modular.com/mojo) programming language.\n\n"
-        f"[![GitHub](https://img.shields.io/badge/GitHub-ratulb/mojo__programming-181717?logo=github)]"
-        f"({GITHUB_REPO})\n\n"
         f"---\n\n"
         f"<div class=\"grid cards\" markdown>\n\n"
         f"{''.join(cards)}"
