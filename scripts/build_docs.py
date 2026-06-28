@@ -208,12 +208,7 @@ def main():
         ".md-main {\n"
         "  background: transparent !important;\n"
         "}\n"
-        ".md-content__inner {\n"
-        "  background: rgba(250, 250, 248, 0.88);\n"
-        "  backdrop-filter: blur(8px);\n"
-        "  border-radius: 0.5rem;\n"
-        "  padding: 0.5rem 1.5rem;\n"
-        "}\n"
+
         ".md-nav--primary .md-nav__item--section .md-nav__list {\n"
         "  padding-left: 1.6rem;\n"
         "}\n"
