@@ -189,6 +189,13 @@ def main():
     print(f"  ✓  site_source/index.md")
 
     (SITE_SOURCE / "extra.css").write_text(
+        ":root {\n"
+        "  --bg-gradient: linear-gradient(120deg, #0650b1, rgb(0, 128, 0));\n"
+        "}\n"
+        "body {\n"
+        "  background: var(--bg-gradient);\n"
+        "  background-attachment: fixed;\n"
+        "}\n"
         ".md-nav--primary .md-nav__item--section .md-nav__list {\n"
         "  padding-left: 1.6rem;\n"
         "}\n"
