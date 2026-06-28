@@ -198,6 +198,7 @@ def main():
         "}\n"
         ".md-header, .md-footer {\n"
         "  background: transparent !important;\n"
+        "  box-shadow: none !important;\n"
         "}\n"
         ".md-nav--primary .md-nav__item--section .md-nav__list {\n"
         "  padding-left: 1.6rem;\n"
