@@ -141,11 +141,15 @@ def generate_nav(categories):
         children = []
         for stem in files:
             mojo_path = find_mojo_file(stem)
-            if not mojo_path:
-                continue
-            title = read_mojo_title(mojo_path)
-            md_rel = mojo_to_md_rel(mojo_path)
-            children.append({title: md_rel})
+            if mojo_path:
+                title = read_mojo_title(mojo_path)
+                md_rel = mojo_to_md_rel(mojo_path)
+                children.append({title: md_rel})
+            else:
+                md_path = ROOT / f"{stem}.md"
+                if md_path.exists():
+                    title = stem.replace("_", " ").replace("-", " ").title()
+                    children.append({title: f"{stem}.md"})
         if children:
             nav.append({cat_name: children})
     return nav
@@ -164,14 +168,22 @@ def main():
     for cat_name, files in categories.items():
         for stem in files:
             mojo_path = find_mojo_file(stem)
-            if not mojo_path:
-                print(f"  !  {stem}.mojo not found — skipping")
-                continue
-            md_rel = mojo_to_md_rel(mojo_path)
-            md_path = SITE_SOURCE / md_rel
-            md_path.parent.mkdir(parents=True, exist_ok=True)
-            md_path.write_text(generate_md_content(mojo_path))
-            print(f"  ✓  {md_rel}")
+            if mojo_path:
+                md_rel = mojo_to_md_rel(mojo_path)
+                md_path = SITE_SOURCE / md_rel
+                md_path.parent.mkdir(parents=True, exist_ok=True)
+                md_path.write_text(generate_md_content(mojo_path))
+                print(f"  ✓  {md_rel}")
+            else:
+                # Check for a pre-existing .md file at project root
+                md_path = ROOT / f"{stem}.md"
+                if md_path.exists():
+                    dest = SITE_SOURCE / f"{stem}.md"
+                    dest.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(md_path, dest)
+                    print(f"  ✓  {stem}.md (copied)")
+                else:
+                    print(f"  !  {stem}.mojo not found — skipping")
 
     (SITE_SOURCE / "index.md").write_text(generate_index_page(categories))
     print(f"  ✓  site_source/index.md")

@@ -94,6 +94,8 @@ nav:
   - Dumb matrix multiplication: gpu/naive_matmul_single_thread_layout_tensor.md
   - Dumb matrix multiplication: gpu/matmul_thread_per_output_cell.md
   - Matmul Thread Per Output Cell Vectorized: gpu/matmul_thread_per_output_cell_vectorized.md
+- Background:
+  - Background Notes: background-notes.md
 - Utilities:
   - Timer utility: ./utils.md
 - CUDA:

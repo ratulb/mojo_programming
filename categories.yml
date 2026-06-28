@@ -76,6 +76,9 @@ GPU Puzzles:
   - matmul_thread_per_output_cell
   - matmul_thread_per_output_cell_vectorized
 
+Background:
+  - background-notes
+
 Utilities:
   - utils
 
