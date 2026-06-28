@@ -238,7 +238,7 @@ def main():
         "  color: #e6edf3 !important;\n"
         "}\n"
         ".md-typeset h1 {\n"
-        "  font-size: 1.5em !important;\n"
+        "  font-size: 1em !important;\n"
         "}\n"
         ".md-nav__link {\n"
         "  color: #d4d4d8 !important;\n"
