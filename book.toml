@@ -1,0 +1,14 @@
+[book]
+authors = ["Ratul Buragohain"]
+language = "en"
+src = "src"
+title = "Mojo Programming"
+description = "CPU & GPU algorithm implementations in the Mojo programming language"
+
+[build]
+build-dir = "docs"
+
+[output.html]
+additional-css = ["theme/custom.css"]
+default-theme = "navy"
+preferred-dark-theme = "navy"

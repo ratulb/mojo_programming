@@ -4,9 +4,8 @@
 # magic environment (legacy)
 .magic
 
-# Generated site content (MkDocs source & output)
-site_source/
-site/
+# Generated site content (mdBook source)
+src/
 
 # macOS
 .DS_Store

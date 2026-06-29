@@ -18,22 +18,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up pixi
-        uses: prefix-dev/setup-pixi@v0
-        with:
-          pixi-version: latest
-          environments: default
+      - name: Install mdBook
+        run: |
+          curl -sSL https://github.com/rust-lang/mdBook/releases/download/v0.4.36/mdbook-v0.4.36-x86_64-unknown-linux-gnu.tar.gz | tar xz
+          sudo mv mdbook /usr/local/bin/
+
+      - name: Install Python deps
+        run: pip install pyyaml
 
       - name: Generate site content
-        run: pixi run python scripts/build_docs.py
+        run: python scripts/build_docs.py
 
       - name: Build site
-        run: pixi run mkdocs build
+        run: mdbook build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './site'
+          path: './docs'
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
