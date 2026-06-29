@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,9 +177,9 @@
                     <main>
                         <h1 id="string-to-integer-atoi"><a class="header" href="#string-to-integer-atoi">String to Integer (atoi)</a></h1>
 <p>Implement the atoi(string s) function, which converts a string to a signed integer.</p>
-<pre><code class="language-rust ignore">def atoi(s: String) raises -&gt; Int:
-<span class="boring">    Return 0 for an empty string (edge case)
-</span>    if len(s) == 0:
+<pre><code class="language-python">def atoi(s: String) raises -&gt; Int:
+    # Return 0 for an empty string (edge case)
+    if len(s) == 0:
         return 0
 
     buffer = String()  # Buffer to collect valid characters forming the number
@@ -188,43 +188,43 @@
     prelude = True  # Indicates we're in the whitespace/prefix-skipping phase
 
     while idx &lt; len(s):
-<span class="boring">        Skip leading whitespaces
-</span>        while prelude and idx &lt; len(s) and (s[idx] == " "):
+        # Skip leading whitespaces
+        while prelude and idx &lt; len(s) and (s[idx] == " "):
             idx += 1
             continue
 
-<span class="boring">        If we have skipped whitespaces, check for sign or digit
-</span>        if prelude and idx &lt; len(s):
-<span class="boring">            If current char is '+' or '-' or a digit, add it to buffer
-</span>            if s[idx] == "-" or s[idx] == "+" or s[idx] in digits:
+        # If we have skipped whitespaces, check for sign or digit
+        if prelude and idx &lt; len(s):
+            # If current char is '+' or '-' or a digit, add it to buffer
+            if s[idx] == "-" or s[idx] == "+" or s[idx] in digits:
                 if not s[idx] == "+":
                     buffer.__iadd__(s[idx])
                 idx += 1
                 prelude = False  # Exit prelude phase after processing sign or first digit
                 continue
             else:
-<span class="boring">                Invalid character before number starts; exit parsing
-</span>                break
+                # Invalid character before number starts; exit parsing
+                break
 
-<span class="boring">        If we encounter a non-digit (excluding whitespace in middle), break
-</span>        if s[idx] != " " and s[idx] not in digits:
+        # If we encounter a non-digit (excluding whitespace in middle), break
+        if s[idx] != " " and s[idx] not in digits:
             break
 
-<span class="boring">        If it's a digit, add to buffer
-</span>        if s[idx] in digits:
+        # If it's a digit, add to buffer
+        if s[idx] in digits:
             buffer.__iadd__(s[idx])
         idx += 1
 
-<span class="boring">    Now buffer contains something like "-123", "456", "+789", etc.
-</span>    number, factor = 0, 1
+    # Now buffer contains something like "-123", "456", "+789", etc.
+    number, factor = 0, 1
 
-<span class="boring">    Convert from left to right (excluding the first char which could be a sign)
-</span>    for idx in range(len(buffer) - 1, 0, -1):
+    # Convert from left to right (excluding the first char which could be a sign)
+    for idx in range(len(buffer) - 1, 0, -1):
         number = number + Int(buffer[idx]) * factor
         factor *= 10
 
-<span class="boring">    Handle the first character (either a sign or a digit)
-</span>    number = (
+    # Handle the first character (either a sign or a digit)
+    number = (
         -1 * number if buffer[0] == "-" else number + Int(buffer[0]) * factor
     ) if len(buffer) &gt; 1 else number
 
@@ -277,7 +277,8 @@ def main() raises:
 
     s10 = " - 98700 www"
     number = atoi(s10)
-    assert_equal(number, -98700)</code></pre>
+    assert_equal(number, -98700)
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/atoi.mojo">View source on GitHub</a></p>
 
                     </main>

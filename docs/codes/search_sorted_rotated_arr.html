@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,71 +176,72 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="search-sorted-rotated-arr"><a class="header" href="#search-sorted-rotated-arr">Search Sorted Rotated Arr</a></h1>
-<pre><code class="language-rust ignore"><span class="boring">Search in Rotated Sorted Array
-</span>
-<span class="boring">Function to search for a target in a rotated sorted array
-</span>comptime ItemType = ComparableCollectionElement
+<pre><code class="language-python"># Search in Rotated Sorted Array
+
+# Function to search for a target in a rotated sorted array
+comptime ItemType = ComparableCollectionElement
 
 
 def find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -&gt; Int:
     if len(items) == 0:
         return -1
 
-<span class="boring">    Initialize pointers for binary search
-</span>    left, right = 0, len(items) - 1
+    # Initialize pointers for binary search
+    left, right = 0, len(items) - 1
 
-<span class="boring">    Perform binary search
-</span>    while left &lt;= right:
+    # Perform binary search
+    while left &lt;= right:
         mid = (left + right) // 2  # Calculate middle index
 
-<span class="boring">        If the middle element is the target, return the index
-</span>        if items[mid] == target:
+        # If the middle element is the target, return the index
+        if items[mid] == target:
             return mid
 
-<span class="boring">        Determine which half is sorted
-</span>        if items[mid] &gt;= items[left]:
-<span class="boring">            Left half is sorted
-</span>
-<span class="boring">            Check if target lies outside the sorted left half
-</span>            if target &lt; items[left] or target &gt; items[mid]:
-<span class="boring">                Target is in the right half
-</span>                left = mid + 1
-            else:
-<span class="boring">                Target is in the left half
-</span>                right = mid - 1
-        else:
-<span class="boring">            Right half is sorted
-</span>
-<span class="boring">            Check if target lies outside the sorted right half
-</span>            if target &gt; items[right] or target &lt; items[mid]:
-<span class="boring">                Target is in the left half
-</span>                right = mid - 1
-            else:
-<span class="boring">                Target is in the right half
-</span>                left = mid + 1
+        # Determine which half is sorted
+        if items[mid] &gt;= items[left]:
+            # Left half is sorted
 
-<span class="boring">    Target not found
-</span>    return -1
+            # Check if target lies outside the sorted left half
+            if target &lt; items[left] or target &gt; items[mid]:
+                # Target is in the right half
+                left = mid + 1
+            else:
+                # Target is in the left half
+                right = mid - 1
+        else:
+            # Right half is sorted
+
+            # Check if target lies outside the sorted right half
+            if target &gt; items[right] or target &lt; items[mid]:
+                # Target is in the left half
+                right = mid - 1
+            else:
+                # Target is in the right half
+                left = mid + 1
+
+    # Target not found
+    return -1
 
 
 def main():
-<span class="boring">    Example 1: Target exists in the array
-</span>    items = [4, 5, 6, 7, 0, 1, 2]
+    # Example 1: Target exists in the array
+    items = [4, 5, 6, 7, 0, 1, 2]
     target = 0
-<span class="boring">    Expected output: 4 (index of 0)
-</span><span class="boring">    debug_assert(find(items, target) == 4, "Assertion failed")
-</span>
-<span class="boring">    Example 2: Target does not exist
-</span>    items = [4, 5, 6, 7, 0, 1, 2]
+    # Expected output: 4 (index of 0)
+    # debug_assert(find(items, target) == 4, "Assertion failed")
+
+    # Example 2: Target does not exist
+    items = [4, 5, 6, 7, 0, 1, 2]
     target = 3
-<span class="boring">    Expected output: -1
-</span><span class="boring">    debug_assert(find(items, target) == -1, "Assertion failed")
-</span>
-<span class="boring">    Example 3: Single-element array, target not present
-</span>    items = [1]
+    # Expected output: -1
+    # debug_assert(find(items, target) == -1, "Assertion failed")
+
+    # Example 3: Single-element array, target not present
+    items = [1]
     target = 0
-<span class="boring">    Expected output: -1
-</span>    debug_assert(find(items, target) == -1, "Assertion failed")</code></pre>
+    # Expected output: -1
+    debug_assert(find(items, target) == -1, "Assertion failed")
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/search_sorted_rotated_arr.mojo">View source on GitHub</a></p>
 
                     </main>

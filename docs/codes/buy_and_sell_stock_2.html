@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,36 +176,37 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="buy-and-sell-stock-2"><a class="header" href="#buy-and-sell-stock-2">Buy And Sell Stock 2</a></h1>
-<pre><code class="language-rust ignore"><span class="boring">On each day, you may decide to buy and/or sell the stock. You can only hold
-</span><span class="boring">at most one share of the stock at any time. However, you can buy it then
-</span><span class="boring">immediately sell it on the same day.
-</span>
-<span class="boring">Find and return the maximum profit you can achieve.
-</span><span class="boring">Note the problem is confusing - given per day prices, you make no profit buying
-</span><span class="boring">and selling on the same day! 
-</span>
+<pre><code class="language-python"># On each day, you may decide to buy and/or sell the stock. You can only hold
+# at most one share of the stock at any time. However, you can buy it then
+# immediately sell it on the same day.
+
+# Find and return the maximum profit you can achieve.
+# Note the problem is confusing - given per day prices, you make no profit buying
+# and selling on the same day! 
+
 def total_profit(prices: List[UInt]) -&gt; UInt:
     var total_profit: UInt = 0  # Stores the maximum profit found so far
 
-<span class="boring">    Loop until sell day reaches the end of the price list
-</span>    for day in range(1, len(prices)):
+    # Loop until sell day reaches the end of the price list
+    for day in range(1, len(prices)):
         if prices[day - 1] &lt; prices[day]:
-<span class="boring">            If selling is profitable, sell it &amp; add up profit
-</span>            total_profit += prices[day] - prices[day - 1]
+            # If selling is profitable, sell it &amp; add up profit
+            total_profit += prices[day] - prices[day - 1]
     return total_profit  # Return the highest profit found
 
 
 def main():
-<span class="boring">    First test: Best profit is buying at 1 and selling at 6 =&gt; profit = 5
-</span>    prices = [7, 1, 5, 3, 6, 4]
+    # First test: Best profit is buying at 1 and selling at 6 =&gt; profit = 5
+    prices = [7, 1, 5, 3, 6, 4]
     debug_assert(total_profit(prices) == 7, "Assertion failed")
 
-<span class="boring">    Second test: No profitable day to sell =&gt; profit = 0
-</span>    prices = [7, 6, 4, 3, 1]
+    # Second test: No profitable day to sell =&gt; profit = 0
+    prices = [7, 6, 4, 3, 1]
     debug_assert(total_profit(prices) == 0, "Assertion failed")
-<span class="boring">    3rd test: Best profit is buying at every day and selling next day
-</span>    prices = [1, 2, 3, 4, 5]
-    debug_assert(total_profit(prices) == 4, "Assertion failed")</code></pre>
+    # 3rd test: Best profit is buying at every day and selling next day
+    prices = [1, 2, 3, 4, 5]
+    debug_assert(total_profit(prices) == 4, "Assertion failed")
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/buy_and_sell_stock_2.mojo">View source on GitHub</a></p>
 
                     </main>

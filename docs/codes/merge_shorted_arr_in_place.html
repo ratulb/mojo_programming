@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,38 +177,38 @@
                     <main>
                         <h1 id="merge-nums2-into-nums1-in-place"><a class="header" href="#merge-nums2-into-nums1-in-place">Merge nums2 into nums1 (in-place)</a></h1>
 <p>Given two sorted arrays nums1 (size m + n, with m valid elements followed by n zeros) and nums2 (size n), merge them in-place into nums1 as one sorted array.</p>
-<pre><code class="language-rust ignore">def merge(mut nums1: List[Int], nums2: List[Int]):
+<pre><code class="language-python">def merge(mut nums1: List[Int], nums2: List[Int]):
     if len(nums1) == 0 or len(nums2) == 0:
         return
-<span class="boring">    Set pointer m to the last valid element in nums1 (i.e., excluding trailing zeros)
-</span>    m = len(nums1) - len(nums2) - 1
+    # Set pointer m to the last valid element in nums1 (i.e., excluding trailing zeros)
+    m = len(nums1) - len(nums2) - 1
 
-<span class="boring">    Set pointer n to the last element of nums2
-</span>    n = len(nums2) - 1
+    # Set pointer n to the last element of nums2
+    n = len(nums2) - 1
 
-<span class="boring">    Set pointer last to the end of nums1 (i.e., last index where final element will go)
-</span>    last = len(nums1) - 1
+    # Set pointer last to the end of nums1 (i.e., last index where final element will go)
+    last = len(nums1) - 1
 
-<span class="boring">    Traverse both arrays from the end and fill nums1 from the back
-</span>    while m &gt;= 0 and n &gt;= 0:
+    # Traverse both arrays from the end and fill nums1 from the back
+    while m &gt;= 0 and n &gt;= 0:
         if nums1[m] &gt;= nums2[n]:
-<span class="boring">            If current nums1 element is greater, place it at 'last' and move pointers
-</span>            nums1[last] = nums1[m]
+            # If current nums1 element is greater, place it at 'last' and move pointers
+            nums1[last] = nums1[m]
             m -= 1
         else:
-<span class="boring">            Else, place nums2[n] at 'last' and move pointers
-</span>            nums1[last] = nums2[n]
+            # Else, place nums2[n] at 'last' and move pointers
+            nums1[last] = nums2[n]
             n -= 1
         last -= 1
 
-<span class="boring">    If there are leftover elements in nums2 (i.e., nums2 had smaller elements)
-</span>    while n &gt;= 0:
+    # If there are leftover elements in nums2 (i.e., nums2 had smaller elements)
+    while n &gt;= 0:
         nums1[last] = nums2[n]
         last -= 1
         n -= 1
 
-<span class="boring">    No need to handle leftover nums1 elements, they are already in place 1
-</span>
+    # No need to handle leftover nums1 elements, they are already in place 1
+
 
 from std.testing import assert_equal
 
@@ -226,7 +226,8 @@ def main() raises:
     nums1 = [1]
     nums2 = []
     merge(nums1, nums2)
-    assert_equal(nums1, [1], "Assertion failed")</code></pre>
+    assert_equal(nums1, [1], "Assertion failed")
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/merge_shorted_arr_in_place.mojo">View source on GitHub</a></p>
 
                     </main>

@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,44 +176,44 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="longest-substr-no-char-repeats"><a class="header" href="#longest-substr-no-char-repeats">Longest Substr No Char Repeats</a></h1>
-<pre><code class="language-rust ignore"><span class="boring">Longest Substring Without Repeating Characters
-</span><span class="boring">Given a string s, find the length of the longest substring without duplicate characters.
-</span>from collections import Set
+<pre><code class="language-python"># Longest Substring Without Repeating Characters
+# Given a string s, find the length of the longest substring without duplicate characters.
+from collections import Set
 
 
-<span class="boring">Function to compute the length of the longest substring without repeating characters.
-</span><span class="boring">Takes a StringLiteral `s` and returns an unsigned 16-bit integer.
-</span>def len_longest_substr_no_char_repeats(s: StringLiteral) raises -&gt; UInt16:
-<span class="boring">    If the input string is empty, return 0 immediately
-</span>    if len(s) == 0:
+# Function to compute the length of the longest substring without repeating characters.
+# Takes a StringLiteral `s` and returns an unsigned 16-bit integer.
+def len_longest_substr_no_char_repeats(s: StringLiteral) raises -&gt; UInt16:
+    # If the input string is empty, return 0 immediately
+    if len(s) == 0:
         return 0
 
-<span class="boring">    Initialize a Set to keep track of characters in the current window (substring)
-</span><span class="boring">    Start by adding the first character of the string
-</span>    seen = Set(s[0])
+    # Initialize a Set to keep track of characters in the current window (substring)
+    # Start by adding the first character of the string
+    seen = Set(s[0])
 
-<span class="boring">    `left` is the left boundary of the current sliding window (start index)
-</span>    left = 0
+    # `left` is the left boundary of the current sliding window (start index)
+    left = 0
 
-<span class="boring">    Initial max_length is 1 since we already have one character in the set
-</span>    max_length = 1
+    # Initial max_length is 1 since we already have one character in the set
+    max_length = 1
 
-<span class="boring">    Start iterating from the second character to the end of the string
-</span>    for idx in range(1, len(s)):
-<span class="boring">        If the current character is already in the set, it means a repetition
-</span><span class="boring">        So we move the `left` boundary forward until we remove the duplicate
-</span>        while s[idx] in seen:
+    # Start iterating from the second character to the end of the string
+    for idx in range(1, len(s)):
+        # If the current character is already in the set, it means a repetition
+        # So we move the `left` boundary forward until we remove the duplicate
+        while s[idx] in seen:
             seen.remove(s[left])
             left += 1
 
-<span class="boring">        Add the current character to the set
-</span>        seen.add(s[idx])
+        # Add the current character to the set
+        seen.add(s[idx])
 
-<span class="boring">        Update max_length with the size of the current window (set size)
-</span>        max_length = max(max_length, len(seen))
+        # Update max_length with the size of the current window (set size)
+        max_length = max(max_length, len(seen))
 
-<span class="boring">    Return the maximum length found
-</span>    return max_length
+    # Return the maximum length found
+    return max_length
 
 
 def main() raises:
@@ -222,7 +222,8 @@ def main() raises:
     s = "bbbbb"
     print(len_longest_substr_no_char_repeats(s))  # 1
     s = "pwwkew"
-    print(len_longest_substr_no_char_repeats(s))  # 3</code></pre>
+    print(len_longest_substr_no_char_repeats(s))  # 3
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/longest_substr_no_char_repeats.mojo">View source on GitHub</a></p>
 
                     </main>

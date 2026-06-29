@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,51 +176,52 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="max-subarray-product"><a class="header" href="#max-subarray-product">Max Subarray Product</a></h1>
-<pre><code class="language-rust ignore"><span class="boring">Function to find the maximum product of a contiguous subarray
-</span>def max_subarray_product(read nums: List[Int]) -&gt; Int:
-<span class="boring">    Handle edge case: empty array
-</span>    if len(nums) == 0:
+<pre><code class="language-python"># Function to find the maximum product of a contiguous subarray
+def max_subarray_product(read nums: List[Int]) -&gt; Int:
+    # Handle edge case: empty array
+    if len(nums) == 0:
         return 0
-<span class="boring">    Handle edge case: single element
-</span>    elif len(nums) == 1:
+    # Handle edge case: single element
+    elif len(nums) == 1:
         return nums[0]
     else:
-<span class="boring">        Initialize max_product: if first element is 0, set to 1 temporarily
-</span>        max_product = 1 if nums[0] == 0 else nums[0]
-<span class="boring">        Track both current max and min products (important for handling negatives)
-</span>        curr_max, curr_min = 1, 1
+        # Initialize max_product: if first element is 0, set to 1 temporarily
+        max_product = 1 if nums[0] == 0 else nums[0]
+        # Track both current max and min products (important for handling negatives)
+        curr_max, curr_min = 1, 1
 
-<span class="boring">        Iterate through all elements
-</span>        for idx in range(0, len(nums)):
+        # Iterate through all elements
+        for idx in range(0, len(nums)):
             num = nums[idx]
 
-<span class="boring">            Reset both max and min when zero is encountered (new subarray starts)
-</span>            if num == 0:
+            # Reset both max and min when zero is encountered (new subarray starts)
+            if num == 0:
                 curr_max, curr_min = 1, 1
                 continue
 
-<span class="boring">            Preserve previous curr_max for updating curr_min
-</span>            curr_max_copy = curr_max
+            # Preserve previous curr_max for updating curr_min
+            curr_max_copy = curr_max
 
-<span class="boring">            Update current max and min by considering:
-</span><span class="boring">            - current number alone
-</span><span class="boring">            - product of current number with previous max
-</span><span class="boring">            - product of current number with previous min (for negatives)
-</span>            curr_max = max(curr_max * num, curr_min * num, num)
+            # Update current max and min by considering:
+            # - current number alone
+            # - product of current number with previous max
+            # - product of current number with previous min (for negatives)
+            curr_max = max(curr_max * num, curr_min * num, num)
             curr_min = min(curr_max_copy * num, curr_min * num, num)
 
-<span class="boring">            Update the global max product
-</span>            max_product = max(max_product, curr_max)
+            # Update the global max product
+            max_product = max(max_product, curr_max)
 
         return max_product
 
 
-<span class="boring">Entry point
-</span>def main():
+# Entry point
+def main():
     nums = [2, 3, -2, 4]  # Expected maximum product subarray: [2, 3] =&gt; 6
     max_product = max_subarray_product(nums)
     print(max_product)
-    debug_assert(max_product == 6, "Assertion failed")</code></pre>
+    debug_assert(max_product == 6, "Assertion failed")
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/max_subarray_product.mojo">View source on GitHub</a></p>
 
                     </main>

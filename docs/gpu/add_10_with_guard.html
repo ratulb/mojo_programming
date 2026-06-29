@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,9 +177,9 @@
                     <main>
                         <h1 id="add-10"><a class="header" href="#add-10">Add 10</a></h1>
 <p>Implement a kernel that adds 10 to each position of vector a and stores it in vector out.</p>
-<pre><code class="language-rust ignore">## Add 10
-## Implement a kernel that adds 10 to each position of vector a and stores it in vector out.
-## More threads than data — guard against out-of-bounds access.
+<pre><code class="language-python">### Add 10
+### Implement a kernel that adds 10 to each position of vector a and stores it in vector out.
+### More threads than data — guard against out-of-bounds access.
 
 from gpu.host import DeviceContext
 from memory import UnsafePointer
@@ -233,7 +233,8 @@ def main() raises:
     with d_out_buff.map_to_host() as h_out_buff:
         print(h_out_buff)
         for i in range(SIZE):
-            assert_equal(h_out_buff[i], expected[i])</code></pre>
+            assert_equal(h_out_buff[i], expected[i])
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/add_10_with_guard.mojo">View source on GitHub</a></p>
 
                     </main>

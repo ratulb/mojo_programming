@@ -83,6 +83,4 @@ html {
 ul#searchresults li.focus {
   background-color: rgba(255,255,255,0.1) !important;
 }
-.boring {
-  opacity: 1 !important;
-}
+

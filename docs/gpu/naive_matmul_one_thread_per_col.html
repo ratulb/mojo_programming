@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,7 +177,7 @@
                     <main>
                         <h1 id="matrix-multiplication-1-gpu-thread-per-output-column"><a class="header" href="#matrix-multiplication-1-gpu-thread-per-output-column">Matrix multiplication 1 GPU thread per output column</a></h1>
 <p>Simulate the CPU-style dumb matrix multiplication 1 thread per output column</p>
-<pre><code class="language-rust ignore">from gpu.host import DeviceContext, HostBuffer
+<pre><code class="language-python">from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim
 import random
 from layout import Layout, LayoutTensor
@@ -196,10 +196,10 @@ comptime MATRIX_MIN_ELEM = -5.0
 comptime MATRIX_MAX_ELEM = 5.0
 
 comptime dtype = DType.float32
-<span class="boring">Num threads per block
-</span>comptime THREADS = COLS_C
-<span class="boring">Total numbers blocks in the grid
-</span>comptime BLOCKS = 1
+# Num threads per block
+comptime THREADS = COLS_C
+# Total numbers blocks in the grid
+comptime BLOCKS = 1
 
 comptime layout_a = Layout.row_major(ROWS_A, COLS_A)
 comptime layout_b = Layout.row_major(ROWS_B, COLS_B)
@@ -222,10 +222,10 @@ def naive_matmul_one_thread_per_col[
                 C[i, tid] += A[i, k] * B[k, tid]
 
 
-<span class="boring">Initialize the matrix buffer with values in the range 0 to 100
-</span>def fill_buffer(buffer: HostBuffer[dtype]):
-<span class="boring">    Randomize
-</span>    random.seed()
+# Initialize the matrix buffer with values in the range 0 to 100
+def fill_buffer(buffer: HostBuffer[dtype]):
+    # Randomize
+    random.seed()
     for i in range(len(buffer)):
         buffer[i] = random.random_float64(
             MATRIX_MIN_ELEM, MATRIX_MAX_ELEM
@@ -315,7 +315,8 @@ def reshape(ndarray: PythonObject, rows: Int, cols: Int) raises -&gt; PythonObje
 def ndarray_ptr[
     dtype: DType
 ](ndarray: PythonObject) raises -&gt; UnsafePointer[Scalar[dtype]]:
-    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()</code></pre>
+    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/naive_matmul_one_thread_per_col.mojo">View source on GitHub</a></p>
 
                     </main>

@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,7 +177,7 @@
                     <main>
                         <h1 id="largest-number"><a class="header" href="#largest-number">Largest Number</a></h1>
 <p>Arrange non-negative integers to form the largest possible number and return it as a string.</p>
-<pre><code class="language-rust ignore">def largest_number(nums: List[Int]) raises -&gt; String:
+<pre><code class="language-python">def largest_number(nums: List[Int]) raises -&gt; String:
     if len(nums) == 0:
         return ""
     strs = List[String](capacity=len(nums))
@@ -211,7 +211,8 @@ def main() raises:
 
     nums = List[Int]()
     result = largest_number(nums)
-    assert_true(result == "", "Assertion failed")</code></pre>
+    assert_true(result == "", "Assertion failed")
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/largest_number.mojo">View source on GitHub</a></p>
 
                     </main>

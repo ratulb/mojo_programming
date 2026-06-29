@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,8 +177,8 @@
                     <main>
                         <h1 id="search-sorted-rotated-arr-with-duplicates"><a class="header" href="#search-sorted-rotated-arr-with-duplicates">Search Sorted Rotated Arr With Duplicates</a></h1>
 <p>Generic function to find the index of a target element in a rotated sorted list.</p>
-<pre><code class="language-rust ignore"><span class="boring">Define an alias for types that support comparison operations.
-</span>comptime ItemType = ComparableCollectionElement
+<pre><code class="language-python"># Define an alias for types that support comparison operations.
+comptime ItemType = ComparableCollectionElement
 
 
 def find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -&gt; Int:
@@ -186,40 +186,40 @@ def find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -&gt; In
         return -1
     left, right = 0, len(items) - 1
 
-<span class="boring">    Perform modified binary search to handle rotation and duplicates
-</span>    while left &lt;= right:
+    # Perform modified binary search to handle rotation and duplicates
+    while left &lt;= right:
         mid = left + (right - left) // 2
 
-<span class="boring">        Target found at midpoint
-</span>        if items[mid] == target:
+        # Target found at midpoint
+        if items[mid] == target:
             return mid
 
-<span class="boring">        Case 1: Target is less than midpoint value
-</span>        if target &lt; items[mid]:
-<span class="boring">            If target is greater than the left bound, it must be in the left subarray
-</span>            if target &gt; items[left]:
+        # Case 1: Target is less than midpoint value
+        if target &lt; items[mid]:
+            # If target is greater than the left bound, it must be in the left subarray
+            if target &gt; items[left]:
                 right = mid - 1
-<span class="boring">            If target is less than the left bound, it must be in the right subarray
-</span>            elif target &lt; items[left]:
+            # If target is less than the left bound, it must be in the right subarray
+            elif target &lt; items[left]:
                 left = mid + 1
-<span class="boring">            If target equals the left bound, it's a match
-</span>            else:
+            # If target equals the left bound, it's a match
+            else:
                 return left
 
-<span class="boring">        Case 2: Target is greater than midpoint value
-</span>        else:
-<span class="boring">            If target is less than the right bound, it lies in the right subarray
-</span>            if target &lt; items[right]:
+        # Case 2: Target is greater than midpoint value
+        else:
+            # If target is less than the right bound, it lies in the right subarray
+            if target &lt; items[right]:
                 left = mid + 1
-<span class="boring">            If target is greater than the right bound, it must lie to the left
-</span>            elif target &gt; items[right]:
+            # If target is greater than the right bound, it must lie to the left
+            elif target &gt; items[right]:
                 right = mid - 1
-<span class="boring">            If target equals the right bound, it's a match
-</span>            else:
+            # If target equals the right bound, it's a match
+            else:
                 return right
 
-<span class="boring">    Target not found
-</span>    return -1
+    # Target not found
+    return -1
 
 
 from std.testing import assert_equal
@@ -249,7 +249,8 @@ def main() raises:
     items = [7, 8, 4, 5]
     target = 3
     index = find(items, target)
-    assert_equal(index, -1, "Assertion failed")</code></pre>
+    assert_equal(index, -1, "Assertion failed")
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/search_sorted_rotated_arr_with_duplicates.mojo">View source on GitHub</a></p>
 
                     </main>

@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,46 +176,47 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="product-of-array-except-self"><a class="header" href="#product-of-array-except-self">Product Of Array Except Self</a></h1>
-<pre><code class="language-rust ignore"><span class="boring">Function to compute the product of all elements in the list except the one at each index
-</span>def product_except_self(nums: List[Int]) -&gt; List[Int]:
-<span class="boring">    If the input list is empty, return it as is
-</span>    if len(nums) == 0:
+<pre><code class="language-python"># Function to compute the product of all elements in the list except the one at each index
+def product_except_self(nums: List[Int]) -&gt; List[Int]:
+    # If the input list is empty, return it as is
+    if len(nums) == 0:
         return nums
 
-<span class="boring">    Store the length of the input list
-</span>    len = len(nums)
+    # Store the length of the input list
+    len = len(nums)
 
-<span class="boring">    Initialize the result list with all 1s. This will store our final answer.
-</span>    result = [1] * len
+    # Initialize the result list with all 1s. This will store our final answer.
+    result = [1] * len
 
-<span class="boring">    prefix_product holds the product of all elements to the *left* of the current index
-</span>    prefix_product = 1
+    # prefix_product holds the product of all elements to the *left* of the current index
+    prefix_product = 1
     for idx in range(len):
-<span class="boring">        For each index, store the current prefix product
-</span>        result[idx] = prefix_product
-<span class="boring">        Update the prefix product by multiplying it with the current number
-</span>        prefix_product *= nums[idx]
+        # For each index, store the current prefix product
+        result[idx] = prefix_product
+        # Update the prefix product by multiplying it with the current number
+        prefix_product *= nums[idx]
 
-<span class="boring">    suffix_product holds the product of all elements to the *right* of the current index
-</span>    suffix_product = 1
-<span class="boring">    Iterate from right to left
-</span>    for idx in range(len - 1, -1, -1):
-<span class="boring">        Multiply the result at index with the current suffix product
-</span>        result[idx] *= suffix_product
-<span class="boring">        Update the suffix product by multiplying with current number
-</span>        suffix_product *= nums[idx]
+    # suffix_product holds the product of all elements to the *right* of the current index
+    suffix_product = 1
+    # Iterate from right to left
+    for idx in range(len - 1, -1, -1):
+        # Multiply the result at index with the current suffix product
+        result[idx] *= suffix_product
+        # Update the suffix product by multiplying with current number
+        suffix_product *= nums[idx]
 
     return result
 
 
-<span class="boring">Entry point
-</span>def main():
-<span class="boring">    Example input
-</span>    nums = [1, 2, 3, 4]
-<span class="boring">    Call the function to get result
-</span>    result = product_except_self(nums)  # Output should be [24, 12, 8, 6]
-<span class="boring">    Print the result
-</span>    print(result.__str__())</code></pre>
+# Entry point
+def main():
+    # Example input
+    nums = [1, 2, 3, 4]
+    # Call the function to get result
+    result = product_except_self(nums)  # Output should be [24, 12, 8, 6]
+    # Print the result
+    print(result.__str__())
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/product_of_array_except_self.mojo">View source on GitHub</a></p>
 
                     </main>

@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,8 +176,8 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="max-average-subarray"><a class="header" href="#max-average-subarray">Max Average Subarray</a></h1>
-<pre><code class="language-rust ignore"><span class="boring">Find the maximum average of any contiguous subarray of length k(window size) from the array.
-</span>
+<pre><code class="language-python"># Find the maximum average of any contiguous subarray of length k(window size) from the array.
+
 def find_max_average(read nums: List[Int], window_size: UInt) -&gt; Float16:
     length = len(nums)
     if length == 0 or window_size == 0:
@@ -186,13 +186,13 @@ def find_max_average(read nums: List[Int], window_size: UInt) -&gt; Float16:
     var max_average: Float16 = 0.0
     window_sum = 0
 
-<span class="boring">    Compute sum of the first 'window_size' elements
-</span>    for idx in range(window_size):
+    # Compute sum of the first 'window_size' elements
+    for idx in range(window_size):
         window_sum += nums[idx]
     max_average = Float16(window_sum / window_size)  # Initialize max average
 
-<span class="boring">    Slide the window over the array
-</span>    for idx in range(window_size, length):
+    # Slide the window over the array
+    for idx in range(window_size, length):
         window_sum += nums[idx]                     # Add next element
         window_sum -= nums[idx - window_size]       # Remove the element going out of window
         average = Float16(window_sum / window_size) # Current window average
@@ -205,7 +205,8 @@ def main():
     nums = [1, 12, -5, -6, 50, 3]
     window_size = 4
     max_average = find_max_average(nums, window_size)
-    debug_assert(max_average == 12.75, "Assertion failed")  # Test case check</code></pre>
+    debug_assert(max_average == 12.75, "Assertion failed")  # Test case check
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/max_average_subarray.mojo">View source on GitHub</a></p>
 
                     </main>

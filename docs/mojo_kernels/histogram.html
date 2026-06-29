@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,7 +177,7 @@
                     <main>
                         <h1 id="histogram"><a class="header" href="#histogram">Histogram</a></h1>
 <p>Program to compute histogram of a 1D array</p>
-<pre><code class="language-rust ignore">from gpu.host import DeviceContext, HostBuffer, DeviceBuffer
+<pre><code class="language-python">from gpu.host import DeviceContext, HostBuffer, DeviceBuffer
 from gpu import thread_idx, block_idx, block_dim
 import random
 from math import ceildiv
@@ -187,17 +187,17 @@ from os import Atomic
 from os.atomic import Consistency
 
 comptime dtype = DType.int64
-<span class="boring">How many numbers to bin? 2 ^ 20 (default)
-</span>comptime ELEMS_COUNT = 1 &lt;&lt; 20
-<span class="boring">How many bins?
-</span>comptime NUM_BINS = 10
-<span class="boring">Num threads per block
-</span>comptime THREADS = 256
-<span class="boring">Total numbers blocks in the grid
-</span>comptime BLOCKS = ceildiv(ELEMS_COUNT, THREADS)
+# How many numbers to bin? 2 ^ 20 (default)
+comptime ELEMS_COUNT = 1 &lt;&lt; 20
+# How many bins?
+comptime NUM_BINS = 10
+# Num threads per block
+comptime THREADS = 256
+# Total numbers blocks in the grid
+comptime BLOCKS = ceildiv(ELEMS_COUNT, THREADS)
 
-<span class="boring">Max value of any binned element
-</span>comptime MAX_ELEM = 101
+# Max value of any binned element
+comptime MAX_ELEM = 101
 comptime MIN_ELEM = 1
 
 comptime BIN_WIDTH = (MAX_ELEM - MIN_ELEM + 1) // NUM_BINS
@@ -214,20 +214,20 @@ def histogram(
     if tid &lt; total_elems:
         var elem = input[tid]
         bin_index = bin_index(elem[0])
-<span class="boring">        _ = Atomic.fetch_add[ordering= Consistency.MONOTONIC](output + bin_index, 1)
-</span>        _ = Atomic.fetch_add(output + bin_index, 1)
+        # _ = Atomic.fetch_add[ordering= Consistency.MONOTONIC](output + bin_index, 1)
+        _ = Atomic.fetch_add(output + bin_index, 1)
 
 
-<span class="boring">Initialize the input buffer with values in the range 0 to 100
-</span>def fill_buffer(buffer: HostBuffer[dtype]):
-<span class="boring">    Randomize
-</span>    random.seed()
+# Initialize the input buffer with values in the range 0 to 100
+def fill_buffer(buffer: HostBuffer[dtype]):
+    # Randomize
+    random.seed()
     for i in range(len(buffer)):
         buffer[i] = random.random_ui64(MIN_ELEM, MAX_ELEM).cast[dtype]()[0]
 
 
-<span class="boring">Find the bin index given a number
-</span>@always_inline
+# Find the bin index given a number
+@always_inline
 def bin_index(elem: Int64) -&gt; Int:
     bin_index = Int((elem - MIN_ELEM) // BIN_WIDTH)
     if bin_index &gt;= NUM_BINS:
@@ -250,8 +250,8 @@ def main():
         input_tensor = LayoutTensor[dtype, input_layout, MutableAnyOrigin](
             elements
         )
-<span class="boring">        output_tensor = LayoutTensor[mut=True, dtype, output_layout](bins)
-</span>
+        # output_tensor = LayoutTensor[mut=True, dtype, output_layout](bins)
+
         ctx.enqueue_function[histogram](
             input_tensor,
             bins.unsafe_ptr(),
@@ -267,7 +267,8 @@ def main():
 
         print(ctx.name())
     except e:
-        print("Prininting here: ", e)</code></pre>
+        print("Prininting here: ", e)
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/mojo_kernels/histogram.mojo">View source on GitHub</a></p>
 
                     </main>

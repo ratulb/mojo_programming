@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,18 +176,18 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="gridv1"><a class="header" href="#gridv1">Gridv1</a></h1>
-<pre><code class="language-rust ignore">import random
+<pre><code class="language-python">import random
 from gridv2 import Grid as GridV2
 
 
-<span class="boring">Grid is a 2D structure holding cell states (0: dead, 1: alive)
-</span><span class="boring">It supports string conversion, output writing, and cell access/update
-</span>@value
+# Grid is a 2D structure holding cell states (0: dead, 1: alive)
+# It supports string conversion, output writing, and cell access/update
+@value
 struct Grid(Stringable, Writable):
     var data: List[List[Int, True]]  # 2D grid of integers (1 = alive, 0 = dead)
 
-<span class="boring">    Constructor to initialize the grid with given data
-</span>    def __init__(out self, data: List[List[Int, True]]):
+    # Constructor to initialize the grid with given data
+    def __init__(out self, data: List[List[Int, True]]):
         self.data = data
 
     @implicit
@@ -203,22 +203,22 @@ struct Grid(Stringable, Writable):
             grid.append(curr_row)
         self.data = grid^
 
-<span class="boring">    Get the number of rows in the grid
-</span>    def row_count(self) -&gt; Int:
+    # Get the number of rows in the grid
+    def row_count(self) -&gt; Int:
         if self.data:
             return len(self.data)
         else:
             return 0
 
-<span class="boring">    Get the number of columns in the grid
-</span>    def col_count(self) -&gt; Int:
+    # Get the number of columns in the grid
+    def col_count(self) -&gt; Int:
         if self.data[0]:
             return len(self.data[0])
         else:
             return 0
 
-<span class="boring">    Convert the grid to a string for pretty-printing
-</span>    def __str__(self) -&gt; String:
+    # Convert the grid to a string for pretty-printing
+    def __str__(self) -&gt; String:
         capacity = self.row_count() * self.col_count()
         if capacity == 0:
             return String()
@@ -235,33 +235,33 @@ struct Grid(Stringable, Writable):
             row_index += 1
         return s
 
-<span class="boring">    Allow writing the grid to any output writer
-</span>    def write_to[W: Writer](self, mut writer: W) -&gt; None:
+    # Allow writing the grid to any output writer
+    def write_to[W: Writer](self, mut writer: W) -&gt; None:
         writer.write(self.__str__())
 
-<span class="boring">    Access cell at (row, col)
-</span>    def __getitem__(self, row: Int, col: Int) -&gt; Int:
+    # Access cell at (row, col)
+    def __getitem__(self, row: Int, col: Int) -&gt; Int:
         return self.data[row][col]
 
-<span class="boring">    Update cell at (row, col)
-</span>    def __setitem__(mut self, row: Int, col: Int, value: Int) -&gt; None:
+    # Update cell at (row, col)
+    def __setitem__(mut self, row: Int, col: Int, value: Int) -&gt; None:
         self.data[row][col] = value
 
-<span class="boring">    Static method to create a random grid with specified size
-</span>    @staticmethod
+    # Static method to create a random grid with specified size
+    @staticmethod
     def new(rows: Int, cols: Int) -&gt; Self:
         random.seed()
         data = List[List[Int, True]](capacity=rows)
         for row in range(rows):
             record = List[Int, True](capacity=cols)
             for col in range(cols):
-<span class="boring">                Initialize each cell randomly to 0 or 1
-</span>                record.append(Int(random.random_si64(0, 1)))
+                # Initialize each cell randomly to 0 or 1
+                record.append(Int(random.random_si64(0, 1)))
             data.append(record)
         return Self(data)
 
-<span class="boring">    Perform one step of mutation (Game of Life rules)
-</span>    def mutate(mut self):
+    # Perform one step of mutation (Game of Life rules)
+    def mutate(mut self):
         rows = self.row_count()
         cols = self.col_count()
         for row in range(rows):
@@ -271,8 +271,8 @@ struct Grid(Stringable, Writable):
                 left = (col - 1) % cols
                 right = (col + 1) % cols
 
-<span class="boring">                Count live neighbors using 8-connected grid
-</span>                alive_neighbours = (
+                # Count live neighbors using 8-connected grid
+                alive_neighbours = (
                     self[above, left]
                     + self[above, col]
                     + self[above, right]
@@ -283,19 +283,19 @@ struct Grid(Stringable, Writable):
                     + self[row, left]
                 )
 
-<span class="boring">                Apply Conway's Game of Life rules:
-</span><span class="boring">                Rule 1 &amp; 2: Any live cell with 2 or 3 live neighbors survives
-</span>                if self[row, col] == 1 and (
+                # Apply Conway's Game of Life rules:
+                # Rule 1 &amp; 2: Any live cell with 2 or 3 live neighbors survives
+                if self[row, col] == 1 and (
                     alive_neighbours == 2 or alive_neighbours == 3
                 ):
                     continue  # Keep alive
 
-<span class="boring">                Rule 3: All other live cells die
-</span>                else:
+                # Rule 3: All other live cells die
+                else:
                     self[row, col] = 0
 
-<span class="boring">                Rule 4: Any dead cell with exactly 3 live neighbors becomes alive
-</span>                if self[row, col] == 0 and alive_neighbours == 3:
+                # Rule 4: Any dead cell with exactly 3 live neighbors becomes alive
+                if self[row, col] == 0 and alive_neighbours == 3:
                     self[row, col] = 1
 
 
@@ -316,7 +316,8 @@ def main() raises -&gt; None:
     print(grid_2)
     print("Implicit conversion\n\n")
     grid_1 = Grid(grid_2)
-    print(grid_1)</code></pre>
+    print(grid_1)
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/gridv1.mojo">View source on GitHub</a></p>
 
                     </main>

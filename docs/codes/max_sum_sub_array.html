@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,30 +176,30 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="max-sum-sub-array"><a class="header" href="#max-sum-sub-array">Max Sum Sub Array</a></h1>
-<pre><code class="language-rust ignore"><span class="boring">Given an integer array nums, find the subarray with the largest sum, and return its sum.
-</span>
+<pre><code class="language-python"># Given an integer array nums, find the subarray with the largest sum, and return its sum.
 
-<span class="boring">Function to find the subarray with the maximum sum
-</span>def max_sum_sub_array(nums: List[Int]) -&gt; Int:
-<span class="boring">    If the list is empty, return 0 as no subarray exists
-</span>    if len(nums) == 0:
+
+# Function to find the subarray with the maximum sum
+def max_sum_sub_array(nums: List[Int]) -&gt; Int:
+    # If the list is empty, return 0 as no subarray exists
+    if len(nums) == 0:
         return 0
 
-<span class="boring">    Initialize the running sum and max sum with the first element
-</span><span class="boring">    running_sum: current subarray sum being tracked
-</span><span class="boring">    max_sum: maximum subarray sum seen so far
-</span>    running_sum, max_sum = nums[0], nums[0]
+    # Initialize the running sum and max sum with the first element
+    # running_sum: current subarray sum being tracked
+    # max_sum: maximum subarray sum seen so far
+    running_sum, max_sum = nums[0], nums[0]
 
-<span class="boring">    Iterate over the list starting from the second element
-</span>    for idx in range(1, len(nums)):
-<span class="boring">        Decide whether to extend the previous subarray or start a new subarray at current index
-</span>        running_sum = max(running_sum + nums[idx], nums[idx])
+    # Iterate over the list starting from the second element
+    for idx in range(1, len(nums)):
+        # Decide whether to extend the previous subarray or start a new subarray at current index
+        running_sum = max(running_sum + nums[idx], nums[idx])
 
-<span class="boring">        Update max_sum if the current running_sum is greater
-</span>        max_sum = max(max_sum, running_sum)
+        # Update max_sum if the current running_sum is greater
+        max_sum = max(max_sum, running_sum)
 
-<span class="boring">    Return the maximum subarray sum found
-</span>    return max_sum
+    # Return the maximum subarray sum found
+    return max_sum
 
 
 def main():
@@ -208,7 +208,8 @@ def main():
     debug_assert(max_sum == 6, "Assertion failed")
     nums = [5,4,-1,7,8]
     max_sum = max_sum_sub_array(nums)
-    debug_assert(max_sum == 23, "Assertion failed")</code></pre>
+    debug_assert(max_sum == 23, "Assertion failed")
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/max_sum_sub_array.mojo">View source on GitHub</a></p>
 
                     </main>

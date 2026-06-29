@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
+        <link rel="stylesheet" href="../theme/custom-fb47630f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
+            window.path_to_searchindex_js = "../searchindex-d871299c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,9 +176,9 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="water-container-max-area"><a class="header" href="#water-container-max-area">Water Container Max Area</a></h1>
-<pre><code class="language-rust ignore">def max_area(heights: List[Int]) -&gt; Int:
-<span class="boring">    If there are fewer than 2 lines, no container can be formed
-</span>    if len(heights) &lt; 2:
+<pre><code class="language-python">def max_area(heights: List[Int]) -&gt; Int:
+    # If there are fewer than 2 lines, no container can be formed
+    if len(heights) &lt; 2:
         return 0
 
     left, right = 0, len(heights) - 1
@@ -186,15 +186,15 @@
     max_area = 0
 
     while left &lt; right:
-<span class="boring">        Height of container is limited by the shorter of the two lines
-</span>        min_height = min(heights[left], heights[right])
+        # Height of container is limited by the shorter of the two lines
+        min_height = min(heights[left], heights[right])
 
-<span class="boring">        Calculate area formed between the two lines and update max_area if it's larger
-</span>        max_area = max(max_area, (right - left) * min_height)
+        # Calculate area formed between the two lines and update max_area if it's larger
+        max_area = max(max_area, (right - left) * min_height)
 
-<span class="boring">        Move the pointer that's at the shorter line inward to potentially find a taller line
-</span><span class="boring">        This can potentially increase the area despite reducing the width
-</span>        if heights[left] &lt;= heights[right]:
+        # Move the pointer that's at the shorter line inward to potentially find a taller line
+        # This can potentially increase the area despite reducing the width
+        if heights[left] &lt;= heights[right]:
             left += 1
         else:
             right -= 1
@@ -212,7 +212,8 @@ def main():
 
     heights = [1, 1]
     mx_area = max_area(heights)
-    assert_equal(mx_area, 1, "Assertion failed")</code></pre>
+    assert_equal(mx_area, 1, "Assertion failed")
+</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/water_container_max_area.mojo">View source on GitHub</a></p>
 
                     </main>

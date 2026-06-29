@@ -88,7 +88,7 @@ def generate_md_content(mojo_path):
         lines.extend(["", desc])
     lines.extend([
         "",
-        "```rust,ignore",
+        "```python",
         code,
         "```",
         "",
