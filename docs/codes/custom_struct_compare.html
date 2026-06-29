@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,24 +176,23 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="custom-struct-compare"><a class="header" href="#custom-struct-compare">Custom Struct Compare</a></h1>
-<pre><code class="language-mojo">from search_sorted_rotated_arr import find
+<pre><code class="language-rust ignore">from search_sorted_rotated_arr import find
 from shapes import Rectangle
 
 
 def main():
-    # Re
-    r4 = Rectangle(4, 10)  # 40
+<span class="boring">    Re
+</span>    r4 = Rectangle(4, 10)  # 40
     r5 = Rectangle(4, 12)  # 48
     r6 = Rectangle(5, 10)  # 50
     r7 = Rectangle(8, 8)  # 64
     r1 = Rectangle(3, 2)  # 6
     r2 = Rectangle(4, 4)  # 16
     r3 = Rectangle(4, 8)  # 32
-    # Rectangles are sorted and rotated in the list
-    items = [r4, r5, r6, r7, r1, r2, r3]
+<span class="boring">    Rectangles are sorted and rotated in the list
+</span>    items = [r4, r5, r6, r7, r1, r2, r3]
     item_index = find(items, r2)
-    debug_assert(item_index == 5, "Assertion failed")
-</code></pre>
+    debug_assert(item_index == 5, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/custom_struct_compare.mojo">View source on GitHub</a></p>
 
                     </main>

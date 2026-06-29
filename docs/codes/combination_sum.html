@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,7 +177,7 @@
                     <main>
                         <h1 id="combination-sum"><a class="header" href="#combination-sum">Combination sum</a></h1>
 <p>Find all unique combinations of numbers from candidates (reusable unlimited times) that sum to target.</p>
-<pre><code class="language-mojo">def combination_sum(candidates: List[Int], target: Int) -&gt; List[List[Int]]:
+<pre><code class="language-rust ignore">def combination_sum(candidates: List[Int], target: Int) -&gt; List[List[Int]]:
     combinations = List[List[Int]]()
     if len(candidates) == 0:
         return combinations
@@ -265,8 +265,7 @@ def main() raises:
     candidates = [2]
     target = 1
     result = combination_sum(candidates, target)
-    assert_true(len(result) == 0, "assertion failed")
-</code></pre>
+    assert_true(len(result) == 0, "assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/combination_sum.mojo">View source on GitHub</a></p>
 
                     </main>

@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,7 +176,7 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="game-of-life"><a class="header" href="#game-of-life">Game Of Life</a></h1>
-<pre><code class="language-mojo">from gridv1 import Grid as GridV1
+<pre><code class="language-rust ignore">from gridv1 import Grid as GridV1
 from gridv2 import Grid as GridV2
 from utils import Variant
 import random
@@ -211,8 +211,7 @@ def main() raises -&gt; None:
     else:
         v2 = GridV2.new(None, 16, 16)
         grid = Grid(v2)
-    run(grid^)
-</code></pre>
+    run(grid^)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/game_of_life.mojo">View source on GitHub</a></p>
 
                     </main>

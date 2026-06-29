@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,12 +176,12 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="4sum"><a class="header" href="#4sum">4Sum</a></h1>
-<pre><code class="language-mojo">from collections import InlineArray
+<pre><code class="language-rust ignore">from collections import InlineArray
 
 comptime Quadruplet = InlineArray[Int, 4]
 
-# Function to find all unique triplets that sum up to target
-def quadruplets(mut nums: List[Int], target: Int) -&gt; List[Quadruplet]:
+<span class="boring">Function to find all unique triplets that sum up to target
+</span>def quadruplets(mut nums: List[Int], target: Int) -&gt; List[Quadruplet]:
     result = []
     if len(nums) == 0:
         return result
@@ -218,8 +218,7 @@ def main():
     target = 0
     result = quadruplets(nums, target)
     for each in result:
-        print(each[][0], each[][1], each[][2], each[][3])
-</code></pre>
+        print(each[][0], each[][1], each[][2], each[][3])</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/4sum.mojo">View source on GitHub</a></p>
 
                     </main>

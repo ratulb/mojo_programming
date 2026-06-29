@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/custom-0800076f.css">
+        <link rel="stylesheet" href="theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-d871299c.js";
+            window.path_to_searchindex_js = "searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-5930c5f3.js"></script>
@@ -177,20 +177,20 @@
                     <main>
                         <h1 id="timer-utility"><a class="header" href="#timer-utility">Timer utility</a></h1>
 <p>A simple RAII / context-manager timer that prints elapsed wall-clock time in nanoseconds.</p>
-<pre><code class="language-mojo">from std.time import global_perf_counter_ns
+<pre><code class="language-rust ignore">from std.time import global_perf_counter_ns
 
 
-# Timer struct used via Python-style `with` blocks.
-#
-# Records the time at `__enter__` and prints the elapsed duration at `__exit__`.
-# The label prefix is a templated `StringSlice` to avoid allocation.
-#
-# Usage:
-#   with Timer("My computation: "):
-#       do_something()
-#   # Prints: "My computation:  12345000 nanoseconds"
-#
-@fieldwise_init
+<span class="boring">Timer struct used via Python-style `with` blocks.
+</span><span class="boring">
+</span><span class="boring">Records the time at `__enter__` and prints the elapsed duration at `__exit__`.
+</span><span class="boring">The label prefix is a templated `StringSlice` to avoid allocation.
+</span><span class="boring">
+</span><span class="boring">Usage:
+</span><span class="boring">  with Timer("My computation: "):
+</span><span class="boring">      do_something()
+</span><span class="boring">  # Prints: "My computation:  12345000 nanoseconds"
+</span><span class="boring">
+</span>@fieldwise_init
 struct Timer[origin: Origin, //](ImplicitlyCopyable):
     var start_time: UInt64
     var prefix: StringSlice[Self.origin]
@@ -205,8 +205,7 @@ struct Timer[origin: Origin, //](ImplicitlyCopyable):
 
     def __exit__(mut self):
         elapsed_time_ms = global_perf_counter_ns() - self.start_time
-        print(self.prefix, elapsed_time_ms, "nanoseconds")
-</code></pre>
+        print(self.prefix, elapsed_time_ms, "nanoseconds")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/utils.mojo">View source on GitHub</a></p>
 
                     </main>

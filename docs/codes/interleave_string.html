@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,7 +177,7 @@
                     <main>
                         <h1 id="interleaving-string"><a class="header" href="#interleaving-string">Interleaving String</a></h1>
 <p>Determine if s3 is an interleaving of s1 and s2.</p>
-<pre><code class="language-mojo">def is_interleave(s1: String, s2: String, s3: String) -&gt; Bool:
+<pre><code class="language-rust ignore">def is_interleave(s1: String, s2: String, s3: String) -&gt; Bool:
     if len(s1) + len(s2) != len(s3):
         return False
     dp = List[List[Bool]](
@@ -214,8 +214,7 @@ def main() raises:
     s2 = ""
     s3 = ""
     result = is_interleave(s1, s2, s3)
-    assert_true(result, "Assertion failed")
-</code></pre>
+    assert_true(result, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/interleave_string.mojo">View source on GitHub</a></p>
 
                     </main>

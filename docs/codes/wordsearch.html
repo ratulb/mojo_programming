@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,7 +177,7 @@
                     <main>
                         <h1 id="word-search"><a class="header" href="#word-search">Word Search</a></h1>
 <p>Check if a word can be formed in a grid by sequentially adjacent (non-repeating) horizontal or vertical letters.</p>
-<pre><code class="language-mojo">from collections import Set
+<pre><code class="language-rust ignore">from collections import Set
 
 comptime SString = List[StaticString]
 comptime SStrings = List[SString]
@@ -255,8 +255,7 @@ def main() raises:
     )
     word3 = "ABCCED"
     result = present(board, word3)
-    assert_true(result, "Assertion failed")
-</code></pre>
+    assert_true(result, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/wordsearch.mojo">View source on GitHub</a></p>
 
                     </main>

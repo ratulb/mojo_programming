@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,7 +177,7 @@
                     <main>
                         <h1 id="vector-add-gpu--cpu"><a class="header" href="#vector-add-gpu--cpu">Vector Add (GPU + CPU)</a></h1>
 <p>Demonstrates a vector addition kernel with grid-stride loops, SIMD vectorization,</p>
-<pre><code class="language-mojo">from std.gpu.host import DeviceContext, HostBuffer, DeviceAttribute
+<pre><code class="language-rust ignore">from std.gpu.host import DeviceContext, HostBuffer, DeviceAttribute
 from std.gpu import thread_idx, block_idx, block_dim, grid_dim
 from std.testing import assert_almost_equal
 from utils import Timer
@@ -185,21 +185,21 @@ from std.random import random_float64, seed
 from std.sys import has_accelerator, simd_width_of
 
 
-# GPU kernel: element-wise vector addition with grid-stride loop, SIMD loads,
-# and compile-time loop unrolling. Each thread processes CHUNK_SIZE elements
-# per iteration, then advances by the total grid stride.
-#
-# Parameters:
-#   result: output pointer (mutably addressed)
-#   a, b: input pointers (immutably addressed)
-#   size: number of elements in each vector
-#
-# Template parameters:
-#   dtype: element data type (e.g. DType.float32)
-#   simd_width: SIMD width, auto-detected from dtype
-#   simd_vectors_per_thread: number of SIMD vectors per thread per grid step
-#
-def vector_add[
+<span class="boring">GPU kernel: element-wise vector addition with grid-stride loop, SIMD loads,
+</span><span class="boring">and compile-time loop unrolling. Each thread processes CHUNK_SIZE elements
+</span><span class="boring">per iteration, then advances by the total grid stride.
+</span><span class="boring">
+</span><span class="boring">Parameters:
+</span><span class="boring">  result: output pointer (mutably addressed)
+</span><span class="boring">  a, b: input pointers (immutably addressed)
+</span><span class="boring">  size: number of elements in each vector
+</span><span class="boring">
+</span><span class="boring">Template parameters:
+</span><span class="boring">  dtype: element data type (e.g. DType.float32)
+</span><span class="boring">  simd_width: SIMD width, auto-detected from dtype
+</span><span class="boring">  simd_vectors_per_thread: number of SIMD vectors per thread per grid step
+</span><span class="boring">
+</span>def vector_add[
     dtype: DType,
     simd_width: Int = simd_width_of[dtype](),
     simd_vectors_per_thread: Int = 4 * simd_width,
@@ -213,10 +213,10 @@ def vector_add[
     var grid_stride = grid_dim.x * block_dim.x
 
     comptime CHUNK_SIZE = simd_vectors_per_thread * simd_width
-    # =========================================================
-    # Each thread processes CHUNK_SIZE elements
-    # =========================================================
-    var start_index = (
+<span class="boring">    =========================================================
+</span><span class="boring">    Each thread processes CHUNK_SIZE elements
+</span><span class="boring">    =========================================================
+</span>    var start_index = (
         tid * CHUNK_SIZE
     )  # Start index for each thread per grid_stride
 
@@ -224,10 +224,10 @@ def vector_add[
         comptime for vector in range(simd_vectors_per_thread):
             var i = start_index + vector * simd_width
 
-            # Bound check for this vector
-            if i + simd_width &lt;= size:
-                # Load whole vectors, add up and store
-                result.store[width=simd_width](
+<span class="boring">            Bound check for this vector
+</span>            if i + simd_width &lt;= size:
+<span class="boring">                Load whole vectors, add up and store
+</span>                result.store[width=simd_width](
                     i, a.load[width=simd_width](i) + b.load[width=simd_width](i)
                 )
             else:  # i &lt; size, can not load a simd_length vector, handle tail
@@ -239,14 +239,14 @@ def vector_add[
         start_index += grid_stride * CHUNK_SIZE
 
 
-# CPU reference implementation: simple sequential element-wise vector addition.
-#
-# Parameters:
-#   result: output host buffer
-#   a, b: input host buffers
-#   size: number of elements
-#
-def vector_add_cpu[
+<span class="boring">CPU reference implementation: simple sequential element-wise vector addition.
+</span><span class="boring">
+</span><span class="boring">Parameters:
+</span><span class="boring">  result: output host buffer
+</span><span class="boring">  a, b: input host buffers
+</span><span class="boring">  size: number of elements
+</span><span class="boring">
+</span>def vector_add_cpu[
     dtype: DType,
     //,
 ](
@@ -261,15 +261,15 @@ def vector_add_cpu[
         i += 1
 
 
-# Fill a host buffer with random float64 values cast to the target dtype.
-# Optionally accepts a seed for reproducible results.
-#
-# Parameters:
-#   buffer_a: host buffer to fill
-#   init_seed: optional RNG seed (deterministic if provided)
-#   min, max: range for random values
-#
-def fill[
+<span class="boring">Fill a host buffer with random float64 values cast to the target dtype.
+</span><span class="boring">Optionally accepts a seed for reproducible results.
+</span><span class="boring">
+</span><span class="boring">Parameters:
+</span><span class="boring">  buffer_a: host buffer to fill
+</span><span class="boring">  init_seed: optional RNG seed (deterministic if provided)
+</span><span class="boring">  min, max: range for random values
+</span><span class="boring">
+</span>def fill[
     dtype: DType,
     //,
 ](
@@ -286,10 +286,10 @@ def fill[
         buffer_a[i] = random_float64(min, max).cast[dtype]()
 
 
-# Benchmark vector addition on CPU and (if available) GPU, then validate that
-# all GPU results match the CPU reference within a small tolerance.
-#
-def main() raises:
+<span class="boring">Benchmark vector addition on CPU and (if available) GPU, then validate that
+</span><span class="boring">all GPU results match the CPU reference within a small tolerance.
+</span><span class="boring">
+</span>def main() raises:
     comptime dtype = DType.float32
     var size = 100000000
     var cpu_ctx = DeviceContext(api="cpu")
@@ -350,8 +350,7 @@ def main() raises:
 
         with result_gpu_buffer.map_to_host() as gpu_result:
             for i in range(size):
-                assert_almost_equal(gpu_result[i], result_host_buffer[i])
-</code></pre>
+                assert_almost_equal(gpu_result[i], result_host_buffer[i])</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/vector_add.mojo">View source on GitHub</a></p>
 
                     </main>

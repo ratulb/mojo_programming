@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,30 +177,29 @@
                     <main>
                         <h1 id="simd-select"><a class="header" href="#simd-select">SIMD Select</a></h1>
 <p>Select based on a SIMD (Single Instruction, Multiple Data) mask</p>
-<pre><code class="language-mojo">from std.testing import assert_true
+<pre><code class="language-rust ignore">from std.testing import assert_true
 
 
 def main() raises:
-    # Create a SIMD (Single Instruction, Multiple Data) boolean selector vector of size 4.
-    # Each element is a boolean value (True or False), indicating which value to select from `left` or `right`.
-    # - If selector[i] == True, take the value from `left[i]`
-    # - If selector[i] == False, take the value from `right[i]`
-    selector = SIMD[DType.bool, 4](False, True, False, True)
+<span class="boring">    Create a SIMD (Single Instruction, Multiple Data) boolean selector vector of size 4.
+</span><span class="boring">    Each element is a boolean value (True or False), indicating which value to select from `left` or `right`.
+</span><span class="boring">    - If selector[i] == True, take the value from `left[i]`
+</span><span class="boring">    - If selector[i] == False, take the value from `right[i]`
+</span>    selector = SIMD[DType.bool, 4](False, True, False, True)
 
-    # Define a SIMD vector `left` with 4 elements of unsigned 8-bit integers
-    left = SIMD[DType.uint8, 4](0, 42, 0, 42)
+<span class="boring">    Define a SIMD vector `left` with 4 elements of unsigned 8-bit integers
+</span>    left = SIMD[DType.uint8, 4](0, 42, 0, 42)
 
-    # Define another SIMD vector `right` with 4 elements of unsigned 8-bit integers
-    right = SIMD[DType.uint8, 4](42, 0, 42, 0)
+<span class="boring">    Define another SIMD vector `right` with 4 elements of unsigned 8-bit integers
+</span>    right = SIMD[DType.uint8, 4](42, 0, 42, 0)
 
-    # Use the selector to choose elements from either `left` or `right`:
-    # result[i] = left[i] if selector[i] else right[i]
-    result = selector.select(left, right)
-    #   → result = [42, 42, 42, 42]
-
+<span class="boring">    Use the selector to choose elements from either `left` or `right`:
+</span><span class="boring">    result[i] = left[i] if selector[i] else right[i]
+</span>    result = selector.select(left, right)
+<span class="boring">      → result = [42, 42, 42, 42]
+</span>
     expected = SIMD[DType.uint8, 4](42)  #   → expected = [42, 42, 42, 42]
-    assert_true(all(result == expected))
-</code></pre>
+    assert_true(all(result == expected))</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/simd_select.mojo">View source on GitHub</a></p>
 
                     </main>

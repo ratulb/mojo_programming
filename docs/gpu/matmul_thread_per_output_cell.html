@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -177,7 +177,7 @@
                     <main>
                         <h1 id="dumb-matrix-multiplication"><a class="header" href="#dumb-matrix-multiplication">Dumb matrix multiplication</a></h1>
 <p>Use one one GPU thread for each column of the output matrix</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext, HostBuffer
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim
 import random
 from layout import Layout, LayoutTensor
@@ -196,10 +196,10 @@ comptime MATRIX_MIN_ELEM = -5.0
 comptime MATRIX_MAX_ELEM = 5.0
 
 comptime dtype = DType.float32
-# Num threads per block
-comptime THREADS = (5, 5)
-# Total numbers blocks in the grid
-comptime BLOCKS = (
+<span class="boring">Num threads per block
+</span>comptime THREADS = (5, 5)
+<span class="boring">Total numbers blocks in the grid
+</span>comptime BLOCKS = (
     (COLS_C + THREADS[0] - 1) // THREADS[0],
     (ROWS_C + THREADS[1] - 1) // THREADS[1],
 )
@@ -225,10 +225,10 @@ def matmul_thread_per_output_cell[
             C[i, j] += A[i, k] * B[k, j]
 
 
-# Initialize the matrix buffer with values in the range 0 to 100
-def fill_buffer(buffer: HostBuffer[dtype]):
-    # Randomize
-    random.seed()
+<span class="boring">Initialize the matrix buffer with values in the range 0 to 100
+</span>def fill_buffer(buffer: HostBuffer[dtype]):
+<span class="boring">    Randomize
+</span>    random.seed()
     for i in range(len(buffer)):
         buffer[i] = random.random_float64(
             MATRIX_MIN_ELEM, MATRIX_MAX_ELEM
@@ -318,8 +318,7 @@ def reshape(ndarray: PythonObject, rows: Int, cols: Int) raises -&gt; PythonObje
 def ndarray_ptr[
     dtype: DType
 ](ndarray: PythonObject) raises -&gt; UnsafePointer[Scalar[dtype]]:
-    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()
-</code></pre>
+    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/matmul_thread_per_output_cell.mojo">View source on GitHub</a></p>
 
                     </main>

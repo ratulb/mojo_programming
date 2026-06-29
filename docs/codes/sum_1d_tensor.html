@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,7 +176,7 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="sum-1d-tensor"><a class="header" href="#sum-1d-tensor">Sum 1D Tensor</a></h1>
-<pre><code class="language-mojo">from layout import Layout, LayoutTensor
+<pre><code class="language-rust ignore">from layout import Layout, LayoutTensor
 from algorithm import vectorize
 from sys import simdwidthof
 
@@ -211,8 +211,7 @@ def main():
     end = 1024
     #result = summer[16](tensor, start, end)
     result = summer(tensor)
-    print(result)
-</code></pre>
+    print(result)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/sum_1d_tensor.mojo">View source on GitHub</a></p>
 
                     </main>

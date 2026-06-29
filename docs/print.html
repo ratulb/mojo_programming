@@ -29,7 +29,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="theme/custom-0800076f.css">
+        <link rel="stylesheet" href="theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -37,7 +37,7 @@
             const path_to_root = "";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-d871299c.js";
+            window.path_to_searchindex_js = "searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-5930c5f3.js"></script>
@@ -201,40 +201,40 @@
 <p>Full source on <a href="https://github.com/ratulb/mojo_programming">GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="two-sum"><a class="header" href="#two-sum">Two Sum</a></h1>
-<pre><code class="language-mojo"># Two Sum Problem:
-# Given an array of integers `nums` and a target value `target`,
-# return the indices of two numbers such that they add up to `target`.
-
+<pre><code class="language-rust ignore"><span class="boring">Two Sum Problem:
+</span><span class="boring">Given an array of integers `nums` and a target value `target`,
+</span><span class="boring">return the indices of two numbers such that they add up to `target`.
+</span>
 
 def two_sum(nums: List[Int], target: Int) -&gt; Tuple[Int, Int]:
-    # Default return value: (-1, -1) if no valid pair is found
-    indices = (-1, -1)
+<span class="boring">    Default return value: (-1, -1) if no valid pair is found
+</span>    indices = (-1, -1)
 
-    # Early exit: If list has 0 or 1 elements, no pair can be formed
-    if len(nums) &lt;= 1:
+<span class="boring">    Early exit: If list has 0 or 1 elements, no pair can be formed
+</span>    if len(nums) &lt;= 1:
         return indices
 
-    # Create a dictionary to map each value to its index for quick lookup
-    # Format: value_indices[value] = index
-    var value_indices = Dict[Int, Int]()  # value -&gt; index
+<span class="boring">    Create a dictionary to map each value to its index for quick lookup
+</span><span class="boring">    Format: value_indices[value] = index
+</span>    var value_indices = Dict[Int, Int]()  # value -&gt; index
 
-    # Iterate through the array
-    for idx in range(len(nums)):
-        # Calculate the number needed to reach the target
-        diff = target - nums[idx]
+<span class="boring">    Iterate through the array
+</span>    for idx in range(len(nums)):
+<span class="boring">        Calculate the number needed to reach the target
+</span>        diff = target - nums[idx]
 
-        # If this difference was seen before, we found the pair
-        if diff in value_indices:
-            # Retrieve the stored index of the matching number
-            indices[0] = value_indices.get(diff).value()
-            # Store the current index as the second of the pair
-            indices[1] = idx
+<span class="boring">        If this difference was seen before, we found the pair
+</span>        if diff in value_indices:
+<span class="boring">            Retrieve the stored index of the matching number
+</span>            indices[0] = value_indices.get(diff).value()
+<span class="boring">            Store the current index as the second of the pair
+</span>            indices[1] = idx
         else:
-            # Store the current number and its index for future reference
-            value_indices[nums[idx]] = idx
+<span class="boring">            Store the current number and its index for future reference
+</span>            value_indices[nums[idx]] = idx
 
-    # Return the result tuple
-    return indices
+<span class="boring">    Return the result tuple
+</span>    return indices
 
 def two_sum_costly(nums: List[Int], target: Int) -&gt; Tuple[Int, Int]:
     if len(nums) &lt;= 1:
@@ -256,82 +256,81 @@ def main():
     debug_assert(indices[0] == 1 and indices[1] == 2, "Assertion failed")
     target = 100
     indices = two_sum(nums, target)
-    debug_assert(indices[0] == -1 and indices[1] == -2, "Assertion failed")
-</code></pre>
+    debug_assert(indices[0] == -1 and indices[1] == -2, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/two_sum.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="3sum"><a class="header" href="#3sum">3Sum</a></h1>
 <p>This solution also returns indices of the triplets along with their values</p>
-<pre><code class="language-mojo">import random
+<pre><code class="language-rust ignore">import random
 from collections import InlineArray
 
-# Define a fixed-size array type to store triplets: each element is a tuple (value: Int, index: UInt)
-comptime Triplet = InlineArray[(Int, UInt), 3]
+<span class="boring">Define a fixed-size array type to store triplets: each element is a tuple (value: Int, index: UInt)
+</span>comptime Triplet = InlineArray[(Int, UInt), 3]
 
 
-# Comparison function used for sorting the array of tuples (value, original_index)
-@parameter
+<span class="boring">Comparison function used for sorting the array of tuples (value, original_index)
+</span>@parameter
 def compare_fn(left: (Int, UInt), right: (Int, UInt)) -&gt; Bool:
     return (
         left[0] &lt; right[0]
     )  # Compare based on the actual value, not the index
 
 
-# Function to find all unique triplets that sum up to 0
-def find_triplets(nums: List[Int]) -&gt; List[Triplet]:
-    # Create a new list of tuples (value, original index)
-    numbers = List[(Int, UInt)](capacity=len(nums))
+<span class="boring">Function to find all unique triplets that sum up to 0
+</span>def find_triplets(nums: List[Int]) -&gt; List[Triplet]:
+<span class="boring">    Create a new list of tuples (value, original index)
+</span>    numbers = List[(Int, UInt)](capacity=len(nums))
     for idx in range(len(nums)):
         numbers.append((nums[idx], UInt(idx)))  # Keep original index
 
-    # Sort the list based on the value of elements
-    sort[compare_fn](numbers)
+<span class="boring">    Sort the list based on the value of elements
+</span>    sort[compare_fn](numbers)
 
-    # List to store the result triplets
-    outcome = []
+<span class="boring">    List to store the result triplets
+</span>    outcome = []
 
-    # Iterate through the sorted list using a fixed pivot at index `idx`
-    for idx in range(len(numbers) - 2):
-        # Early stopping: if current value is greater than 0, we can't find a sum of 0
-        if numbers[idx][0] &gt; 0:
+<span class="boring">    Iterate through the sorted list using a fixed pivot at index `idx`
+</span>    for idx in range(len(numbers) - 2):
+<span class="boring">        Early stopping: if current value is greater than 0, we can't find a sum of 0
+</span>        if numbers[idx][0] &gt; 0:
             break
-        # Skip duplicates: avoid repeated first elements to prevent repeated triplets
-        if idx &gt; 0 and numbers[idx][0] == numbers[idx - 1][0]:
+<span class="boring">        Skip duplicates: avoid repeated first elements to prevent repeated triplets
+</span>        if idx &gt; 0 and numbers[idx][0] == numbers[idx - 1][0]:
             continue
 
-        # Two-pointer approach starts here
-        left, right = idx + 1, len(numbers) - 1
+<span class="boring">        Two-pointer approach starts here
+</span>        left, right = idx + 1, len(numbers) - 1
         while left &lt; right:
-            # Calculate sum of the triplet
-            sum = numbers[idx][0] + numbers[left][0] + numbers[right][0]
+<span class="boring">            Calculate sum of the triplet
+</span>            sum = numbers[idx][0] + numbers[left][0] + numbers[right][0]
             if sum == 0:
-                # Found a valid triplet that sums to 0
-                outcome.append(
+<span class="boring">                Found a valid triplet that sums to 0
+</span>                outcome.append(
                     Triplet(numbers[idx], numbers[left], numbers[right])
                 )
-                # Move both pointers inward
-                left += 1
+<span class="boring">                Move both pointers inward
+</span>                left += 1
                 right -= 1
 
-                # Skip duplicates after finding a valid triplet
-                while left &lt; right and numbers[left - 1][0] == numbers[left][0]:
+<span class="boring">                Skip duplicates after finding a valid triplet
+</span>                while left &lt; right and numbers[left - 1][0] == numbers[left][0]:
                     left += 1
                 while (
                     left &lt; right and numbers[right][0] == numbers[right + 1][0]
                 ):
                     right -= 1
             elif sum &lt; 0:
-                # Sum is too small, move left pointer to increase it
-                left += 1
+<span class="boring">                Sum is too small, move left pointer to increase it
+</span>                left += 1
             else:
-                # Sum is too large, move right pointer to decrease it
-                right -= 1
+<span class="boring">                Sum is too large, move right pointer to decrease it
+</span>                right -= 1
 
     return outcome
 
 
-# Helper function to nicely print triplet values and their original indices
-def pretty_print(triplets: List[Triplet]):
+<span class="boring">Helper function to nicely print triplet values and their original indices
+</span>def pretty_print(triplets: List[Triplet]):
     for triplet in triplets:
         print("Elem1 value: ", triplet[][0][0], ", index: ", triplet[][0][1])
         print("Elem2 value: ", triplet[][1][0], ", index: ", triplet[][1][1])
@@ -339,22 +338,21 @@ def pretty_print(triplets: List[Triplet]):
         print()
 
 
-# Entry point: generates a test list, shuffles it, finds triplets and prints them
-def main():
+<span class="boring">Entry point: generates a test list, shuffles it, finds triplets and prints them
+</span>def main():
     list = [-3, -3, -2, -1, 0, 1, 2, 2, 3]
     random.shuffle(list)  # Randomize input to simulate unordered input
     triplets = find_triplets(list)
-    pretty_print(triplets)
-</code></pre>
+    pretty_print(triplets)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/3sum.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="4sum"><a class="header" href="#4sum">4Sum</a></h1>
-<pre><code class="language-mojo">from collections import InlineArray
+<pre><code class="language-rust ignore">from collections import InlineArray
 
 comptime Quadruplet = InlineArray[Int, 4]
 
-# Function to find all unique triplets that sum up to target
-def quadruplets(mut nums: List[Int], target: Int) -&gt; List[Quadruplet]:
+<span class="boring">Function to find all unique triplets that sum up to target
+</span>def quadruplets(mut nums: List[Int], target: Int) -&gt; List[Quadruplet]:
     result = []
     if len(nums) == 0:
         return result
@@ -391,79 +389,77 @@ def main():
     target = 0
     result = quadruplets(nums, target)
     for each in result:
-        print(each[][0], each[][1], each[][2], each[][3])
-</code></pre>
+        print(each[][0], each[][1], each[][2], each[][3])</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/4sum.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="product-of-array-except-self"><a class="header" href="#product-of-array-except-self">Product Of Array Except Self</a></h1>
-<pre><code class="language-mojo"># Function to compute the product of all elements in the list except the one at each index
-def product_except_self(nums: List[Int]) -&gt; List[Int]:
-    # If the input list is empty, return it as is
-    if len(nums) == 0:
+<pre><code class="language-rust ignore"><span class="boring">Function to compute the product of all elements in the list except the one at each index
+</span>def product_except_self(nums: List[Int]) -&gt; List[Int]:
+<span class="boring">    If the input list is empty, return it as is
+</span>    if len(nums) == 0:
         return nums
 
-    # Store the length of the input list
-    len = len(nums)
+<span class="boring">    Store the length of the input list
+</span>    len = len(nums)
 
-    # Initialize the result list with all 1s. This will store our final answer.
-    result = [1] * len
+<span class="boring">    Initialize the result list with all 1s. This will store our final answer.
+</span>    result = [1] * len
 
-    # prefix_product holds the product of all elements to the *left* of the current index
-    prefix_product = 1
+<span class="boring">    prefix_product holds the product of all elements to the *left* of the current index
+</span>    prefix_product = 1
     for idx in range(len):
-        # For each index, store the current prefix product
-        result[idx] = prefix_product
-        # Update the prefix product by multiplying it with the current number
-        prefix_product *= nums[idx]
+<span class="boring">        For each index, store the current prefix product
+</span>        result[idx] = prefix_product
+<span class="boring">        Update the prefix product by multiplying it with the current number
+</span>        prefix_product *= nums[idx]
 
-    # suffix_product holds the product of all elements to the *right* of the current index
-    suffix_product = 1
-    # Iterate from right to left
-    for idx in range(len - 1, -1, -1):
-        # Multiply the result at index with the current suffix product
-        result[idx] *= suffix_product
-        # Update the suffix product by multiplying with current number
-        suffix_product *= nums[idx]
+<span class="boring">    suffix_product holds the product of all elements to the *right* of the current index
+</span>    suffix_product = 1
+<span class="boring">    Iterate from right to left
+</span>    for idx in range(len - 1, -1, -1):
+<span class="boring">        Multiply the result at index with the current suffix product
+</span>        result[idx] *= suffix_product
+<span class="boring">        Update the suffix product by multiplying with current number
+</span>        suffix_product *= nums[idx]
 
     return result
 
 
-# Entry point
-def main():
-    # Example input
-    nums = [1, 2, 3, 4]
-    # Call the function to get result
-    result = product_except_self(nums)  # Output should be [24, 12, 8, 6]
-    # Print the result
-    print(result.__str__())
-</code></pre>
+<span class="boring">Entry point
+</span>def main():
+<span class="boring">    Example input
+</span>    nums = [1, 2, 3, 4]
+<span class="boring">    Call the function to get result
+</span>    result = product_except_self(nums)  # Output should be [24, 12, 8, 6]
+<span class="boring">    Print the result
+</span>    print(result.__str__())</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/product_of_array_except_self.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="max-sum-sub-array"><a class="header" href="#max-sum-sub-array">Max Sum Sub Array</a></h1>
-<pre><code class="language-mojo"># Given an integer array nums, find the subarray with the largest sum, and return its sum.
+<pre><code class="language-rust ignore"><span class="boring">Given an integer array nums, find the subarray with the largest sum, and return its sum.
+</span>
 
-
-# Function to find the subarray with the maximum sum
-def max_sum_sub_array(nums: List[Int]) -&gt; Int:
-    # If the list is empty, return 0 as no subarray exists
-    if len(nums) == 0:
+<span class="boring">Function to find the subarray with the maximum sum
+</span>def max_sum_sub_array(nums: List[Int]) -&gt; Int:
+<span class="boring">    If the list is empty, return 0 as no subarray exists
+</span>    if len(nums) == 0:
         return 0
 
-    # Initialize the running sum and max sum with the first element
-    # running_sum: current subarray sum being tracked
-    # max_sum: maximum subarray sum seen so far
-    running_sum, max_sum = nums[0], nums[0]
+<span class="boring">    Initialize the running sum and max sum with the first element
+</span><span class="boring">    running_sum: current subarray sum being tracked
+</span><span class="boring">    max_sum: maximum subarray sum seen so far
+</span>    running_sum, max_sum = nums[0], nums[0]
 
-    # Iterate over the list starting from the second element
-    for idx in range(1, len(nums)):
-        # Decide whether to extend the previous subarray or start a new subarray at current index
-        running_sum = max(running_sum + nums[idx], nums[idx])
+<span class="boring">    Iterate over the list starting from the second element
+</span>    for idx in range(1, len(nums)):
+<span class="boring">        Decide whether to extend the previous subarray or start a new subarray at current index
+</span>        running_sum = max(running_sum + nums[idx], nums[idx])
 
-        # Update max_sum if the current running_sum is greater
-        max_sum = max(max_sum, running_sum)
+<span class="boring">        Update max_sum if the current running_sum is greater
+</span>        max_sum = max(max_sum, running_sum)
 
-    # Return the maximum subarray sum found
-    return max_sum
+<span class="boring">    Return the maximum subarray sum found
+</span>    return max_sum
 
 
 def main():
@@ -472,13 +468,12 @@ def main():
     debug_assert(max_sum == 6, "Assertion failed")
     nums = [5,4,-1,7,8]
     max_sum = max_sum_sub_array(nums)
-    debug_assert(max_sum == 23, "Assertion failed")
-</code></pre>
+    debug_assert(max_sum == 23, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/max_sum_sub_array.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="max-average-subarray"><a class="header" href="#max-average-subarray">Max Average Subarray</a></h1>
-<pre><code class="language-mojo"># Find the maximum average of any contiguous subarray of length k(window size) from the array.
-
+<pre><code class="language-rust ignore"><span class="boring">Find the maximum average of any contiguous subarray of length k(window size) from the array.
+</span>
 def find_max_average(read nums: List[Int], window_size: UInt) -&gt; Float16:
     length = len(nums)
     if length == 0 or window_size == 0:
@@ -487,13 +482,13 @@ def find_max_average(read nums: List[Int], window_size: UInt) -&gt; Float16:
     var max_average: Float16 = 0.0
     window_sum = 0
 
-    # Compute sum of the first 'window_size' elements
-    for idx in range(window_size):
+<span class="boring">    Compute sum of the first 'window_size' elements
+</span>    for idx in range(window_size):
         window_sum += nums[idx]
     max_average = Float16(window_sum / window_size)  # Initialize max average
 
-    # Slide the window over the array
-    for idx in range(window_size, length):
+<span class="boring">    Slide the window over the array
+</span>    for idx in range(window_size, length):
         window_sum += nums[idx]                     # Add next element
         window_sum -= nums[idx - window_size]       # Remove the element going out of window
         average = Float16(window_sum / window_size) # Current window average
@@ -506,63 +501,61 @@ def main():
     nums = [1, 12, -5, -6, 50, 3]
     window_size = 4
     max_average = find_max_average(nums, window_size)
-    debug_assert(max_average == 12.75, "Assertion failed")  # Test case check
-</code></pre>
+    debug_assert(max_average == 12.75, "Assertion failed")  # Test case check</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/max_average_subarray.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="max-subarray-product"><a class="header" href="#max-subarray-product">Max Subarray Product</a></h1>
-<pre><code class="language-mojo"># Function to find the maximum product of a contiguous subarray
-def max_subarray_product(read nums: List[Int]) -&gt; Int:
-    # Handle edge case: empty array
-    if len(nums) == 0:
+<pre><code class="language-rust ignore"><span class="boring">Function to find the maximum product of a contiguous subarray
+</span>def max_subarray_product(read nums: List[Int]) -&gt; Int:
+<span class="boring">    Handle edge case: empty array
+</span>    if len(nums) == 0:
         return 0
-    # Handle edge case: single element
-    elif len(nums) == 1:
+<span class="boring">    Handle edge case: single element
+</span>    elif len(nums) == 1:
         return nums[0]
     else:
-        # Initialize max_product: if first element is 0, set to 1 temporarily
-        max_product = 1 if nums[0] == 0 else nums[0]
-        # Track both current max and min products (important for handling negatives)
-        curr_max, curr_min = 1, 1
+<span class="boring">        Initialize max_product: if first element is 0, set to 1 temporarily
+</span>        max_product = 1 if nums[0] == 0 else nums[0]
+<span class="boring">        Track both current max and min products (important for handling negatives)
+</span>        curr_max, curr_min = 1, 1
 
-        # Iterate through all elements
-        for idx in range(0, len(nums)):
+<span class="boring">        Iterate through all elements
+</span>        for idx in range(0, len(nums)):
             num = nums[idx]
 
-            # Reset both max and min when zero is encountered (new subarray starts)
-            if num == 0:
+<span class="boring">            Reset both max and min when zero is encountered (new subarray starts)
+</span>            if num == 0:
                 curr_max, curr_min = 1, 1
                 continue
 
-            # Preserve previous curr_max for updating curr_min
-            curr_max_copy = curr_max
+<span class="boring">            Preserve previous curr_max for updating curr_min
+</span>            curr_max_copy = curr_max
 
-            # Update current max and min by considering:
-            # - current number alone
-            # - product of current number with previous max
-            # - product of current number with previous min (for negatives)
-            curr_max = max(curr_max * num, curr_min * num, num)
+<span class="boring">            Update current max and min by considering:
+</span><span class="boring">            - current number alone
+</span><span class="boring">            - product of current number with previous max
+</span><span class="boring">            - product of current number with previous min (for negatives)
+</span>            curr_max = max(curr_max * num, curr_min * num, num)
             curr_min = min(curr_max_copy * num, curr_min * num, num)
 
-            # Update the global max product
-            max_product = max(max_product, curr_max)
+<span class="boring">            Update the global max product
+</span>            max_product = max(max_product, curr_max)
 
         return max_product
 
 
-# Entry point
-def main():
+<span class="boring">Entry point
+</span>def main():
     nums = [2, 3, -2, 4]  # Expected maximum product subarray: [2, 3] =&gt; 6
     max_product = max_subarray_product(nums)
     print(max_product)
-    debug_assert(max_product == 6, "Assertion failed")
-</code></pre>
+    debug_assert(max_product == 6, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/max_subarray_product.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="water-container-max-area"><a class="header" href="#water-container-max-area">Water Container Max Area</a></h1>
-<pre><code class="language-mojo">def max_area(heights: List[Int]) -&gt; Int:
-    # If there are fewer than 2 lines, no container can be formed
-    if len(heights) &lt; 2:
+<pre><code class="language-rust ignore">def max_area(heights: List[Int]) -&gt; Int:
+<span class="boring">    If there are fewer than 2 lines, no container can be formed
+</span>    if len(heights) &lt; 2:
         return 0
 
     left, right = 0, len(heights) - 1
@@ -570,15 +563,15 @@ def main():
     max_area = 0
 
     while left &lt; right:
-        # Height of container is limited by the shorter of the two lines
-        min_height = min(heights[left], heights[right])
+<span class="boring">        Height of container is limited by the shorter of the two lines
+</span>        min_height = min(heights[left], heights[right])
 
-        # Calculate area formed between the two lines and update max_area if it's larger
-        max_area = max(max_area, (right - left) * min_height)
+<span class="boring">        Calculate area formed between the two lines and update max_area if it's larger
+</span>        max_area = max(max_area, (right - left) * min_height)
 
-        # Move the pointer that's at the shorter line inward to potentially find a taller line
-        # This can potentially increase the area despite reducing the width
-        if heights[left] &lt;= heights[right]:
+<span class="boring">        Move the pointer that's at the shorter line inward to potentially find a taller line
+</span><span class="boring">        This can potentially increase the area despite reducing the width
+</span>        if heights[left] &lt;= heights[right]:
             left += 1
         else:
             right -= 1
@@ -596,13 +589,12 @@ def main():
 
     heights = [1, 1]
     mx_area = max_area(heights)
-    assert_equal(mx_area, 1, "Assertion failed")
-</code></pre>
+    assert_equal(mx_area, 1, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/water_container_max_area.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="largest-number"><a class="header" href="#largest-number">Largest Number</a></h1>
 <p>Arrange non-negative integers to form the largest possible number and return it as a string.</p>
-<pre><code class="language-mojo">def largest_number(nums: List[Int]) raises -&gt; String:
+<pre><code class="language-rust ignore">def largest_number(nums: List[Int]) raises -&gt; String:
     if len(nums) == 0:
         return ""
     strs = List[String](capacity=len(nums))
@@ -636,41 +628,40 @@ def main() raises:
 
     nums = List[Int]()
     result = largest_number(nums)
-    assert_true(result == "", "Assertion failed")
-</code></pre>
+    assert_true(result == "", "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/largest_number.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="remove-duplicates-from-sorted-array"><a class="header" href="#remove-duplicates-from-sorted-array">Remove duplicates from sorted array</a></h1>
 <p>This implementation mutates the array in place.</p>
-<pre><code class="language-mojo">def remove_duplicates(mut nums: List[Int]) -&gt; None:
-    # If the list has 0 or 1 element, it's already unique
-    if len(nums) &lt; 2:
+<pre><code class="language-rust ignore">def remove_duplicates(mut nums: List[Int]) -&gt; None:
+<span class="boring">    If the list has 0 or 1 element, it's already unique
+</span>    if len(nums) &lt; 2:
         return
 
-    # `left` points to the position where the next unique element should go
-    left = 0
+<span class="boring">    `left` points to the position where the next unique element should go
+</span>    left = 0
 
-    # Start from second element and iterate through the list
-    for right in range(1, len(nums)):
-        # If a unique value is found (not equal to the previous one),
-        # move it to the `left + 1` position
-        if nums[right - 1] != nums[right]:
+<span class="boring">    Start from second element and iterate through the list
+</span>    for right in range(1, len(nums)):
+<span class="boring">        If a unique value is found (not equal to the previous one),
+</span><span class="boring">        move it to the `left + 1` position
+</span>        if nums[right - 1] != nums[right]:
             left += 1
             nums[left] = nums[right]
 
-    # After all unique elements are placed at the beginning of the list,
-    # remove all remaining elements beyond the `left` index
-    for _ in range(len(nums) - 1, left, -1):
+<span class="boring">    After all unique elements are placed at the beginning of the list,
+</span><span class="boring">    remove all remaining elements beyond the `left` index
+</span>    for _ in range(len(nums) - 1, left, -1):
         _ = nums.pop()  # Discard redundant elements
 
 
-# Import testing helper for assertions
-from std.testing import assert_equal
+<span class="boring">Import testing helper for assertions
+</span>from std.testing import assert_equal
 
 
 def main() raises:
-    # Each test validates that the function keeps only unique sorted elements
-    nums = [1, 1]
+<span class="boring">    Each test validates that the function keeps only unique sorted elements
+</span>    nums = [1, 1]
     remove_duplicates(nums)
     assert_equal(nums, [1], "Assertion failed")
 
@@ -688,44 +679,43 @@ def main() raises:
 
     nums = [1, 1, 1, 2, 3, 3, 3, 5, 5, 6, 6, 8, 8, 8, 9, 10, 10, 11]
     remove_duplicates(nums)
-    assert_equal(nums, [1, 2, 3, 5, 6, 8, 9, 10, 11], "Assertion failed")
-</code></pre>
+    assert_equal(nums, [1, 2, 3, 5, 6, 8, 9, 10, 11], "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/remove_duplicates_sorted_arr.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="merge-nums2-into-nums1-in-place"><a class="header" href="#merge-nums2-into-nums1-in-place">Merge nums2 into nums1 (in-place)</a></h1>
 <p>Given two sorted arrays nums1 (size m + n, with m valid elements followed by n zeros) and nums2 (size n), merge them in-place into nums1 as one sorted array.</p>
-<pre><code class="language-mojo">def merge(mut nums1: List[Int], nums2: List[Int]):
+<pre><code class="language-rust ignore">def merge(mut nums1: List[Int], nums2: List[Int]):
     if len(nums1) == 0 or len(nums2) == 0:
         return
-    # Set pointer m to the last valid element in nums1 (i.e., excluding trailing zeros)
-    m = len(nums1) - len(nums2) - 1
+<span class="boring">    Set pointer m to the last valid element in nums1 (i.e., excluding trailing zeros)
+</span>    m = len(nums1) - len(nums2) - 1
 
-    # Set pointer n to the last element of nums2
-    n = len(nums2) - 1
+<span class="boring">    Set pointer n to the last element of nums2
+</span>    n = len(nums2) - 1
 
-    # Set pointer last to the end of nums1 (i.e., last index where final element will go)
-    last = len(nums1) - 1
+<span class="boring">    Set pointer last to the end of nums1 (i.e., last index where final element will go)
+</span>    last = len(nums1) - 1
 
-    # Traverse both arrays from the end and fill nums1 from the back
-    while m &gt;= 0 and n &gt;= 0:
+<span class="boring">    Traverse both arrays from the end and fill nums1 from the back
+</span>    while m &gt;= 0 and n &gt;= 0:
         if nums1[m] &gt;= nums2[n]:
-            # If current nums1 element is greater, place it at 'last' and move pointers
-            nums1[last] = nums1[m]
+<span class="boring">            If current nums1 element is greater, place it at 'last' and move pointers
+</span>            nums1[last] = nums1[m]
             m -= 1
         else:
-            # Else, place nums2[n] at 'last' and move pointers
-            nums1[last] = nums2[n]
+<span class="boring">            Else, place nums2[n] at 'last' and move pointers
+</span>            nums1[last] = nums2[n]
             n -= 1
         last -= 1
 
-    # If there are leftover elements in nums2 (i.e., nums2 had smaller elements)
-    while n &gt;= 0:
+<span class="boring">    If there are leftover elements in nums2 (i.e., nums2 had smaller elements)
+</span>    while n &gt;= 0:
         nums1[last] = nums2[n]
         last -= 1
         n -= 1
 
-    # No need to handle leftover nums1 elements, they are already in place 1
-
+<span class="boring">    No need to handle leftover nums1 elements, they are already in place 1
+</span>
 
 from std.testing import assert_equal
 
@@ -743,12 +733,11 @@ def main() raises:
     nums1 = [1]
     nums2 = []
     merge(nums1, nums2)
-    assert_equal(nums1, [1], "Assertion failed")
-</code></pre>
+    assert_equal(nums1, [1], "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/merge_shorted_arr_in_place.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="sum-1d-tensor"><a class="header" href="#sum-1d-tensor">Sum 1D Tensor</a></h1>
-<pre><code class="language-mojo">from layout import Layout, LayoutTensor
+<pre><code class="language-rust ignore">from layout import Layout, LayoutTensor
 from algorithm import vectorize
 from sys import simdwidthof
 
@@ -783,15 +772,14 @@ def main():
     end = 1024
     #result = summer[16](tensor, start, end)
     result = summer(tensor)
-    print(result)
-</code></pre>
+    print(result)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/sum_1d_tensor.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="string-to-integer-atoi"><a class="header" href="#string-to-integer-atoi">String to Integer (atoi)</a></h1>
 <p>Implement the atoi(string s) function, which converts a string to a signed integer.</p>
-<pre><code class="language-mojo">def atoi(s: String) raises -&gt; Int:
-    # Return 0 for an empty string (edge case)
-    if len(s) == 0:
+<pre><code class="language-rust ignore">def atoi(s: String) raises -&gt; Int:
+<span class="boring">    Return 0 for an empty string (edge case)
+</span>    if len(s) == 0:
         return 0
 
     buffer = String()  # Buffer to collect valid characters forming the number
@@ -800,43 +788,43 @@ def main():
     prelude = True  # Indicates we're in the whitespace/prefix-skipping phase
 
     while idx &lt; len(s):
-        # Skip leading whitespaces
-        while prelude and idx &lt; len(s) and (s[idx] == " "):
+<span class="boring">        Skip leading whitespaces
+</span>        while prelude and idx &lt; len(s) and (s[idx] == " "):
             idx += 1
             continue
 
-        # If we have skipped whitespaces, check for sign or digit
-        if prelude and idx &lt; len(s):
-            # If current char is '+' or '-' or a digit, add it to buffer
-            if s[idx] == "-" or s[idx] == "+" or s[idx] in digits:
+<span class="boring">        If we have skipped whitespaces, check for sign or digit
+</span>        if prelude and idx &lt; len(s):
+<span class="boring">            If current char is '+' or '-' or a digit, add it to buffer
+</span>            if s[idx] == "-" or s[idx] == "+" or s[idx] in digits:
                 if not s[idx] == "+":
                     buffer.__iadd__(s[idx])
                 idx += 1
                 prelude = False  # Exit prelude phase after processing sign or first digit
                 continue
             else:
-                # Invalid character before number starts; exit parsing
-                break
+<span class="boring">                Invalid character before number starts; exit parsing
+</span>                break
 
-        # If we encounter a non-digit (excluding whitespace in middle), break
-        if s[idx] != " " and s[idx] not in digits:
+<span class="boring">        If we encounter a non-digit (excluding whitespace in middle), break
+</span>        if s[idx] != " " and s[idx] not in digits:
             break
 
-        # If it's a digit, add to buffer
-        if s[idx] in digits:
+<span class="boring">        If it's a digit, add to buffer
+</span>        if s[idx] in digits:
             buffer.__iadd__(s[idx])
         idx += 1
 
-    # Now buffer contains something like "-123", "456", "+789", etc.
-    number, factor = 0, 1
+<span class="boring">    Now buffer contains something like "-123", "456", "+789", etc.
+</span>    number, factor = 0, 1
 
-    # Convert from left to right (excluding the first char which could be a sign)
-    for idx in range(len(buffer) - 1, 0, -1):
+<span class="boring">    Convert from left to right (excluding the first char which could be a sign)
+</span>    for idx in range(len(buffer) - 1, 0, -1):
         number = number + Int(buffer[idx]) * factor
         factor *= 10
 
-    # Handle the first character (either a sign or a digit)
-    number = (
+<span class="boring">    Handle the first character (either a sign or a digit)
+</span>    number = (
         -1 * number if buffer[0] == "-" else number + Int(buffer[0]) * factor
     ) if len(buffer) &gt; 1 else number
 
@@ -889,49 +877,48 @@ def main() raises:
 
     s10 = " - 98700 www"
     number = atoi(s10)
-    assert_equal(number, -98700)
-</code></pre>
+    assert_equal(number, -98700)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/atoi.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="longest-substr-no-char-repeats"><a class="header" href="#longest-substr-no-char-repeats">Longest Substr No Char Repeats</a></h1>
-<pre><code class="language-mojo"># Longest Substring Without Repeating Characters
-# Given a string s, find the length of the longest substring without duplicate characters.
-from collections import Set
+<pre><code class="language-rust ignore"><span class="boring">Longest Substring Without Repeating Characters
+</span><span class="boring">Given a string s, find the length of the longest substring without duplicate characters.
+</span>from collections import Set
 
 
-# Function to compute the length of the longest substring without repeating characters.
-# Takes a StringLiteral `s` and returns an unsigned 16-bit integer.
-def len_longest_substr_no_char_repeats(s: StringLiteral) raises -&gt; UInt16:
-    # If the input string is empty, return 0 immediately
-    if len(s) == 0:
+<span class="boring">Function to compute the length of the longest substring without repeating characters.
+</span><span class="boring">Takes a StringLiteral `s` and returns an unsigned 16-bit integer.
+</span>def len_longest_substr_no_char_repeats(s: StringLiteral) raises -&gt; UInt16:
+<span class="boring">    If the input string is empty, return 0 immediately
+</span>    if len(s) == 0:
         return 0
 
-    # Initialize a Set to keep track of characters in the current window (substring)
-    # Start by adding the first character of the string
-    seen = Set(s[0])
+<span class="boring">    Initialize a Set to keep track of characters in the current window (substring)
+</span><span class="boring">    Start by adding the first character of the string
+</span>    seen = Set(s[0])
 
-    # `left` is the left boundary of the current sliding window (start index)
-    left = 0
+<span class="boring">    `left` is the left boundary of the current sliding window (start index)
+</span>    left = 0
 
-    # Initial max_length is 1 since we already have one character in the set
-    max_length = 1
+<span class="boring">    Initial max_length is 1 since we already have one character in the set
+</span>    max_length = 1
 
-    # Start iterating from the second character to the end of the string
-    for idx in range(1, len(s)):
-        # If the current character is already in the set, it means a repetition
-        # So we move the `left` boundary forward until we remove the duplicate
-        while s[idx] in seen:
+<span class="boring">    Start iterating from the second character to the end of the string
+</span>    for idx in range(1, len(s)):
+<span class="boring">        If the current character is already in the set, it means a repetition
+</span><span class="boring">        So we move the `left` boundary forward until we remove the duplicate
+</span>        while s[idx] in seen:
             seen.remove(s[left])
             left += 1
 
-        # Add the current character to the set
-        seen.add(s[idx])
+<span class="boring">        Add the current character to the set
+</span>        seen.add(s[idx])
 
-        # Update max_length with the size of the current window (set size)
-        max_length = max(max_length, len(seen))
+<span class="boring">        Update max_length with the size of the current window (set size)
+</span>        max_length = max(max_length, len(seen))
 
-    # Return the maximum length found
-    return max_length
+<span class="boring">    Return the maximum length found
+</span>    return max_length
 
 
 def main() raises:
@@ -940,13 +927,12 @@ def main() raises:
     s = "bbbbb"
     print(len_longest_substr_no_char_repeats(s))  # 1
     s = "pwwkew"
-    print(len_longest_substr_no_char_repeats(s))  # 3
-</code></pre>
+    print(len_longest_substr_no_char_repeats(s))  # 3</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/longest_substr_no_char_repeats.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="longest-palindromic-substring"><a class="header" href="#longest-palindromic-substring">Longest Palindromic Substring</a></h1>
 <p>Given a string s, return the longest palindromic substring therein</p>
-<pre><code class="language-mojo">def longest_palindrome(s: String) -&gt; String:
+<pre><code class="language-rust ignore">def longest_palindrome(s: String) -&gt; String:
     if len(s) == 0:
         return s
     longest = String("")
@@ -983,13 +969,12 @@ def main() raises:
     s = "racecar"
     expected = "racecar"
     result = longest_palindrome(s)
-    assert_true(result == expected, "Assertion failed")
-</code></pre>
+    assert_true(result == expected, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/longest_palidromic_substr.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="interleaving-string"><a class="header" href="#interleaving-string">Interleaving String</a></h1>
 <p>Determine if s3 is an interleaving of s1 and s2.</p>
-<pre><code class="language-mojo">def is_interleave(s1: String, s2: String, s3: String) -&gt; Bool:
+<pre><code class="language-rust ignore">def is_interleave(s1: String, s2: String, s3: String) -&gt; Bool:
     if len(s1) + len(s2) != len(s3):
         return False
     dp = List[List[Bool]](
@@ -1026,13 +1011,12 @@ def main() raises:
     s2 = ""
     s3 = ""
     result = is_interleave(s1, s2, s3)
-    assert_true(result, "Assertion failed")
-</code></pre>
+    assert_true(result, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/interleave_string.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="last-word-length"><a class="header" href="#last-word-length">Last word length</a></h1>
 <p>Return the length of the last word in a given space-separated string</p>
-<pre><code class="language-mojo">def last_word_length(s: String) -&gt; Int:
+<pre><code class="language-rust ignore">def last_word_length(s: String) -&gt; Int:
     if len(s) == 0:
         return 0
     i, length = len(s) - 1, 0
@@ -1057,13 +1041,12 @@ def main() raises:
     assert_true(result == 4, "Assertion failed")
 
     result = last_word_length("luffy is still joyboy")
-    assert_true(result == 6, "Assertion failed")
-</code></pre>
+    assert_true(result == 6, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/last_word_length.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="find-all-anagrams-in-a-string"><a class="header" href="#find-all-anagrams-in-a-string">Find All Anagrams in a String</a></h1>
 <p>Return all start indices of anagrams of string p in string s.</p>
-<pre><code class="language-mojo">from collections import Dict
+<pre><code class="language-rust ignore">from collections import Dict
 
 
 def find_anagrams(s: String, p: String) -&gt; List[Int]:
@@ -1135,13 +1118,12 @@ def main() raises:
     s = "abab"
     p = "ab"
     result = find_anagrams(s, p)
-    assert_equal(result, [0, 1, 2], "Assertion failed")
-</code></pre>
+    assert_equal(result, [0, 1, 2], "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/all_anagrams.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="word-search"><a class="header" href="#word-search">Word Search</a></h1>
 <p>Check if a word can be formed in a grid by sequentially adjacent (non-repeating) horizontal or vertical letters.</p>
-<pre><code class="language-mojo">from collections import Set
+<pre><code class="language-rust ignore">from collections import Set
 
 comptime SString = List[StaticString]
 comptime SStrings = List[SString]
@@ -1219,118 +1201,115 @@ def main() raises:
     )
     word3 = "ABCCED"
     result = present(board, word3)
-    assert_true(result, "Assertion failed")
-</code></pre>
+    assert_true(result, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/wordsearch.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="buy-and-sell-stock"><a class="header" href="#buy-and-sell-stock">Buy And Sell Stock</a></h1>
-<pre><code class="language-mojo"># Function to calculate the maximum profit from a list of stock prices
-# where you are allowed to make only one buy and one sell transaction.
-# You must buy before you sell.
-
+<pre><code class="language-rust ignore"><span class="boring">Function to calculate the maximum profit from a list of stock prices
+</span><span class="boring">where you are allowed to make only one buy and one sell transaction.
+</span><span class="boring">You must buy before you sell.
+</span>
 
 def max_profit(prices: List[UInt]) -&gt; UInt:
     var max_profit: UInt = 0  # Stores the maximum profit found so far
     buy_day = 0  # Pointer to track the day to buy the stock
     sell_day = 1  # Pointer to track the day to sell the stock
 
-    # Loop until sell_day reaches the end of the price list
-    while sell_day &lt; len(prices):
+<span class="boring">    Loop until sell_day reaches the end of the price list
+</span>    while sell_day &lt; len(prices):
         if prices[buy_day] &lt; prices[sell_day]:
-            # If selling is profitable, calculate profit and update max
-            max_profit = max(max_profit, prices[sell_day] - prices[buy_day])
+<span class="boring">            If selling is profitable, calculate profit and update max
+</span>            max_profit = max(max_profit, prices[sell_day] - prices[buy_day])
         else:
-            # If current sell_day is cheaper than buy_day, shift buy_day
-            buy_day = sell_day
+<span class="boring">            If current sell_day is cheaper than buy_day, shift buy_day
+</span>            buy_day = sell_day
         sell_day += 1  # Move to the next day
 
     return max_profit  # Return the highest profit found
 
 
 def main():
-    # First test: Best profit is buying at 1 and selling at 6 =&gt; profit = 5
-    prices = [7, 1, 5, 3, 6, 4]
+<span class="boring">    First test: Best profit is buying at 1 and selling at 6 =&gt; profit = 5
+</span>    prices = [7, 1, 5, 3, 6, 4]
     debug_assert(max_profit(prices) == 5, "Assertion failed")
 
-    # Second test: No profitable day to sell =&gt; profit = 0
-    prices = [7, 6, 4, 3, 1]
-    debug_assert(max_profit(prices) == 0, "Assertion failed")
-</code></pre>
+<span class="boring">    Second test: No profitable day to sell =&gt; profit = 0
+</span>    prices = [7, 6, 4, 3, 1]
+    debug_assert(max_profit(prices) == 0, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/buy_and_sell_stock.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="buy-and-sell-stock-2"><a class="header" href="#buy-and-sell-stock-2">Buy And Sell Stock 2</a></h1>
-<pre><code class="language-mojo"># On each day, you may decide to buy and/or sell the stock. You can only hold
-# at most one share of the stock at any time. However, you can buy it then
-# immediately sell it on the same day.
-
-# Find and return the maximum profit you can achieve.
-# Note the problem is confusing - given per day prices, you make no profit buying
-# and selling on the same day! 
-
+<pre><code class="language-rust ignore"><span class="boring">On each day, you may decide to buy and/or sell the stock. You can only hold
+</span><span class="boring">at most one share of the stock at any time. However, you can buy it then
+</span><span class="boring">immediately sell it on the same day.
+</span>
+<span class="boring">Find and return the maximum profit you can achieve.
+</span><span class="boring">Note the problem is confusing - given per day prices, you make no profit buying
+</span><span class="boring">and selling on the same day! 
+</span>
 def total_profit(prices: List[UInt]) -&gt; UInt:
     var total_profit: UInt = 0  # Stores the maximum profit found so far
 
-    # Loop until sell day reaches the end of the price list
-    for day in range(1, len(prices)):
+<span class="boring">    Loop until sell day reaches the end of the price list
+</span>    for day in range(1, len(prices)):
         if prices[day - 1] &lt; prices[day]:
-            # If selling is profitable, sell it &amp; add up profit
-            total_profit += prices[day] - prices[day - 1]
+<span class="boring">            If selling is profitable, sell it &amp; add up profit
+</span>            total_profit += prices[day] - prices[day - 1]
     return total_profit  # Return the highest profit found
 
 
 def main():
-    # First test: Best profit is buying at 1 and selling at 6 =&gt; profit = 5
-    prices = [7, 1, 5, 3, 6, 4]
+<span class="boring">    First test: Best profit is buying at 1 and selling at 6 =&gt; profit = 5
+</span>    prices = [7, 1, 5, 3, 6, 4]
     debug_assert(total_profit(prices) == 7, "Assertion failed")
 
-    # Second test: No profitable day to sell =&gt; profit = 0
-    prices = [7, 6, 4, 3, 1]
+<span class="boring">    Second test: No profitable day to sell =&gt; profit = 0
+</span>    prices = [7, 6, 4, 3, 1]
     debug_assert(total_profit(prices) == 0, "Assertion failed")
-    # 3rd test: Best profit is buying at every day and selling next day
-    prices = [1, 2, 3, 4, 5]
-    debug_assert(total_profit(prices) == 4, "Assertion failed")
-</code></pre>
+<span class="boring">    3rd test: Best profit is buying at every day and selling next day
+</span>    prices = [1, 2, 3, 4, 5]
+    debug_assert(total_profit(prices) == 4, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/buy_and_sell_stock_2.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="min-in-sorted-rotated-arr"><a class="header" href="#min-in-sorted-rotated-arr">Min In Sorted Rotated Arr</a></h1>
-<pre><code class="language-mojo"># Given a sorted, rotated array `nums`, find and return the minimum element.
-# The solution uses binary search to achieve O(log n) time complexity.
-
+<pre><code class="language-rust ignore"><span class="boring">Given a sorted, rotated array `nums`, find and return the minimum element.
+</span><span class="boring">The solution uses binary search to achieve O(log n) time complexity.
+</span>
 def find_min(nums: List[Int]) -&gt; Int:
-    # Handle edge case: empty list
-    if len(nums) == 0:
+<span class="boring">    Handle edge case: empty list
+</span>    if len(nums) == 0:
         return Int.MIN  # Return the minimum representable integer
 
-    # Handle edge case: single-element list
-    elif len(nums) == 1:
+<span class="boring">    Handle edge case: single-element list
+</span>    elif len(nums) == 1:
         return nums[0]
 
     else:
-        # Initialize binary search pointers
-        left, right = 0, len(nums) - 1
+<span class="boring">        Initialize binary search pointers
+</span>        left, right = 0, len(nums) - 1
         curr_min = nums[0]  # Assume first element is the minimum initially
 
         while left &lt;= right:
-            # If the current window is sorted, the smallest element is at the left
-            if nums[left] &lt;= nums[right]:
+<span class="boring">            If the current window is sorted, the smallest element is at the left
+</span>            if nums[left] &lt;= nums[right]:
                 return min(curr_min, nums[left])
 
-            # Compute the mid index
-            mid = (left + right) // 2
+<span class="boring">            Compute the mid index
+</span>            mid = (left + right) // 2
 
-            # Update the minimum seen so far
-            cur_min = min(curr_min, nums[mid])
+<span class="boring">            Update the minimum seen so far
+</span>            cur_min = min(curr_min, nums[mid])
 
-            # Determine which side is unsorted (contains the pivot)
-            if nums[mid] &gt;= nums[left]:
-                # Left half is sorted, so min must be in the right half
-                left = mid + 1
+<span class="boring">            Determine which side is unsorted (contains the pivot)
+</span>            if nums[mid] &gt;= nums[left]:
+<span class="boring">                Left half is sorted, so min must be in the right half
+</span>                left = mid + 1
             else:
-                # Right half is sorted, so min must be in the left half (including mid)
-                right = mid - 1
+<span class="boring">                Right half is sorted, so min must be in the left half (including mid)
+</span>                right = mid - 1
 
-        # Fallback return — should never be reached in a rotated sorted array
-        return curr_min  # Keeps compiler happy
+<span class="boring">        Fallback return — should never be reached in a rotated sorted array
+</span>        return curr_min  # Keeps compiler happy
 
 def main():
     nums = List[Int]()
@@ -1356,83 +1335,81 @@ def main():
     debug_assert(minimum == 11, "Assertion failed")
     nums = [11, 13, 15, 17, 1, 1, 2, 2]
     minimum = find_min(nums)
-    debug_assert(minimum == 1, "Assertion failed")
-</code></pre>
+    debug_assert(minimum == 1, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/min_in_sorted_rotated_arr.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="search-sorted-rotated-arr"><a class="header" href="#search-sorted-rotated-arr">Search Sorted Rotated Arr</a></h1>
-<pre><code class="language-mojo"># Search in Rotated Sorted Array
-
-# Function to search for a target in a rotated sorted array
-comptime ItemType = ComparableCollectionElement
+<pre><code class="language-rust ignore"><span class="boring">Search in Rotated Sorted Array
+</span>
+<span class="boring">Function to search for a target in a rotated sorted array
+</span>comptime ItemType = ComparableCollectionElement
 
 
 def find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -&gt; Int:
     if len(items) == 0:
         return -1
 
-    # Initialize pointers for binary search
-    left, right = 0, len(items) - 1
+<span class="boring">    Initialize pointers for binary search
+</span>    left, right = 0, len(items) - 1
 
-    # Perform binary search
-    while left &lt;= right:
+<span class="boring">    Perform binary search
+</span>    while left &lt;= right:
         mid = (left + right) // 2  # Calculate middle index
 
-        # If the middle element is the target, return the index
-        if items[mid] == target:
+<span class="boring">        If the middle element is the target, return the index
+</span>        if items[mid] == target:
             return mid
 
-        # Determine which half is sorted
-        if items[mid] &gt;= items[left]:
-            # Left half is sorted
-
-            # Check if target lies outside the sorted left half
-            if target &lt; items[left] or target &gt; items[mid]:
-                # Target is in the right half
-                left = mid + 1
+<span class="boring">        Determine which half is sorted
+</span>        if items[mid] &gt;= items[left]:
+<span class="boring">            Left half is sorted
+</span>
+<span class="boring">            Check if target lies outside the sorted left half
+</span>            if target &lt; items[left] or target &gt; items[mid]:
+<span class="boring">                Target is in the right half
+</span>                left = mid + 1
             else:
-                # Target is in the left half
-                right = mid - 1
+<span class="boring">                Target is in the left half
+</span>                right = mid - 1
         else:
-            # Right half is sorted
-
-            # Check if target lies outside the sorted right half
-            if target &gt; items[right] or target &lt; items[mid]:
-                # Target is in the left half
-                right = mid - 1
+<span class="boring">            Right half is sorted
+</span>
+<span class="boring">            Check if target lies outside the sorted right half
+</span>            if target &gt; items[right] or target &lt; items[mid]:
+<span class="boring">                Target is in the left half
+</span>                right = mid - 1
             else:
-                # Target is in the right half
-                left = mid + 1
+<span class="boring">                Target is in the right half
+</span>                left = mid + 1
 
-    # Target not found
-    return -1
+<span class="boring">    Target not found
+</span>    return -1
 
 
 def main():
-    # Example 1: Target exists in the array
-    items = [4, 5, 6, 7, 0, 1, 2]
+<span class="boring">    Example 1: Target exists in the array
+</span>    items = [4, 5, 6, 7, 0, 1, 2]
     target = 0
-    # Expected output: 4 (index of 0)
-    # debug_assert(find(items, target) == 4, "Assertion failed")
-
-    # Example 2: Target does not exist
-    items = [4, 5, 6, 7, 0, 1, 2]
+<span class="boring">    Expected output: 4 (index of 0)
+</span><span class="boring">    debug_assert(find(items, target) == 4, "Assertion failed")
+</span>
+<span class="boring">    Example 2: Target does not exist
+</span>    items = [4, 5, 6, 7, 0, 1, 2]
     target = 3
-    # Expected output: -1
-    # debug_assert(find(items, target) == -1, "Assertion failed")
-
-    # Example 3: Single-element array, target not present
-    items = [1]
+<span class="boring">    Expected output: -1
+</span><span class="boring">    debug_assert(find(items, target) == -1, "Assertion failed")
+</span>
+<span class="boring">    Example 3: Single-element array, target not present
+</span>    items = [1]
     target = 0
-    # Expected output: -1
-    debug_assert(find(items, target) == -1, "Assertion failed")
-</code></pre>
+<span class="boring">    Expected output: -1
+</span>    debug_assert(find(items, target) == -1, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/search_sorted_rotated_arr.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="search-sorted-rotated-arr-with-duplicates"><a class="header" href="#search-sorted-rotated-arr-with-duplicates">Search Sorted Rotated Arr With Duplicates</a></h1>
 <p>Generic function to find the index of a target element in a rotated sorted list.</p>
-<pre><code class="language-mojo"># Define an alias for types that support comparison operations.
-comptime ItemType = ComparableCollectionElement
+<pre><code class="language-rust ignore"><span class="boring">Define an alias for types that support comparison operations.
+</span>comptime ItemType = ComparableCollectionElement
 
 
 def find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -&gt; Int:
@@ -1440,40 +1417,40 @@ def find[ItmType: ItemType](read items: List[ItmType], target: ItmType) -&gt; In
         return -1
     left, right = 0, len(items) - 1
 
-    # Perform modified binary search to handle rotation and duplicates
-    while left &lt;= right:
+<span class="boring">    Perform modified binary search to handle rotation and duplicates
+</span>    while left &lt;= right:
         mid = left + (right - left) // 2
 
-        # Target found at midpoint
-        if items[mid] == target:
+<span class="boring">        Target found at midpoint
+</span>        if items[mid] == target:
             return mid
 
-        # Case 1: Target is less than midpoint value
-        if target &lt; items[mid]:
-            # If target is greater than the left bound, it must be in the left subarray
-            if target &gt; items[left]:
+<span class="boring">        Case 1: Target is less than midpoint value
+</span>        if target &lt; items[mid]:
+<span class="boring">            If target is greater than the left bound, it must be in the left subarray
+</span>            if target &gt; items[left]:
                 right = mid - 1
-            # If target is less than the left bound, it must be in the right subarray
-            elif target &lt; items[left]:
+<span class="boring">            If target is less than the left bound, it must be in the right subarray
+</span>            elif target &lt; items[left]:
                 left = mid + 1
-            # If target equals the left bound, it's a match
-            else:
+<span class="boring">            If target equals the left bound, it's a match
+</span>            else:
                 return left
 
-        # Case 2: Target is greater than midpoint value
-        else:
-            # If target is less than the right bound, it lies in the right subarray
-            if target &lt; items[right]:
+<span class="boring">        Case 2: Target is greater than midpoint value
+</span>        else:
+<span class="boring">            If target is less than the right bound, it lies in the right subarray
+</span>            if target &lt; items[right]:
                 left = mid + 1
-            # If target is greater than the right bound, it must lie to the left
-            elif target &gt; items[right]:
+<span class="boring">            If target is greater than the right bound, it must lie to the left
+</span>            elif target &gt; items[right]:
                 right = mid - 1
-            # If target equals the right bound, it's a match
-            else:
+<span class="boring">            If target equals the right bound, it's a match
+</span>            else:
                 return right
 
-    # Target not found
-    return -1
+<span class="boring">    Target not found
+</span>    return -1
 
 
 from std.testing import assert_equal
@@ -1503,13 +1480,12 @@ def main() raises:
     items = [7, 8, 4, 5]
     target = 3
     index = find(items, target)
-    assert_equal(index, -1, "Assertion failed")
-</code></pre>
+    assert_equal(index, -1, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/search_sorted_rotated_arr_with_duplicates.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="find-firstlast"><a class="header" href="#find-firstlast">Find First/Last</a></h1>
 <p>Find first and last index of a target value in a sorted array</p>
-<pre><code class="language-mojo">def find_first_last(arr: List[Int], target: Int) -&gt; (Int, Int):
+<pre><code class="language-rust ignore">def find_first_last(arr: List[Int], target: Int) -&gt; (Int, Int):
     result = (-1, -1)
     if len(arr) == 0:
         return result
@@ -1556,13 +1532,12 @@ def main() raises:
     arr = [5, 7, 7, 8, 10]
     target = 8
     result = find_first_last(arr, target)
-    assert_true(result[0] == 3 and result[1] == 3, "Assertion failed")
-</code></pre>
+    assert_true(result[0] == 3 and result[1] == 3, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/find_first_last.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="merge-itervals"><a class="header" href="#merge-itervals">Merge Itervals</a></h1>
 <p>Merge overlapping intervals</p>
-<pre><code class="language-mojo">@parameter
+<pre><code class="language-rust ignore">@parameter
 def compare_fn(interval1: (Int, Int), interval2: (Int, Int)) -&gt; Bool:
     return interval1[0] &lt; interval2[0]
 
@@ -1611,12 +1586,11 @@ def main() raises:
             each[][0] == expected[i][0] and each[][1] == expected[i][1],
             "Assertion failed",
         )
-        i += 1
-</code></pre>
+        i += 1</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/merge_intervals.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="shapes"><a class="header" href="#shapes">Shapes</a></h1>
-<pre><code class="language-mojo">trait Shape(ComparableCollectionElement):
+<pre><code class="language-rust ignore">trait Shape(ComparableCollectionElement):
     def area(self) -&gt; UInt:
         ...
 
@@ -1644,13 +1618,12 @@ struct Rectangle(Shape):
         return self.area() &gt; other.area()
 
     def __ge__(self, other: Self) -&gt; Bool:
-        return self.area() &gt;= other.area()
-</code></pre>
+        return self.area() &gt;= other.area()</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/shapes.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="generic-singnly-link-list"><a class="header" href="#generic-singnly-link-list">Generic singnly link list</a></h1>
 <p>A singly linked list with parametric polymorphism.</p>
-<pre><code class="language-mojo">from memory import Pointer, UnsafePointer
+<pre><code class="language-rust ignore">from memory import Pointer, UnsafePointer
 
 comptime ElementType = CollectionElement
 
@@ -1794,13 +1767,12 @@ def main():
     print(linkedlist.len)
     print(linkedlist.__str__())
     for e in linkedlist:
-        print(e[].__str__())
-</code></pre>
+        print(e[].__str__())</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/linkedlist.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="longest-common-subsequence-recursive"><a class="header" href="#longest-common-subsequence-recursive">Longest Common Subsequence Recursive</a></h1>
 <p>Return the length of the longest common subsequence between two strings, or 0 if none exists</p>
-<pre><code class="language-mojo">def longest_subseq(mut text1: String, mut text2: String) raises -&gt; Int:
+<pre><code class="language-rust ignore">def longest_subseq(mut text1: String, mut text2: String) raises -&gt; Int:
     if len(text1) == 0 or len(text2) == 0:
         return 0
     if text1[len(text1) - 1] == text2[len(text2) - 1]:
@@ -1832,13 +1804,12 @@ def main() raises:
     text1 = "abc"
     text2 = "xyz"
     result = longest_subseq(text1, text2)
-    assert_equal(result, 0, "Assertion failed")
-</code></pre>
+    assert_equal(result, 0, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/longest_common_subeq.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="longest-common-subsequence-dynamic"><a class="header" href="#longest-common-subsequence-dynamic">Longest Common Subsequence Dynamic</a></h1>
 <p>Return the length of the longest common subsequence between two strings, or 0 if none exists</p>
-<pre><code class="language-mojo">def longest_subseq(mut text1: String, mut text2: String) raises -&gt; Int:
+<pre><code class="language-rust ignore">def longest_subseq(mut text1: String, mut text2: String) raises -&gt; Int:
     if len(text1) == 0 or len(text2) == 0:
         return 0
     dp = List[List[Int]](
@@ -1870,13 +1841,12 @@ def main() raises:
     text1 = "abc"
     text2 = "xyz"
     result = longest_subseq(text1, text2)
-    assert_equal(result, 0, "Assertion failed")
-</code></pre>
+    assert_equal(result, 0, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/longest_common_subeq_dyn.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="combination-sum"><a class="header" href="#combination-sum">Combination sum</a></h1>
 <p>Find all unique combinations of numbers from candidates (reusable unlimited times) that sum to target.</p>
-<pre><code class="language-mojo">def combination_sum(candidates: List[Int], target: Int) -&gt; List[List[Int]]:
+<pre><code class="language-rust ignore">def combination_sum(candidates: List[Int], target: Int) -&gt; List[List[Int]]:
     combinations = List[List[Int]]()
     if len(candidates) == 0:
         return combinations
@@ -1964,12 +1934,11 @@ def main() raises:
     candidates = [2]
     target = 1
     result = combination_sum(candidates, target)
-    assert_true(len(result) == 0, "assertion failed")
-</code></pre>
+    assert_true(len(result) == 0, "assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/combination_sum.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="num-ones"><a class="header" href="#num-ones">Num Ones</a></h1>
-<pre><code class="language-mojo">def count_bits(mut num: Int) -&gt; Int:
+<pre><code class="language-rust ignore">def count_bits(mut num: Int) -&gt; Int:
 	result = 0
 	while num:
 		result += num % 2
@@ -1998,13 +1967,12 @@ def main() raises:
 	num = 128
 	assert_equal(1, count_bits2(num))
 	num = 2147483645
-	assert_equal(30, count_bits2(num))
-</code></pre>
+	assert_equal(30, count_bits2(num))</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/num_ones.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="count-1s-for-each-entry"><a class="header" href="#count-1s-for-each-entry">Count 1s For Each Entry</a></h1>
 <p>Return an array where each element at index i (0 ≤ i ≤ n) is the number of 1’s in the binary representation of i.</p>
-<pre><code class="language-mojo">def count_bits(n: Int) -&gt; List[Int]:
+<pre><code class="language-rust ignore">def count_bits(n: Int) -&gt; List[Int]:
     result = List(length=n + 1, fill=0)
     power = 1
     for i in range(1, n + 1):
@@ -2025,12 +1993,11 @@ def main() raises:
 
     n = 5
     result = count_bits(n)
-    assert_equal([0, 1, 1, 2, 1, 2], result, "Assertion failed")
-</code></pre>
+    assert_equal([0, 1, 1, 2, 1, 2], result, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/count_bits.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="game-of-life"><a class="header" href="#game-of-life">Game Of Life</a></h1>
-<pre><code class="language-mojo">from gridv1 import Grid as GridV1
+<pre><code class="language-rust ignore">from gridv1 import Grid as GridV1
 from gridv2 import Grid as GridV2
 from utils import Variant
 import random
@@ -2065,23 +2032,22 @@ def main() raises -&gt; None:
     else:
         v2 = GridV2.new(None, 16, 16)
         grid = Grid(v2)
-    run(grid^)
-</code></pre>
+    run(grid^)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/game_of_life.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="gridv1"><a class="header" href="#gridv1">Gridv1</a></h1>
-<pre><code class="language-mojo">import random
+<pre><code class="language-rust ignore">import random
 from gridv2 import Grid as GridV2
 
 
-# Grid is a 2D structure holding cell states (0: dead, 1: alive)
-# It supports string conversion, output writing, and cell access/update
-@value
+<span class="boring">Grid is a 2D structure holding cell states (0: dead, 1: alive)
+</span><span class="boring">It supports string conversion, output writing, and cell access/update
+</span>@value
 struct Grid(Stringable, Writable):
     var data: List[List[Int, True]]  # 2D grid of integers (1 = alive, 0 = dead)
 
-    # Constructor to initialize the grid with given data
-    def __init__(out self, data: List[List[Int, True]]):
+<span class="boring">    Constructor to initialize the grid with given data
+</span>    def __init__(out self, data: List[List[Int, True]]):
         self.data = data
 
     @implicit
@@ -2097,22 +2063,22 @@ struct Grid(Stringable, Writable):
             grid.append(curr_row)
         self.data = grid^
 
-    # Get the number of rows in the grid
-    def row_count(self) -&gt; Int:
+<span class="boring">    Get the number of rows in the grid
+</span>    def row_count(self) -&gt; Int:
         if self.data:
             return len(self.data)
         else:
             return 0
 
-    # Get the number of columns in the grid
-    def col_count(self) -&gt; Int:
+<span class="boring">    Get the number of columns in the grid
+</span>    def col_count(self) -&gt; Int:
         if self.data[0]:
             return len(self.data[0])
         else:
             return 0
 
-    # Convert the grid to a string for pretty-printing
-    def __str__(self) -&gt; String:
+<span class="boring">    Convert the grid to a string for pretty-printing
+</span>    def __str__(self) -&gt; String:
         capacity = self.row_count() * self.col_count()
         if capacity == 0:
             return String()
@@ -2129,33 +2095,33 @@ struct Grid(Stringable, Writable):
             row_index += 1
         return s
 
-    # Allow writing the grid to any output writer
-    def write_to[W: Writer](self, mut writer: W) -&gt; None:
+<span class="boring">    Allow writing the grid to any output writer
+</span>    def write_to[W: Writer](self, mut writer: W) -&gt; None:
         writer.write(self.__str__())
 
-    # Access cell at (row, col)
-    def __getitem__(self, row: Int, col: Int) -&gt; Int:
+<span class="boring">    Access cell at (row, col)
+</span>    def __getitem__(self, row: Int, col: Int) -&gt; Int:
         return self.data[row][col]
 
-    # Update cell at (row, col)
-    def __setitem__(mut self, row: Int, col: Int, value: Int) -&gt; None:
+<span class="boring">    Update cell at (row, col)
+</span>    def __setitem__(mut self, row: Int, col: Int, value: Int) -&gt; None:
         self.data[row][col] = value
 
-    # Static method to create a random grid with specified size
-    @staticmethod
+<span class="boring">    Static method to create a random grid with specified size
+</span>    @staticmethod
     def new(rows: Int, cols: Int) -&gt; Self:
         random.seed()
         data = List[List[Int, True]](capacity=rows)
         for row in range(rows):
             record = List[Int, True](capacity=cols)
             for col in range(cols):
-                # Initialize each cell randomly to 0 or 1
-                record.append(Int(random.random_si64(0, 1)))
+<span class="boring">                Initialize each cell randomly to 0 or 1
+</span>                record.append(Int(random.random_si64(0, 1)))
             data.append(record)
         return Self(data)
 
-    # Perform one step of mutation (Game of Life rules)
-    def mutate(mut self):
+<span class="boring">    Perform one step of mutation (Game of Life rules)
+</span>    def mutate(mut self):
         rows = self.row_count()
         cols = self.col_count()
         for row in range(rows):
@@ -2165,8 +2131,8 @@ struct Grid(Stringable, Writable):
                 left = (col - 1) % cols
                 right = (col + 1) % cols
 
-                # Count live neighbors using 8-connected grid
-                alive_neighbours = (
+<span class="boring">                Count live neighbors using 8-connected grid
+</span>                alive_neighbours = (
                     self[above, left]
                     + self[above, col]
                     + self[above, right]
@@ -2177,19 +2143,19 @@ struct Grid(Stringable, Writable):
                     + self[row, left]
                 )
 
-                # Apply Conway's Game of Life rules:
-                # Rule 1 &amp; 2: Any live cell with 2 or 3 live neighbors survives
-                if self[row, col] == 1 and (
+<span class="boring">                Apply Conway's Game of Life rules:
+</span><span class="boring">                Rule 1 &amp; 2: Any live cell with 2 or 3 live neighbors survives
+</span>                if self[row, col] == 1 and (
                     alive_neighbours == 2 or alive_neighbours == 3
                 ):
                     continue  # Keep alive
 
-                # Rule 3: All other live cells die
-                else:
+<span class="boring">                Rule 3: All other live cells die
+</span>                else:
                     self[row, col] = 0
 
-                # Rule 4: Any dead cell with exactly 3 live neighbors becomes alive
-                if self[row, col] == 0 and alive_neighbours == 3:
+<span class="boring">                Rule 4: Any dead cell with exactly 3 live neighbors becomes alive
+</span>                if self[row, col] == 0 and alive_neighbours == 3:
                     self[row, col] = 1
 
 
@@ -2210,12 +2176,11 @@ def main() raises -&gt; None:
     print(grid_2)
     print("Implicit conversion\n\n")
     grid_1 = Grid(grid_2)
-    print(grid_1)
-</code></pre>
+    print(grid_1)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/gridv1.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="gridv2"><a class="header" href="#gridv2">Gridv2</a></h1>
-<pre><code class="language-mojo">import random
+<pre><code class="language-rust ignore">import random
 from collections import Optional
 from memory import UnsafePointer, memcpy, memset_zero
 from gridv1 import Grid as GridV1
@@ -2261,8 +2226,8 @@ struct Grid(Stringable, Writable):
         s = String(capacity=capacity)
         for row in range(self.rows):
             for col in range(self.cols):
-                # if (self.data + row * self.cols + col)[] == 1:
-                if self[row, col] == 1:
+<span class="boring">                if (self.data + row * self.cols + col)[] == 1:
+</span>                if self[row, col] == 1:
                     s += "*"  # Alive cell represented by '*'
                 else:
                     s += " "  # Dead cell is blank
@@ -2333,17 +2298,16 @@ def run(owned grid: Grid) raises -&gt; None:
 
 def main() raises -&gt; None:
     grid_1 = GridV1.new(16, 16)
-    # run(grid_1)
-    print(grid_1)
+<span class="boring">    run(grid_1)
+</span>    print(grid_1)
     print("Implicit conversion\n\n")
     grid_2 = Grid(grid_1)
-    print(grid_2)
-</code></pre>
+    print(grid_2)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/gridv2.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="cyclic-reference-1"><a class="header" href="#cyclic-reference-1">Cyclic Reference 1</a></h1>
-<pre><code class="language-mojo"># We have no issues Referece1 calling Reference2 which also calls Reference1
-from cyclic_reference_2 import Reference2
+<pre><code class="language-rust ignore"><span class="boring">We have no issues Referece1 calling Reference2 which also calls Reference1
+</span>from cyclic_reference_2 import Reference2
 
 
 struct Reference1:
@@ -2356,13 +2320,12 @@ struct Reference1:
 
 
 def main():
-    var ref1 = Reference1()
-</code></pre>
+    var ref1 = Reference1()</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/cyclic_reference_1.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="cyclic-reference-2"><a class="header" href="#cyclic-reference-2">Cyclic Reference 2</a></h1>
-<pre><code class="language-mojo"># We have no issues Referece2 calling Reference1 which also calls Reference2
-
+<pre><code class="language-rust ignore"><span class="boring">We have no issues Referece2 calling Reference1 which also calls Reference2
+</span>
 from cyclic_reference_1 import Reference1
 
 
@@ -2376,12 +2339,11 @@ struct Reference2:
 
 
 def main():
-    var ref2 = Reference2()
-</code></pre>
+    var ref2 = Reference2()</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/cyclic_reference_2.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="buffer-reduce"><a class="header" href="#buffer-reduce">Buffer Reduce</a></h1>
-<pre><code class="language-mojo">from buffer import NDBuffer
+<pre><code class="language-rust ignore">from buffer import NDBuffer
 from algorithm import vectorize
 from sys import simdwidthof
 
@@ -2413,72 +2375,68 @@ def main() raises:
     var buf = NDBuffer[DType.float64, 1, _, elem_count](array)
 
     result = summer(buf)
-    print(result)
-</code></pre>
+    print(result)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/buffer_reduce.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="custom-struct-compare"><a class="header" href="#custom-struct-compare">Custom Struct Compare</a></h1>
-<pre><code class="language-mojo">from search_sorted_rotated_arr import find
+<pre><code class="language-rust ignore">from search_sorted_rotated_arr import find
 from shapes import Rectangle
 
 
 def main():
-    # Re
-    r4 = Rectangle(4, 10)  # 40
+<span class="boring">    Re
+</span>    r4 = Rectangle(4, 10)  # 40
     r5 = Rectangle(4, 12)  # 48
     r6 = Rectangle(5, 10)  # 50
     r7 = Rectangle(8, 8)  # 64
     r1 = Rectangle(3, 2)  # 6
     r2 = Rectangle(4, 4)  # 16
     r3 = Rectangle(4, 8)  # 32
-    # Rectangles are sorted and rotated in the list
-    items = [r4, r5, r6, r7, r1, r2, r3]
+<span class="boring">    Rectangles are sorted and rotated in the list
+</span>    items = [r4, r5, r6, r7, r1, r2, r3]
     item_index = find(items, r2)
-    debug_assert(item_index == 5, "Assertion failed")
-</code></pre>
+    debug_assert(item_index == 5, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/custom_struct_compare.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="simd-select"><a class="header" href="#simd-select">SIMD Select</a></h1>
 <p>Select based on a SIMD (Single Instruction, Multiple Data) mask</p>
-<pre><code class="language-mojo">from std.testing import assert_true
+<pre><code class="language-rust ignore">from std.testing import assert_true
 
 
 def main() raises:
-    # Create a SIMD (Single Instruction, Multiple Data) boolean selector vector of size 4.
-    # Each element is a boolean value (True or False), indicating which value to select from `left` or `right`.
-    # - If selector[i] == True, take the value from `left[i]`
-    # - If selector[i] == False, take the value from `right[i]`
-    selector = SIMD[DType.bool, 4](False, True, False, True)
+<span class="boring">    Create a SIMD (Single Instruction, Multiple Data) boolean selector vector of size 4.
+</span><span class="boring">    Each element is a boolean value (True or False), indicating which value to select from `left` or `right`.
+</span><span class="boring">    - If selector[i] == True, take the value from `left[i]`
+</span><span class="boring">    - If selector[i] == False, take the value from `right[i]`
+</span>    selector = SIMD[DType.bool, 4](False, True, False, True)
 
-    # Define a SIMD vector `left` with 4 elements of unsigned 8-bit integers
-    left = SIMD[DType.uint8, 4](0, 42, 0, 42)
+<span class="boring">    Define a SIMD vector `left` with 4 elements of unsigned 8-bit integers
+</span>    left = SIMD[DType.uint8, 4](0, 42, 0, 42)
 
-    # Define another SIMD vector `right` with 4 elements of unsigned 8-bit integers
-    right = SIMD[DType.uint8, 4](42, 0, 42, 0)
+<span class="boring">    Define another SIMD vector `right` with 4 elements of unsigned 8-bit integers
+</span>    right = SIMD[DType.uint8, 4](42, 0, 42, 0)
 
-    # Use the selector to choose elements from either `left` or `right`:
-    # result[i] = left[i] if selector[i] else right[i]
-    result = selector.select(left, right)
-    #   → result = [42, 42, 42, 42]
-
+<span class="boring">    Use the selector to choose elements from either `left` or `right`:
+</span><span class="boring">    result[i] = left[i] if selector[i] else right[i]
+</span>    result = selector.select(left, right)
+<span class="boring">      → result = [42, 42, 42, 42]
+</span>
     expected = SIMD[DType.uint8, 4](42)  #   → expected = [42, 42, 42, 42]
-    assert_true(all(result == expected))
-</code></pre>
+    assert_true(all(result == expected))</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/simd_select.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="check-device-core"><a class="header" href="#check-device-core">Check device core</a></h1>
 <p>Check physical and logical cores of the device</p>
-<pre><code class="language-mojo">from sys import num_physical_cores, num_logical_cores
+<pre><code class="language-rust ignore">from sys import num_physical_cores, num_logical_cores
 
 def main():
     print("    Physical Cores : ", num_physical_cores())
-    print("    Logical Cores  : ", num_logical_cores())
-</code></pre>
+    print("    Logical Cores  : ", num_logical_cores())</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/cores.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="add-10"><a class="header" href="#add-10">Add 10</a></h1>
 <p>Implement a kernel that adds 10 to each position of vector a and stores it in vector out.</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext
 from memory import UnsafePointer
 from gpu import thread_idx
 
@@ -2517,13 +2475,12 @@ def main() raises:
     ctx.synchronize()
 
     with d_out_buff.map_to_host() as h_out_buff:
-        print(h_out_buff)
-</code></pre>
+        print(h_out_buff)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/add_10.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="add-a-constant-10"><a class="header" href="#add-a-constant-10">Add a constant 10</a></h1>
 <p>Implement a kernel that adds 10 to each position of 2d matrix a and stores it in out 2d matrix.</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext
 from memory import UnsafePointer
 from gpu import thread_idx, block_dim
 from std.testing import assert_equal
@@ -2574,13 +2531,12 @@ def main():
             assert_equal(h_out_buff[i], expected[i])
 
   except e:
-    print(e)
-</code></pre>
+    print(e)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/add_10_2d.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="add-constant-to-2d-layout-tensor"><a class="header" href="#add-constant-to-2d-layout-tensor">Add constant to 2D Layout tensor</a></h1>
 <p>Implement a kernel that adds 10 to each position of 2D LayoutTensor a and stores it in 2D LayoutTensor out.</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext
 from gpu import thread_idx
 from layout import Layout, LayoutTensor
 from math import iota
@@ -2600,8 +2556,8 @@ def add_10_2dlayout(
 ):
     row = thread_idx.y
     col = thread_idx.x
-    # FILL ME IN (roughly 2 lines)
-    if row &lt; size and col &lt; size:
+<span class="boring">    FILL ME IN (roughly 2 lines)
+</span>    if row &lt; size and col &lt; size:
         out[row, col] = a[row, col] + 10
 
 
@@ -2635,15 +2591,14 @@ def main():
         with buffer_out.map_to_host() as h_buffer_out:
             print(h_buffer_out)
     except e:
-        print(e)
-</code></pre>
+        print(e)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/add_10_2dlayout.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="add-10-1"><a class="header" href="#add-10-1">Add 10</a></h1>
 <p>Implement a kernel that adds 10 to each position of vector a and stores it in vector out.</p>
-<pre><code class="language-mojo">### Add 10
-### Implement a kernel that adds 10 to each position of vector a and stores it in vector out.
-### More threads than data — guard against out-of-bounds access.
+<pre><code class="language-rust ignore">## Add 10
+## Implement a kernel that adds 10 to each position of vector a and stores it in vector out.
+## More threads than data — guard against out-of-bounds access.
 
 from gpu.host import DeviceContext
 from memory import UnsafePointer
@@ -2697,13 +2652,12 @@ def main() raises:
     with d_out_buff.map_to_host() as h_out_buff:
         print(h_out_buff)
         for i in range(SIZE):
-            assert_equal(h_out_buff[i], expected[i])
-</code></pre>
+            assert_equal(h_out_buff[i], expected[i])</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/add_10_with_guard.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="vector-add-gpu--cpu"><a class="header" href="#vector-add-gpu--cpu">Vector Add (GPU + CPU)</a></h1>
 <p>Demonstrates a vector addition kernel with grid-stride loops, SIMD vectorization,</p>
-<pre><code class="language-mojo">from std.gpu.host import DeviceContext, HostBuffer, DeviceAttribute
+<pre><code class="language-rust ignore">from std.gpu.host import DeviceContext, HostBuffer, DeviceAttribute
 from std.gpu import thread_idx, block_idx, block_dim, grid_dim
 from std.testing import assert_almost_equal
 from utils import Timer
@@ -2711,21 +2665,21 @@ from std.random import random_float64, seed
 from std.sys import has_accelerator, simd_width_of
 
 
-# GPU kernel: element-wise vector addition with grid-stride loop, SIMD loads,
-# and compile-time loop unrolling. Each thread processes CHUNK_SIZE elements
-# per iteration, then advances by the total grid stride.
-#
-# Parameters:
-#   result: output pointer (mutably addressed)
-#   a, b: input pointers (immutably addressed)
-#   size: number of elements in each vector
-#
-# Template parameters:
-#   dtype: element data type (e.g. DType.float32)
-#   simd_width: SIMD width, auto-detected from dtype
-#   simd_vectors_per_thread: number of SIMD vectors per thread per grid step
-#
-def vector_add[
+<span class="boring">GPU kernel: element-wise vector addition with grid-stride loop, SIMD loads,
+</span><span class="boring">and compile-time loop unrolling. Each thread processes CHUNK_SIZE elements
+</span><span class="boring">per iteration, then advances by the total grid stride.
+</span><span class="boring">
+</span><span class="boring">Parameters:
+</span><span class="boring">  result: output pointer (mutably addressed)
+</span><span class="boring">  a, b: input pointers (immutably addressed)
+</span><span class="boring">  size: number of elements in each vector
+</span><span class="boring">
+</span><span class="boring">Template parameters:
+</span><span class="boring">  dtype: element data type (e.g. DType.float32)
+</span><span class="boring">  simd_width: SIMD width, auto-detected from dtype
+</span><span class="boring">  simd_vectors_per_thread: number of SIMD vectors per thread per grid step
+</span><span class="boring">
+</span>def vector_add[
     dtype: DType,
     simd_width: Int = simd_width_of[dtype](),
     simd_vectors_per_thread: Int = 4 * simd_width,
@@ -2739,10 +2693,10 @@ def vector_add[
     var grid_stride = grid_dim.x * block_dim.x
 
     comptime CHUNK_SIZE = simd_vectors_per_thread * simd_width
-    # =========================================================
-    # Each thread processes CHUNK_SIZE elements
-    # =========================================================
-    var start_index = (
+<span class="boring">    =========================================================
+</span><span class="boring">    Each thread processes CHUNK_SIZE elements
+</span><span class="boring">    =========================================================
+</span>    var start_index = (
         tid * CHUNK_SIZE
     )  # Start index for each thread per grid_stride
 
@@ -2750,10 +2704,10 @@ def vector_add[
         comptime for vector in range(simd_vectors_per_thread):
             var i = start_index + vector * simd_width
 
-            # Bound check for this vector
-            if i + simd_width &lt;= size:
-                # Load whole vectors, add up and store
-                result.store[width=simd_width](
+<span class="boring">            Bound check for this vector
+</span>            if i + simd_width &lt;= size:
+<span class="boring">                Load whole vectors, add up and store
+</span>                result.store[width=simd_width](
                     i, a.load[width=simd_width](i) + b.load[width=simd_width](i)
                 )
             else:  # i &lt; size, can not load a simd_length vector, handle tail
@@ -2765,14 +2719,14 @@ def vector_add[
         start_index += grid_stride * CHUNK_SIZE
 
 
-# CPU reference implementation: simple sequential element-wise vector addition.
-#
-# Parameters:
-#   result: output host buffer
-#   a, b: input host buffers
-#   size: number of elements
-#
-def vector_add_cpu[
+<span class="boring">CPU reference implementation: simple sequential element-wise vector addition.
+</span><span class="boring">
+</span><span class="boring">Parameters:
+</span><span class="boring">  result: output host buffer
+</span><span class="boring">  a, b: input host buffers
+</span><span class="boring">  size: number of elements
+</span><span class="boring">
+</span>def vector_add_cpu[
     dtype: DType,
     //,
 ](
@@ -2787,15 +2741,15 @@ def vector_add_cpu[
         i += 1
 
 
-# Fill a host buffer with random float64 values cast to the target dtype.
-# Optionally accepts a seed for reproducible results.
-#
-# Parameters:
-#   buffer_a: host buffer to fill
-#   init_seed: optional RNG seed (deterministic if provided)
-#   min, max: range for random values
-#
-def fill[
+<span class="boring">Fill a host buffer with random float64 values cast to the target dtype.
+</span><span class="boring">Optionally accepts a seed for reproducible results.
+</span><span class="boring">
+</span><span class="boring">Parameters:
+</span><span class="boring">  buffer_a: host buffer to fill
+</span><span class="boring">  init_seed: optional RNG seed (deterministic if provided)
+</span><span class="boring">  min, max: range for random values
+</span><span class="boring">
+</span>def fill[
     dtype: DType,
     //,
 ](
@@ -2812,10 +2766,10 @@ def fill[
         buffer_a[i] = random_float64(min, max).cast[dtype]()
 
 
-# Benchmark vector addition on CPU and (if available) GPU, then validate that
-# all GPU results match the CPU reference within a small tolerance.
-#
-def main() raises:
+<span class="boring">Benchmark vector addition on CPU and (if available) GPU, then validate that
+</span><span class="boring">all GPU results match the CPU reference within a small tolerance.
+</span><span class="boring">
+</span>def main() raises:
     comptime dtype = DType.float32
     var size = 100000000
     var cpu_ctx = DeviceContext(api="cpu")
@@ -2876,12 +2830,11 @@ def main() raises:
 
         with result_gpu_buffer.map_to_host() as gpu_result:
             for i in range(size):
-                assert_almost_equal(gpu_result[i], result_host_buffer[i])
-</code></pre>
+                assert_almost_equal(gpu_result[i], result_host_buffer[i])</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/vector_add.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="layout-basics"><a class="header" href="#layout-basics">Layout Basics</a></h1>
-<pre><code class="language-mojo">from gpu.host import DeviceContext
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext
 from layout import Layout, LayoutTensor
 
 comptime HEIGHT = 2
@@ -2926,13 +2879,12 @@ def main():
     print(ctx.api())
     print(cpu_ctx.api())
     cpu_buffer.unsafe_ptr()[] = 98.0
-    print(cpu_buffer)
-</code></pre>
+    print(cpu_buffer)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/layout_basics.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="dumb-matrix-multiplication"><a class="header" href="#dumb-matrix-multiplication">Dumb matrix multiplication</a></h1>
 <p>Simulate the CPU-style triple for-loop truly dumb matrix multiplication</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext, HostBuffer
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim
 import random
 from layout import Layout, LayoutTensor
@@ -2953,17 +2905,17 @@ comptime MATRIX_MIN_ELEM = -5.0
 comptime MATRIX_MAX_ELEM = 5.0
 
 comptime dtype = DType.float32
-# Num threads per block
-comptime THREADS = 1
-# Total numbers blocks in the grid
-comptime BLOCKS = 1
+<span class="boring">Num threads per block
+</span>comptime THREADS = 1
+<span class="boring">Total numbers blocks in the grid
+</span>comptime BLOCKS = 1
 
 comptime layout_a = Layout.row_major(ROWS_A, COLS_A)
 comptime layout_b = Layout.row_major(ROWS_B, COLS_B)
 comptime layout_c = Layout.row_major(ROWS_C, COLS_C)
 
-# alias Matrix = LayoutTensor[dtype, _, MutableAnyOrigin]
-comptime Matrix = LayoutTensor[mut=True, dtype, _]
+<span class="boring">alias Matrix = LayoutTensor[dtype, _, MutableAnyOrigin]
+</span>comptime Matrix = LayoutTensor[mut=True, dtype, _]
 
 
 def naive_matmaul(
@@ -2982,11 +2934,11 @@ def naive_matmaul(
                     )[]
 
 
-# Initialize the matrix buffer with values in the range 0 to 100
-def fill_buffer(buffer: HostBuffer[dtype]):
-    # Randomize
-    # random.seed()
-    for i in range(len(buffer)):
+<span class="boring">Initialize the matrix buffer with values in the range 0 to 100
+</span>def fill_buffer(buffer: HostBuffer[dtype]):
+<span class="boring">    Randomize
+</span><span class="boring">    random.seed()
+</span>    for i in range(len(buffer)):
         buffer[i] = random.random_float64(
             MATRIX_MIN_ELEM, MATRIX_MAX_ELEM
         ).cast[dtype]()[0]
@@ -3012,10 +2964,10 @@ def main():
         with buffer_b.map_to_host() as h_buffer_b:
             fill_buffer(h_buffer_b)
 
-        # matrix_a = LayoutTensor[dtype, layout_a, MutableAnyOrigin](buffer_a)
-        # matrix_b = LayoutTensor[dtype, layout_b, MutableAnyOrigin](buffer_b)
-        # matrix_c =  LayoutTensor[dtype, layout_c, MutableAnyOrigin](buffer_c)
-
+<span class="boring">        matrix_a = LayoutTensor[dtype, layout_a, MutableAnyOrigin](buffer_a)
+</span><span class="boring">        matrix_b = LayoutTensor[dtype, layout_b, MutableAnyOrigin](buffer_b)
+</span><span class="boring">        matrix_c =  LayoutTensor[dtype, layout_c, MutableAnyOrigin](buffer_c)
+</span>
         ctx.enqueue_function[naive_matmaul](
             buffer_a.unsafe_ptr(),
             buffer_b.unsafe_ptr(),
@@ -3073,13 +3025,12 @@ def reshape(ndarray: PythonObject, rows: Int, cols: Int) raises -&gt; PythonObje
 def ndarray_ptr[
     dtype: DType
 ](ndarray: PythonObject) raises -&gt; UnsafePointer[Scalar[dtype]]:
-    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()
-</code></pre>
+    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/naive_matmul.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="matrix-multiplication-1-gpu-thread-per-output-column"><a class="header" href="#matrix-multiplication-1-gpu-thread-per-output-column">Matrix multiplication 1 GPU thread per output column</a></h1>
 <p>Simulate the CPU-style dumb matrix multiplication 1 thread per output column</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext, HostBuffer
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim
 import random
 from layout import Layout, LayoutTensor
@@ -3098,10 +3049,10 @@ comptime MATRIX_MIN_ELEM = -5.0
 comptime MATRIX_MAX_ELEM = 5.0
 
 comptime dtype = DType.float32
-# Num threads per block
-comptime THREADS = COLS_C
-# Total numbers blocks in the grid
-comptime BLOCKS = 1
+<span class="boring">Num threads per block
+</span>comptime THREADS = COLS_C
+<span class="boring">Total numbers blocks in the grid
+</span>comptime BLOCKS = 1
 
 comptime layout_a = Layout.row_major(ROWS_A, COLS_A)
 comptime layout_b = Layout.row_major(ROWS_B, COLS_B)
@@ -3124,10 +3075,10 @@ def naive_matmul_one_thread_per_col[
                 C[i, tid] += A[i, k] * B[k, tid]
 
 
-# Initialize the matrix buffer with values in the range 0 to 100
-def fill_buffer(buffer: HostBuffer[dtype]):
-    # Randomize
-    random.seed()
+<span class="boring">Initialize the matrix buffer with values in the range 0 to 100
+</span>def fill_buffer(buffer: HostBuffer[dtype]):
+<span class="boring">    Randomize
+</span>    random.seed()
     for i in range(len(buffer)):
         buffer[i] = random.random_float64(
             MATRIX_MIN_ELEM, MATRIX_MAX_ELEM
@@ -3217,13 +3168,12 @@ def reshape(ndarray: PythonObject, rows: Int, cols: Int) raises -&gt; PythonObje
 def ndarray_ptr[
     dtype: DType
 ](ndarray: PythonObject) raises -&gt; UnsafePointer[Scalar[dtype]]:
-    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()
-</code></pre>
+    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/naive_matmul_one_thread_per_col.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="dumb-matrix-multiplication-1"><a class="header" href="#dumb-matrix-multiplication-1">Dumb matrix multiplication</a></h1>
 <p>Simulate the CPU-style matrix multiplication with 1 GPU thread per row</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext, HostBuffer
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim
 import random
 from layout import Layout, LayoutTensor
@@ -3242,10 +3192,10 @@ comptime MATRIX_MIN_ELEM = -5.0
 comptime MATRIX_MAX_ELEM = 5.0
 
 comptime dtype = DType.float32
-# Num threads per block
-comptime THREADS = ROWS_C
-# Total numbers blocks in the grid
-comptime BLOCKS = 1
+<span class="boring">Num threads per block
+</span>comptime THREADS = ROWS_C
+<span class="boring">Total numbers blocks in the grid
+</span>comptime BLOCKS = 1
 
 comptime layout_a = Layout.row_major(ROWS_A, COLS_A)
 comptime layout_b = Layout.row_major(ROWS_B, COLS_B)
@@ -3268,10 +3218,10 @@ def naive_matmul_one_thread_per_row[
                 C[tid, j] += A[tid, k] * B[k, j]
 
 
-# Initialize the matrix buffer with values in the range 0 to 100
-def fill_buffer(buffer: HostBuffer[dtype]):
-    # Randomize
-    random.seed()
+<span class="boring">Initialize the matrix buffer with values in the range 0 to 100
+</span>def fill_buffer(buffer: HostBuffer[dtype]):
+<span class="boring">    Randomize
+</span>    random.seed()
     for i in range(len(buffer)):
         buffer[i] = random.random_float64(
             MATRIX_MIN_ELEM, MATRIX_MAX_ELEM
@@ -3361,13 +3311,12 @@ def reshape(ndarray: PythonObject, rows: Int, cols: Int) raises -&gt; PythonObje
 def ndarray_ptr[
     dtype: DType
 ](ndarray: PythonObject) raises -&gt; UnsafePointer[Scalar[dtype]]:
-    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()
-</code></pre>
+    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/naive_matmul_one_thread_per_row.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="dumb-matrix-multiplication-2"><a class="header" href="#dumb-matrix-multiplication-2">Dumb matrix multiplication</a></h1>
 <p>Simulate the CPU-style triple for-loop truly dumb matrix multiplication</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext, HostBuffer
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim
 import random
 from layout import Layout, LayoutTensor
@@ -3386,10 +3335,10 @@ comptime MATRIX_MIN_ELEM = -5.0
 comptime MATRIX_MAX_ELEM = 5.0
 
 comptime dtype = DType.float32
-# Num threads per block
-comptime THREADS = 1
-# Total numbers blocks in the grid
-comptime BLOCKS = 1
+<span class="boring">Num threads per block
+</span>comptime THREADS = 1
+<span class="boring">Total numbers blocks in the grid
+</span>comptime BLOCKS = 1
 
 comptime layout_a = Layout.row_major(ROWS_A, COLS_A)
 comptime layout_b = Layout.row_major(ROWS_B, COLS_B)
@@ -3413,10 +3362,10 @@ def naive_matmul_single_thread_layout_tensor[
                     C[i, j] += A[i, k] * B[k, j]
 
 
-# Initialize the matrix buffer with values in the range 0 to 100
-def fill_buffer(buffer: HostBuffer[dtype]):
-    # Randomize
-    random.seed()
+<span class="boring">Initialize the matrix buffer with values in the range 0 to 100
+</span>def fill_buffer(buffer: HostBuffer[dtype]):
+<span class="boring">    Randomize
+</span>    random.seed()
     for i in range(len(buffer)):
         buffer[i] = random.random_float64(
             MATRIX_MIN_ELEM, MATRIX_MAX_ELEM
@@ -3508,13 +3457,12 @@ def reshape(ndarray: PythonObject, rows: Int, cols: Int) raises -&gt; PythonObje
 def ndarray_ptr[
     dtype: DType
 ](ndarray: PythonObject) raises -&gt; UnsafePointer[Scalar[dtype]]:
-    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()
-</code></pre>
+    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/naive_matmul_single_thread_layout_tensor.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="dumb-matrix-multiplication-3"><a class="header" href="#dumb-matrix-multiplication-3">Dumb matrix multiplication</a></h1>
 <p>Use one one GPU thread for each column of the output matrix</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext, HostBuffer
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim
 import random
 from layout import Layout, LayoutTensor
@@ -3533,10 +3481,10 @@ comptime MATRIX_MIN_ELEM = -5.0
 comptime MATRIX_MAX_ELEM = 5.0
 
 comptime dtype = DType.float32
-# Num threads per block
-comptime THREADS = (5, 5)
-# Total numbers blocks in the grid
-comptime BLOCKS = (
+<span class="boring">Num threads per block
+</span>comptime THREADS = (5, 5)
+<span class="boring">Total numbers blocks in the grid
+</span>comptime BLOCKS = (
     (COLS_C + THREADS[0] - 1) // THREADS[0],
     (ROWS_C + THREADS[1] - 1) // THREADS[1],
 )
@@ -3562,10 +3510,10 @@ def matmul_thread_per_output_cell[
             C[i, j] += A[i, k] * B[k, j]
 
 
-# Initialize the matrix buffer with values in the range 0 to 100
-def fill_buffer(buffer: HostBuffer[dtype]):
-    # Randomize
-    random.seed()
+<span class="boring">Initialize the matrix buffer with values in the range 0 to 100
+</span>def fill_buffer(buffer: HostBuffer[dtype]):
+<span class="boring">    Randomize
+</span>    random.seed()
     for i in range(len(buffer)):
         buffer[i] = random.random_float64(
             MATRIX_MIN_ELEM, MATRIX_MAX_ELEM
@@ -3655,13 +3603,12 @@ def reshape(ndarray: PythonObject, rows: Int, cols: Int) raises -&gt; PythonObje
 def ndarray_ptr[
     dtype: DType
 ](ndarray: PythonObject) raises -&gt; UnsafePointer[Scalar[dtype]]:
-    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()
-</code></pre>
+    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/matmul_thread_per_output_cell.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="matmul-thread-per-output-cell-vectorized"><a class="header" href="#matmul-thread-per-output-cell-vectorized">Matmul Thread Per Output Cell Vectorized</a></h1>
 <p>Uses shared memory via stack_allocation</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext, HostBuffer
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim
 import random
 from layout import Layout, LayoutTensor
@@ -3683,10 +3630,10 @@ comptime MATRIX_MIN_ELEM = -5.0
 comptime MATRIX_MAX_ELEM = 5.0
 
 comptime dtype = DType.float32
-# Num threads per block
-comptime THREADS = (5, 5)
-# Total numbers blocks in the grid
-comptime BLOCKS = (
+<span class="boring">Num threads per block
+</span>comptime THREADS = (5, 5)
+<span class="boring">Total numbers blocks in the grid
+</span>comptime BLOCKS = (
     (COLS_C + THREADS[0] - 1) // THREADS[0],
     (ROWS_C + THREADS[1] - 1) // THREADS[1],
 )
@@ -3725,10 +3672,10 @@ def matmul_thread_per_output_cell_vectorized(
         vectorize[dotproduct, simdwidthof[dtype]()](ROWS_B)
 
 
-# Initialize the matrix buffer with values in the range 0 to 100
-def fill_buffer(buffer: HostBuffer[dtype]):
-    # Randomize
-    random.seed()
+<span class="boring">Initialize the matrix buffer with values in the range 0 to 100
+</span>def fill_buffer(buffer: HostBuffer[dtype]):
+<span class="boring">    Randomize
+</span>    random.seed()
     for i in range(len(buffer)):
         buffer[i] = random.random_float64(
             MATRIX_MIN_ELEM, MATRIX_MAX_ELEM
@@ -3822,8 +3769,7 @@ def reshape(ndarray: PythonObject, rows: Int, cols: Int) raises -&gt; PythonObje
 def ndarray_ptr[
     dtype: DType
 ](ndarray: PythonObject) raises -&gt; UnsafePointer[Scalar[dtype]]:
-    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()
-</code></pre>
+    return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/matmul_thread_per_output_cell_vectorized.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="background-from-chatgpt-mediator"><a class="header" href="#background-from-chatgpt-mediator">Background from ChatGPT Mediator</a></h1>
@@ -3852,20 +3798,20 @@ Solid green fallback if gradient unsupported.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="timer-utility"><a class="header" href="#timer-utility">Timer utility</a></h1>
 <p>A simple RAII / context-manager timer that prints elapsed wall-clock time in nanoseconds.</p>
-<pre><code class="language-mojo">from std.time import global_perf_counter_ns
+<pre><code class="language-rust ignore">from std.time import global_perf_counter_ns
 
 
-# Timer struct used via Python-style `with` blocks.
-#
-# Records the time at `__enter__` and prints the elapsed duration at `__exit__`.
-# The label prefix is a templated `StringSlice` to avoid allocation.
-#
-# Usage:
-#   with Timer("My computation: "):
-#       do_something()
-#   # Prints: "My computation:  12345000 nanoseconds"
-#
-@fieldwise_init
+<span class="boring">Timer struct used via Python-style `with` blocks.
+</span><span class="boring">
+</span><span class="boring">Records the time at `__enter__` and prints the elapsed duration at `__exit__`.
+</span><span class="boring">The label prefix is a templated `StringSlice` to avoid allocation.
+</span><span class="boring">
+</span><span class="boring">Usage:
+</span><span class="boring">  with Timer("My computation: "):
+</span><span class="boring">      do_something()
+</span><span class="boring">  # Prints: "My computation:  12345000 nanoseconds"
+</span><span class="boring">
+</span>@fieldwise_init
 struct Timer[origin: Origin, //](ImplicitlyCopyable):
     var start_time: UInt64
     var prefix: StringSlice[Self.origin]
@@ -3880,13 +3826,12 @@ struct Timer[origin: Origin, //](ImplicitlyCopyable):
 
     def __exit__(mut self):
         elapsed_time_ms = global_perf_counter_ns() - self.start_time
-        print(self.prefix, elapsed_time_ms, "nanoseconds")
-</code></pre>
+        print(self.prefix, elapsed_time_ms, "nanoseconds")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/utils.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="histogram"><a class="header" href="#histogram">Histogram</a></h1>
 <p>Program to compute histogram of a 1D array</p>
-<pre><code class="language-mojo">from gpu.host import DeviceContext, HostBuffer, DeviceBuffer
+<pre><code class="language-rust ignore">from gpu.host import DeviceContext, HostBuffer, DeviceBuffer
 from gpu import thread_idx, block_idx, block_dim
 import random
 from math import ceildiv
@@ -3896,17 +3841,17 @@ from os import Atomic
 from os.atomic import Consistency
 
 comptime dtype = DType.int64
-# How many numbers to bin? 2 ^ 20 (default)
-comptime ELEMS_COUNT = 1 &lt;&lt; 20
-# How many bins?
-comptime NUM_BINS = 10
-# Num threads per block
-comptime THREADS = 256
-# Total numbers blocks in the grid
-comptime BLOCKS = ceildiv(ELEMS_COUNT, THREADS)
+<span class="boring">How many numbers to bin? 2 ^ 20 (default)
+</span>comptime ELEMS_COUNT = 1 &lt;&lt; 20
+<span class="boring">How many bins?
+</span>comptime NUM_BINS = 10
+<span class="boring">Num threads per block
+</span>comptime THREADS = 256
+<span class="boring">Total numbers blocks in the grid
+</span>comptime BLOCKS = ceildiv(ELEMS_COUNT, THREADS)
 
-# Max value of any binned element
-comptime MAX_ELEM = 101
+<span class="boring">Max value of any binned element
+</span>comptime MAX_ELEM = 101
 comptime MIN_ELEM = 1
 
 comptime BIN_WIDTH = (MAX_ELEM - MIN_ELEM + 1) // NUM_BINS
@@ -3923,20 +3868,20 @@ def histogram(
     if tid &lt; total_elems:
         var elem = input[tid]
         bin_index = bin_index(elem[0])
-        # _ = Atomic.fetch_add[ordering= Consistency.MONOTONIC](output + bin_index, 1)
-        _ = Atomic.fetch_add(output + bin_index, 1)
+<span class="boring">        _ = Atomic.fetch_add[ordering= Consistency.MONOTONIC](output + bin_index, 1)
+</span>        _ = Atomic.fetch_add(output + bin_index, 1)
 
 
-# Initialize the input buffer with values in the range 0 to 100
-def fill_buffer(buffer: HostBuffer[dtype]):
-    # Randomize
-    random.seed()
+<span class="boring">Initialize the input buffer with values in the range 0 to 100
+</span>def fill_buffer(buffer: HostBuffer[dtype]):
+<span class="boring">    Randomize
+</span>    random.seed()
     for i in range(len(buffer)):
         buffer[i] = random.random_ui64(MIN_ELEM, MAX_ELEM).cast[dtype]()[0]
 
 
-# Find the bin index given a number
-@always_inline
+<span class="boring">Find the bin index given a number
+</span>@always_inline
 def bin_index(elem: Int64) -&gt; Int:
     bin_index = Int((elem - MIN_ELEM) // BIN_WIDTH)
     if bin_index &gt;= NUM_BINS:
@@ -3959,8 +3904,8 @@ def main():
         input_tensor = LayoutTensor[dtype, input_layout, MutableAnyOrigin](
             elements
         )
-        # output_tensor = LayoutTensor[mut=True, dtype, output_layout](bins)
-
+<span class="boring">        output_tensor = LayoutTensor[mut=True, dtype, output_layout](bins)
+</span>
         ctx.enqueue_function[histogram](
             input_tensor,
             bins.unsafe_ptr(),
@@ -3976,8 +3921,7 @@ def main():
 
         print(ctx.name())
     except e:
-        print("Prininting here: ", e)
-</code></pre>
+        print("Prininting here: ", e)</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/mojo_kernels/histogram.mojo">View source on GitHub</a></p>
 
                     </main>

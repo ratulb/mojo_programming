@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,40 +176,40 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="two-sum"><a class="header" href="#two-sum">Two Sum</a></h1>
-<pre><code class="language-mojo"># Two Sum Problem:
-# Given an array of integers `nums` and a target value `target`,
-# return the indices of two numbers such that they add up to `target`.
-
+<pre><code class="language-rust ignore"><span class="boring">Two Sum Problem:
+</span><span class="boring">Given an array of integers `nums` and a target value `target`,
+</span><span class="boring">return the indices of two numbers such that they add up to `target`.
+</span>
 
 def two_sum(nums: List[Int], target: Int) -&gt; Tuple[Int, Int]:
-    # Default return value: (-1, -1) if no valid pair is found
-    indices = (-1, -1)
+<span class="boring">    Default return value: (-1, -1) if no valid pair is found
+</span>    indices = (-1, -1)
 
-    # Early exit: If list has 0 or 1 elements, no pair can be formed
-    if len(nums) &lt;= 1:
+<span class="boring">    Early exit: If list has 0 or 1 elements, no pair can be formed
+</span>    if len(nums) &lt;= 1:
         return indices
 
-    # Create a dictionary to map each value to its index for quick lookup
-    # Format: value_indices[value] = index
-    var value_indices = Dict[Int, Int]()  # value -&gt; index
+<span class="boring">    Create a dictionary to map each value to its index for quick lookup
+</span><span class="boring">    Format: value_indices[value] = index
+</span>    var value_indices = Dict[Int, Int]()  # value -&gt; index
 
-    # Iterate through the array
-    for idx in range(len(nums)):
-        # Calculate the number needed to reach the target
-        diff = target - nums[idx]
+<span class="boring">    Iterate through the array
+</span>    for idx in range(len(nums)):
+<span class="boring">        Calculate the number needed to reach the target
+</span>        diff = target - nums[idx]
 
-        # If this difference was seen before, we found the pair
-        if diff in value_indices:
-            # Retrieve the stored index of the matching number
-            indices[0] = value_indices.get(diff).value()
-            # Store the current index as the second of the pair
-            indices[1] = idx
+<span class="boring">        If this difference was seen before, we found the pair
+</span>        if diff in value_indices:
+<span class="boring">            Retrieve the stored index of the matching number
+</span>            indices[0] = value_indices.get(diff).value()
+<span class="boring">            Store the current index as the second of the pair
+</span>            indices[1] = idx
         else:
-            # Store the current number and its index for future reference
-            value_indices[nums[idx]] = idx
+<span class="boring">            Store the current number and its index for future reference
+</span>            value_indices[nums[idx]] = idx
 
-    # Return the result tuple
-    return indices
+<span class="boring">    Return the result tuple
+</span>    return indices
 
 def two_sum_costly(nums: List[Int], target: Int) -&gt; Tuple[Int, Int]:
     if len(nums) &lt;= 1:
@@ -231,8 +231,7 @@ def main():
     debug_assert(indices[0] == 1 and indices[1] == 2, "Assertion failed")
     target = 100
     indices = two_sum(nums, target)
-    debug_assert(indices[0] == -1 and indices[1] == -2, "Assertion failed")
-</code></pre>
+    debug_assert(indices[0] == -1 and indices[1] == -2, "Assertion failed")</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/two_sum.mojo">View source on GitHub</a></p>
 
                     </main>

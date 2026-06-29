@@ -28,7 +28,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="../theme/custom-0800076f.css">
+        <link rel="stylesheet" href="../theme/custom-da71a46f.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -36,7 +36,7 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-1336a7fb.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="../toc-5930c5f3.js"></script>
@@ -176,7 +176,7 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="num-ones"><a class="header" href="#num-ones">Num Ones</a></h1>
-<pre><code class="language-mojo">def count_bits(mut num: Int) -&gt; Int:
+<pre><code class="language-rust ignore">def count_bits(mut num: Int) -&gt; Int:
 	result = 0
 	while num:
 		result += num % 2
@@ -205,8 +205,7 @@ def main() raises:
 	num = 128
 	assert_equal(1, count_bits2(num))
 	num = 2147483645
-	assert_equal(30, count_bits2(num))
-</code></pre>
+	assert_equal(30, count_bits2(num))</code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/num_ones.mojo">View source on GitHub</a></p>
 
                     </main>
