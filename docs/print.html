@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-d871299c.js";
+            window.path_to_searchindex_js = "searchindex-71c92125.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-5930c5f3.js"></script>
+        <script src="toc-672cac93.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -192,8 +192,7 @@
 <li><strong>Bit Manipulation &amp; Math</strong> — 2 problems</li>
 <li><strong>Grid &amp; Matrix</strong> — 3 problems</li>
 <li><strong>Mojo Concepts</strong> — 6 problems</li>
-<li><strong>GPU Puzzles</strong> — 12 problems</li>
-<li><strong>Background</strong> — 1 problem</li>
+<li><strong>GPU programming</strong> — 12 problems</li>
 <li><strong>Utilities</strong> — 1 problem</li>
 <li><strong>CUDA</strong> — 1 problem</li>
 </ul>
@@ -642,6 +641,8 @@ def main() raises:
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="remove-duplicates-from-sorted-array"><a class="header" href="#remove-duplicates-from-sorted-array">Remove duplicates from sorted array</a></h1>
 <p>This implementation mutates the array in place.</p>
+<p>Post de-duplication, only the unique elements are retained.</p>
+<p>After the last unique element, all entries which have been shifted are discarded.</p>
 <pre><code class="language-python">def remove_duplicates(mut nums: List[Int]) -&gt; None:
     # If the list has 0 or 1 element, it's already unique
     if len(nums) &lt; 2:
@@ -1431,6 +1432,7 @@ def main():
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="search-sorted-rotated-arr-with-duplicates"><a class="header" href="#search-sorted-rotated-arr-with-duplicates">Search Sorted Rotated Arr With Duplicates</a></h1>
 <p>Generic function to find the index of a target element in a rotated sorted list.</p>
+<p>Works for any type that implements ComparableCollectionElement (e.g., Int, Float, etc.).</p>
 <pre><code class="language-python"># Define an alias for types that support comparison operations.
 comptime ItemType = ComparableCollectionElement
 
@@ -1650,6 +1652,7 @@ struct Rectangle(Shape):
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="generic-singnly-link-list"><a class="header" href="#generic-singnly-link-list">Generic singnly link list</a></h1>
 <p>A singly linked list with parametric polymorphism.</p>
+<p>Current supports adding multiple elements at one go via the <code>append</code> method</p>
 <pre><code class="language-python">from memory import Pointer, UnsafePointer
 
 comptime ElementType = CollectionElement
@@ -2440,6 +2443,7 @@ def main():
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="simd-select"><a class="header" href="#simd-select">SIMD Select</a></h1>
 <p>Select based on a SIMD (Single Instruction, Multiple Data) mask</p>
+<p>This example demonstrates how to use SIMD.select() to perform element-wise conditional selection between two SIMD vectors based on a boolean mask.</p>
 <pre><code class="language-python">from std.testing import assert_true
 
 
@@ -2641,6 +2645,7 @@ def main():
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="add-10-1"><a class="header" href="#add-10-1">Add 10</a></h1>
 <p>Implement a kernel that adds 10 to each position of vector a and stores it in vector out.</p>
+<p>More threads than data — guard against out-of-bounds access.</p>
 <pre><code class="language-python">### Add 10
 ### Implement a kernel that adds 10 to each position of vector a and stores it in vector out.
 ### More threads than data — guard against out-of-bounds access.
@@ -2701,8 +2706,10 @@ def main() raises:
 </code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/add_10_with_guard.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="vector-add-gpu--cpu"><a class="header" href="#vector-add-gpu--cpu">Vector Add (GPU + CPU)</a></h1>
-<p>Demonstrates a vector addition kernel with grid-stride loops, SIMD vectorization,</p>
+<h1 id="vector-addflexible-kernel-with-grid-stride-loop"><a class="header" href="#vector-addflexible-kernel-with-grid-stride-loop">Vector Add(Flexible Kernel with Grid-Stride Loop)</a></h1>
+<p>Demonstrates a vector addition kernel with Grid-Stride loops, SIMD vectorization,</p>
+<p>and loop unrolling — runnable on both CPU and GPU (when available).</p>
+<p>See <a href="https://developer.nvidia.com/blog/cuda-pro-tip-write-flexible-kernels-grid-stride-loops/">Grid-stride</a> loop</p>
 <pre><code class="language-python">from std.gpu.host import DeviceContext, HostBuffer, DeviceAttribute
 from std.gpu import thread_idx, block_idx, block_dim, grid_dim
 from std.testing import assert_almost_equal
@@ -3825,30 +3832,6 @@ def ndarray_ptr[
     return ndarray.__array_interface__["data"][0].unsafe_get_as_pointer[dtype]()
 </code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/matmul_thread_per_output_cell_vectorized.mojo">View source on GitHub</a></p>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="background-from-chatgpt-mediator"><a class="header" href="#background-from-chatgpt-mediator">Background from ChatGPT Mediator</a></h1>
-<h2 id="current-gradient-appcss"><a class="header" href="#current-gradient-appcss">Current gradient (App.css)</a></h2>
-<pre><code class="language-css">:root {
-  --blue: rgb(0, 128, 128);
-  --blueish: #0650b1;
-  --greenish: rgb(0, 128, 0);
-  --white: snow;
-  --unusual_msg_color: rgb(199, 130, 26);
-  --nice-blue: #0088ff;
-}
-
-body {
-  background-color: var(--greenish);
-  background-image: linear-gradient(120deg, var(--blueish), var(--greenish));
-}
-</code></pre>
-<p>120° diagonal from <code>#0650b1</code> (dark blue) → <code>rgb(0, 128, 0)</code> (green).
-Solid green fallback if gradient unsupported.</p>
-<h2 id="extracted-variable-for-reuse"><a class="header" href="#extracted-variable-for-reuse">Extracted variable (for reuse)</a></h2>
-<pre><code class="language-css">--bg-gradient: linear-gradient(120deg, #0650b1, rgb(0, 128, 0));
-</code></pre>
-<h2 id="unused-image"><a class="header" href="#unused-image">Unused image</a></h2>
-<p><code>client/src/assets/clouds.jpg</code> — exists in the repo but never imported anywhere.</p>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="timer-utility"><a class="header" href="#timer-utility">Timer utility</a></h1>
 <p>A simple RAII / context-manager timer that prints elapsed wall-clock time in nanoseconds.</p>

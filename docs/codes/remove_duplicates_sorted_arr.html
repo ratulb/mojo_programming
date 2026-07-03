@@ -36,10 +36,10 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-71c92125.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-5930c5f3.js"></script>
+        <script src="../toc-672cac93.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -177,6 +177,8 @@
                     <main>
                         <h1 id="remove-duplicates-from-sorted-array"><a class="header" href="#remove-duplicates-from-sorted-array">Remove duplicates from sorted array</a></h1>
 <p>This implementation mutates the array in place.</p>
+<p>Post de-duplication, only the unique elements are retained.</p>
+<p>After the last unique element, all entries which have been shifted are discarded.</p>
 <pre><code class="language-python">def remove_duplicates(mut nums: List[Int]) -&gt; None:
     # If the list has 0 or 1 element, it's already unique
     if len(nums) &lt; 2:

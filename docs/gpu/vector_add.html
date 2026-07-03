@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Vector Add (GPU + CPU) - Mojo Programming</title>
+        <title>Vector Add(Flexible Kernel with Grid-Stride Loop) - Mojo Programming</title>
 
 
         <!-- Custom HTML head -->
@@ -36,10 +36,10 @@
             const path_to_root = "../";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-d871299c.js";
+            window.path_to_searchindex_js = "../searchindex-71c92125.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-5930c5f3.js"></script>
+        <script src="../toc-672cac93.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -175,8 +175,10 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="vector-add-gpu--cpu"><a class="header" href="#vector-add-gpu--cpu">Vector Add (GPU + CPU)</a></h1>
-<p>Demonstrates a vector addition kernel with grid-stride loops, SIMD vectorization,</p>
+                        <h1 id="vector-addflexible-kernel-with-grid-stride-loop"><a class="header" href="#vector-addflexible-kernel-with-grid-stride-loop">Vector Add(Flexible Kernel with Grid-Stride Loop)</a></h1>
+<p>Demonstrates a vector addition kernel with Grid-Stride loops, SIMD vectorization,</p>
+<p>and loop unrolling — runnable on both CPU and GPU (when available).</p>
+<p>See <a href="https://developer.nvidia.com/blog/cuda-pro-tip-write-flexible-kernels-grid-stride-loops/">Grid-stride</a> loop</p>
 <pre><code class="language-python">from std.gpu.host import DeviceContext, HostBuffer, DeviceAttribute
 from std.gpu import thread_idx, block_idx, block_dim, grid_dim
 from std.testing import assert_almost_equal

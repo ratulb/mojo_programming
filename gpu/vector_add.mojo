@@ -1,7 +1,7 @@
 ### Vector Add(Flexible Kernel with Grid-Stride Loop)
 ### Demonstrates a vector addition kernel with Grid-Stride loops, SIMD vectorization,
 ### and loop unrolling — runnable on both CPU and GPU (when available).
-### <p> See [Grid-stride](https://developer.nvidia.com/blog/cuda-pro-tip-write-flexible-kernels-grid-stride-loops/) loop</p>
+### See [Grid-stride](https://developer.nvidia.com/blog/cuda-pro-tip-write-flexible-kernels-grid-stride-loops/) loop
 
 from std.gpu.host import DeviceContext, HostBuffer, DeviceAttribute
 from std.gpu import thread_idx, block_idx, block_dim, grid_dim
