@@ -37,34 +37,87 @@ def find_mojo_file(stem):
     return None
 
 
-def read_mojo_title(filepath):
+def parse_mojo_headers(filepath):
+    """Extract (title, description, header_line_count) from a .mojo file.
+
+    Supports two formats:
+      1. ### Title           (repo convention, preferred)
+         ### Description
+      2. \"\"\"Title            (Mojo docstring convention)
+         Description
+         \"\"\"
+    Returns (title, description, header_line_count). header_line_count is the
+    number of lines at the top of the file consumed by the header block.
+    """
     with open(filepath) as f:
-        first_lines = [next(f, "") for _ in range(5)]
-    for line in first_lines:
-        s = line.strip()
-        if s.startswith("###"):
-            candidate = s.replace("###", "").strip()
-            if len(candidate) <= 55:
-                return candidate
+        raw_lines = f.readlines()
+
+    # Try ### convention first
+    hash_count = 0
+    for line in raw_lines:
+        if line.strip().startswith("###"):
+            hash_count += 1
+        else:
             break
+
+    if hash_count > 0:
+        parts = []
+        for i in range(hash_count):
+            parts.append(raw_lines[i].strip().replace("###", "", 1).strip())
+        title = parts[0]
+        desc = "\n\n".join(parts[1:]) if len(parts) > 1 else ""
+        return (title, desc, hash_count)
+
+    # Try Mojo module-level docstring convention
+    if raw_lines and raw_lines[0].strip().startswith('"""'):
+        title_line = None
+        doc_lines = []
+        content_start = 0
+        first = raw_lines[0].strip()
+
+        if len(first) > 3:
+            # Title on same line as opening """
+            title_line = first[3:].strip()
+            if first.endswith('"""') and len(first) > 3:
+                whole = first[3:-3].strip()
+                parts = whole.split("\n", 1)
+                title = parts[0]
+                desc = parts[1].strip() if len(parts) > 1 else ""
+                return (title, desc, 1)
+            content_start = 1
+        else:
+            content_start = 1
+
+        for i in range(content_start, len(raw_lines)):
+            s = raw_lines[i].strip()
+            if s == '"""':
+                desc = "\n".join(doc_lines).strip()
+                return (title_line or "", desc, i + 1)
+            if title_line is None:
+                title_line = s
+            else:
+                doc_lines.append(raw_lines[i].rstrip())
+
+        desc = "\n".join(doc_lines).strip()
+        return (title_line or "", desc, len(raw_lines))
+
+    # No headers found
+    return ("", "", 0)
+
+
+def read_mojo_title(filepath):
+    """Wrapper for backward compatibility. Returns the title from a .mojo file."""
+    title, _, _ = parse_mojo_headers(filepath)
+    if title:
+        return title
     stem = filepath.stem
     return stem.replace("_", " ").replace("-", " ").title()
 
 
 def read_mojo_description(filepath):
-    extras = []
-    with open(filepath) as f:
-        for line in f:
-            if line.strip().startswith("###"):
-                extras.append(line.strip().replace("###", "").strip())
-    return "\n\n".join(extras[1:]) if len(extras) > 1 else ""
-
-
-def strip_initial_hash3(lines):
-    start = 0
-    while start < len(lines) and lines[start].strip().startswith("###"):
-        start += 1
-    return lines[start:]
+    """Wrapper for backward compatibility. Returns the description."""
+    _, desc, _ = parse_mojo_headers(filepath)
+    return desc
 
 
 def mojo_to_src_rel(mojo_path):
@@ -74,14 +127,15 @@ def mojo_to_src_rel(mojo_path):
 
 
 def generate_md_content(mojo_path):
-    title = read_mojo_title(mojo_path)
-    desc = read_mojo_description(mojo_path)
+    title, desc, header_count = parse_mojo_headers(mojo_path)
+    if not title:
+        title = mojo_path.stem.replace("_", " ").replace("-", " ").title()
     rel_path = mojo_path.relative_to(ROOT)
     github_url = f"{GITHUB_REPO}/blob/main/{rel_path}"
 
     with open(mojo_path) as f:
         source_lines = f.readlines()
-    code = "".join(strip_initial_hash3(source_lines)).strip()
+    code = "".join(source_lines[header_count:]).strip()
 
     lines = [f"# {title}"]
     if desc:

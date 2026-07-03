@@ -37,10 +37,10 @@
             const path_to_root = "";
             const default_light_theme = "navy";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-71c92125.js";
+            window.path_to_searchindex_js = "searchindex-72f5a94b.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-672cac93.js"></script>
+        <script src="toc-14a10e04.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -199,13 +199,10 @@
 <hr>
 <p>Full source on <a href="https://github.com/ratulb/mojo_programming">GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="two-sum"><a class="header" href="#two-sum">Two Sum</a></h1>
-<pre><code class="language-python"># Two Sum Problem:
-# Given an array of integers `nums` and a target value `target`,
-# return the indices of two numbers such that they add up to `target`.
-
-
-def two_sum(nums: List[Int], target: Int) -&gt; Tuple[Int, Int]:
+<h1 id="two-sum-problem"><a class="header" href="#two-sum-problem">Two Sum Problem:</a></h1>
+<p>Given an array of integers <code>nums</code> and a target value <code>target</code>,
+return the indices of two numbers such that they add up to <code>target</code>.</p>
+<pre><code class="language-python">def two_sum(nums: List[Int], target: Int) -&gt; Tuple[Int, Int]:
     # Default return value: (-1, -1) if no valid pair is found
     indices = (-1, -1)
 
@@ -244,22 +241,39 @@ def two_sum_costly(nums: List[Int], target: Int) -&gt; Tuple[Int, Int]:
                 return (i, j)
     return (-1, -1)
 
+from std.testing import assert_true, TestSuite
 
-def main():
+def test_sum() raises:
     nums = [2, 7, 11, 15]
     target = 9
+
     indices = two_sum(nums, target)
-    debug_assert(indices[0] == 0 and indices[1] == 1, "Assertion failed")
+    assert_true(indices[0] == 0 and indices[1] == 1, "Assertion failed")
+
+    indices = two_sum_costly(nums, target)
+    assert_true(indices[0] == 0 and indices[1] == 1, "Assertion failed")
+
     target = 18
+
     indices = two_sum(nums, target)
-    debug_assert(indices[0] == 1 and indices[1] == 2, "Assertion failed")
+    assert_true(indices[0] == 1 and indices[1] == 2, "Assertion failed")
+
+    indices = two_sum_costly(nums, target)
+    assert_true(indices[0] == 1 and indices[1] == 2, "Assertion failed")
+
     target = 100
     indices = two_sum(nums, target)
-    debug_assert(indices[0] == -1 and indices[1] == -2, "Assertion failed")
+    assert_true(indices[0] == -1 and indices[1] == -1, "Assertion failed")
+
+    indices = two_sum_costly(nums, target)
+    assert_true(indices[0] == -1 and indices[1] == -1, "Assertion failed")
+
+def main() raises:
+    TestSuite.discover_tests[__functions_in_module()]().run()
 </code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/two_sum.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="3sum"><a class="header" href="#3sum">3Sum</a></h1>
+<h1 id="find-all-unique-triplets-a-b-c-in-the-array-such-that-a--b--c--0"><a class="header" href="#find-all-unique-triplets-a-b-c-in-the-array-such-that-a--b--c--0">Find all unique triplets [a, b, c] in the array such that a + b + c = 0.</a></h1>
 <p>This solution also returns indices of the triplets along with their values</p>
 <pre><code class="language-python">import random
 from collections import InlineArray
@@ -347,7 +361,7 @@ def main():
 </code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/3sum.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="4sum"><a class="header" href="#4sum">4Sum</a></h1>
+<h1 id="given-an-array-nums-return-all-unique-quadruplets-a-b-c-d-such-that-a--b--c--d--target-and-all-indices-are-distinct"><a class="header" href="#given-an-array-nums-return-all-unique-quadruplets-a-b-c-d-such-that-a--b--c--d--target-and-all-indices-are-distinct">Given an array nums, return all unique quadruplets [a, b, c, d] such that a + b + c + d == target and all indices are distinct.</a></h1>
 <pre><code class="language-python">from collections import InlineArray
 
 comptime Quadruplet = InlineArray[Int, 4]
@@ -558,7 +572,7 @@ def main():
 </code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/max_subarray_product.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="water-container-max-area"><a class="header" href="#water-container-max-area">Water Container Max Area</a></h1>
+<h1 id="given-an-array-of-line-heights-find-the-two-lines-that-form-the-container-holding-the-most-water"><a class="header" href="#given-an-array-of-line-heights-find-the-two-lines-that-form-the-container-holding-the-most-water">Given an array of line heights, find the two lines that form the container holding the most water.</a></h1>
 <pre><code class="language-python">def max_area(heights: List[Int]) -&gt; Int:
     # If there are fewer than 2 lines, no container can be formed
     if len(heights) &lt; 2:
@@ -1430,7 +1444,7 @@ def main():
 </code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/search_sorted_rotated_arr.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="search-sorted-rotated-arr-with-duplicates"><a class="header" href="#search-sorted-rotated-arr-with-duplicates">Search Sorted Rotated Arr With Duplicates</a></h1>
+<h1 id="search-in-a-rotated-sorted-array-that-may-contain-duplicates"><a class="header" href="#search-in-a-rotated-sorted-array-that-may-contain-duplicates">Search in a rotated sorted array that may contain duplicates</a></h1>
 <p>Generic function to find the index of a target element in a rotated sorted list.</p>
 <p>Works for any type that implements ComparableCollectionElement (e.g., Int, Float, etc.).</p>
 <pre><code class="language-python"># Define an alias for types that support comparison operations.
@@ -1971,7 +1985,7 @@ def main() raises:
 </code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/codes/combination_sum.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="num-ones"><a class="header" href="#num-ones">Num Ones</a></h1>
+<h1 id="count-the-number-of-set-bits-hamming-weight-in-the-binary-representation-of-a-positive-integer-n"><a class="header" href="#count-the-number-of-set-bits-hamming-weight-in-the-binary-representation-of-a-positive-integer-n">Count the number of set bits (Hamming weight) in the binary representation of a positive integer n.</a></h1>
 <pre><code class="language-python">def count_bits(mut num: Int) -&gt; Int:
 	result = 0
 	while num:
@@ -2643,9 +2657,7 @@ def main():
 </code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/add_10_2dlayout.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="add-10-1"><a class="header" href="#add-10-1">Add 10</a></h1>
-<p>Implement a kernel that adds 10 to each position of vector a and stores it in vector out.</p>
-<p>More threads than data — guard against out-of-bounds access.</p>
+<h1 id="add-10-with-guard"><a class="header" href="#add-10-with-guard">Add 10 With Guard</a></h1>
 <pre><code class="language-python">### Add 10
 ### Implement a kernel that adds 10 to each position of vector a and stores it in vector out.
 ### More threads than data — guard against out-of-bounds access.
@@ -3666,7 +3678,7 @@ def ndarray_ptr[
 </code></pre>
 <p><a href="https://github.com/ratulb/mojo_programming/blob/main/gpu/matmul_thread_per_output_cell.mojo">View source on GitHub</a></p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="matmul-thread-per-output-cell-vectorized"><a class="header" href="#matmul-thread-per-output-cell-vectorized">Matmul Thread Per Output Cell Vectorized</a></h1>
+<h1 id="use-one-one-gpu-thread-for-each-column-of-the-output-matrix"><a class="header" href="#use-one-one-gpu-thread-for-each-column-of-the-output-matrix">Use one one GPU thread for each column of the output matrix</a></h1>
 <p>Uses shared memory via stack_allocation</p>
 <pre><code class="language-python">from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim

@@ -10,6 +10,9 @@ src/
 # macOS
 .DS_Store
 
+# Editor swap files
+*.swp
+
 # Python
 __pycache__/
 *.egg-info

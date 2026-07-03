@@ -1,7 +1,7 @@
-# Two Sum Problem:
-# Given an array of integers `nums` and a target value `target`,
-# return the indices of two numbers such that they add up to `target`.
-
+"""Two Sum Problem:
+Given an array of integers `nums` and a target value `target`,
+return the indices of two numbers such that they add up to `target`.
+"""
 
 def two_sum(nums: List[Int], target: Int) -> Tuple[Int, Int]:
     # Default return value: (-1, -1) if no valid pair is found
@@ -42,15 +42,32 @@ def two_sum_costly(nums: List[Int], target: Int) -> Tuple[Int, Int]:
                 return (i, j)
     return (-1, -1)
 
+from std.testing import assert_true, TestSuite
 
-def main():
+def test_sum() raises:
     nums = [2, 7, 11, 15]
     target = 9
+
     indices = two_sum(nums, target)
-    debug_assert(indices[0] == 0 and indices[1] == 1, "Assertion failed")
+    assert_true(indices[0] == 0 and indices[1] == 1, "Assertion failed")
+
+    indices = two_sum_costly(nums, target)
+    assert_true(indices[0] == 0 and indices[1] == 1, "Assertion failed")
+
     target = 18
+
     indices = two_sum(nums, target)
-    debug_assert(indices[0] == 1 and indices[1] == 2, "Assertion failed")
+    assert_true(indices[0] == 1 and indices[1] == 2, "Assertion failed")
+
+    indices = two_sum_costly(nums, target)
+    assert_true(indices[0] == 1 and indices[1] == 2, "Assertion failed")
+
     target = 100
     indices = two_sum(nums, target)
-    debug_assert(indices[0] == -1 and indices[1] == -2, "Assertion failed")
+    assert_true(indices[0] == -1 and indices[1] == -1, "Assertion failed")
+
+    indices = two_sum_costly(nums, target)
+    assert_true(indices[0] == -1 and indices[1] == -1, "Assertion failed")
+
+def main() raises:
+    TestSuite.discover_tests[__functions_in_module()]().run()

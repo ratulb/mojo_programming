@@ -42,7 +42,8 @@
 
 ## Doc generation conventions
 
-- The first `###` line becomes the page title, subsequent `###` lines become the description (joined as paragraphs). Everything after the `###` block is shown as code.
+- The first `###` line becomes the page title, subsequent `###` lines become the description (joined as paragraphs). Everything after the `###` block is shown as code. This is a **repo-specific convention** — Mojo uses `#` for comments and `"""..."""` for docstrings; `###` is just `#` + `##` to the compiler and is ignored.
+- Mojo module-level `"""..."""` docstrings are also supported: the first line inside the docstring is the title, subsequent lines form the description.
 - When adding a new `.mojo` file, add its stem (without extension) to the appropriate category in `categories.yml`.
 - Code fences in generated docs use ` ```python ` (historic workaround — mdBook's highlighter didn't support Mojo at the time).
 - The site auto-deploys to GitHub Pages on push to `main` (via `.github/workflows/github-pages.yml`).
