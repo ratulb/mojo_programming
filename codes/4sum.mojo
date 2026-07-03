@@ -13,7 +13,9 @@ Extends the 3SUM O(n²) approach by adding one more outer loop:
 4. If the sum is too low, advance `low`; if too high, retreat `high`.
 5. Skip duplicate values at both the outer loops and the pointer level to avoid repeated results.
 
-This runs in O(n³) time and O(log n) space (for sorting).
+**Why O(n³)?** Two nested loops (`i` and `j`) each contribute O(n), and the two-pointer pass on the remainder is O(n) — totaling O(n · n · n) = O(n³) in the worst case. This is one polynomial degree above 3SUM because k-sum problems generalize to O(n^(k-1)) with this approach.
+
+**Why O(log n)?** Sorting the array in-place uses O(log n) stack space for the sort implementation (e.g. quicksort recursion). No additional data structures are allocated beyond a few index variables.
 """
 
 comptime Quadruplet = Tuple[Int, Int, Int, Int]
