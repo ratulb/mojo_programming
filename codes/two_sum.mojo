@@ -2,6 +2,19 @@
 Two Sum Problem
 Given an array of integers `nums` and a target value `target`,
 return the indices of two numbers such that they add up to `target`.
+
+**Approach: Hash Map (One Pass)**
+
+The brute-force O(n²) approach checks every pair. We can do better:
+
+1. Iterate through the array once.
+2. For each element, compute `diff = target - nums[i]`.
+3. If `diff` exists in the hash map, we've found the pair — return `(map[diff], i)`.
+4. Otherwise, store `nums[i] → i` in the map and continue.
+
+This gives O(n) time and O(n) space — optimal for this problem.
+
+A naive O(n²) version (`two_sum_costly`) is also included for comparison.
 """
 
 def two_sum(nums: List[Int], target: Int) -> Tuple[Int, Int]:
