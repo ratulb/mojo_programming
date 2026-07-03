@@ -4,8 +4,12 @@
 # magic environment (legacy)
 .magic
 
-# Generated site content (mdBook source)
+# Generated site content (mdBook source + output)
 src/
+docs/
+
+# Stray
+ripgrep.deb
 
 # macOS
 .DS_Store
