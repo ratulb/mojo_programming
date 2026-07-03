@@ -186,14 +186,9 @@ def generate_summary(categories):
         if not children:
             continue
 
-        # Use first child as the parent page link
-        first_title, first_rel = children[0]
-        lines.append(f"- [{cat_name}]({first_rel})")
+        lines.append(f"- [{cat_name}]()")
         for child_title, child_rel in children:
-            indent = "  "
-            if child_rel == first_rel:
-                continue
-            lines.append(f"{indent}- [{child_title}]({child_rel})")
+            lines.append(f"  - [{child_title}]({child_rel})")
     return "\n".join(lines) + "\n"
 
 
