@@ -1,5 +1,7 @@
-### Use one one GPU thread for each column of the output matrix
-### Uses shared memory via stack_allocation
+"""
+Use one one GPU thread for each column of the output matrix
+Uses shared memory via stack_allocation
+"""
 
 from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim

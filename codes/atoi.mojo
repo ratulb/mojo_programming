@@ -1,5 +1,7 @@
-### String to Integer (atoi)
-### Implement the atoi(string s) function, which converts a string to a signed integer.
+"""
+String to Integer (atoi)
+Implement the atoi(string s) function, which converts a string to a signed integer.
+"""
 
 
 def atoi(s: String) raises -> Int:

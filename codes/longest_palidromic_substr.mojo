@@ -1,5 +1,7 @@
-### Longest Palindromic Substring
-### Given a string s, return the longest palindromic substring therein
+"""
+Longest Palindromic Substring
+Given a string s, return the longest palindromic substring therein
+"""
 
 
 def longest_palindrome(s: String) -> String:

@@ -1,7 +1,9 @@
-### Remove duplicates from sorted array
-### This implementation mutates the array in place.
-### Post de-duplication, only the unique elements are retained.
-### After the last unique element, all entries which have been shifted are discarded.
+"""
+Remove duplicates from sorted array
+This implementation mutates the array in place.
+Post de-duplication, only the unique elements are retained.
+After the last unique element, all entries which have been shifted are discarded.
+"""
 
 
 def remove_duplicates(mut nums: List[Int]) -> None:

@@ -1,5 +1,7 @@
-### Add constant to 2D Layout tensor
-### Implement a kernel that adds 10 to each position of 2D LayoutTensor a and stores it in 2D LayoutTensor out.
+"""
+Add constant to 2D Layout tensor
+Implement a kernel that adds 10 to each position of 2D LayoutTensor a and stores it in 2D LayoutTensor out.
+"""
 
 from gpu.host import DeviceContext
 from gpu import thread_idx

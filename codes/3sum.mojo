@@ -1,5 +1,7 @@
-### Find all unique triplets [a, b, c] in the array such that a + b + c = 0.
-### This solution also returns indices of the triplets along with their values
+"""
+Find all unique triplets [a, b, c] in the array such that a + b + c = 0.
+This solution also returns indices of the triplets along with their values
+"""
 
 import random
 from collections import InlineArray

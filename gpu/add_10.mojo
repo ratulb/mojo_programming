@@ -1,5 +1,7 @@
-### Add 10
-### Implement a kernel that adds 10 to each position of vector a and stores it in vector out.
+"""
+Add 10
+Implement a kernel that adds 10 to each position of vector a and stores it in vector out.
+"""
 
 from gpu.host import DeviceContext
 from memory import UnsafePointer

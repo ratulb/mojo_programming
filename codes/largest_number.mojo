@@ -1,5 +1,7 @@
-### Largest Number
-### Arrange non-negative integers to form the largest possible number and return it as a string.
+"""
+Largest Number
+Arrange non-negative integers to form the largest possible number and return it as a string.
+"""
 
 
 def largest_number(nums: List[Int]) raises -> String:

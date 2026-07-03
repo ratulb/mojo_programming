@@ -1,5 +1,7 @@
-### Interleaving String
-### Determine if s3 is an interleaving of s1 and s2.
+"""
+Interleaving String
+Determine if s3 is an interleaving of s1 and s2.
+"""
 
 
 def is_interleave(s1: String, s2: String, s3: String) -> Bool:

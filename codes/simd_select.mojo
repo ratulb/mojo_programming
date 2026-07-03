@@ -1,6 +1,8 @@
-### SIMD Select
-### Select based on a SIMD (Single Instruction, Multiple Data) mask
-### This example demonstrates how to use SIMD.select() to perform element-wise conditional selection between two SIMD vectors based on a boolean mask.
+"""
+SIMD Select
+Select based on a SIMD (Single Instruction, Multiple Data) mask
+This example demonstrates how to use SIMD.select() to perform element-wise conditional selection between two SIMD vectors based on a boolean mask.
+"""
 
 
 from std.testing import assert_true

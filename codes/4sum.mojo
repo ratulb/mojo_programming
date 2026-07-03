@@ -1,4 +1,4 @@
-### Given an array nums, return all unique quadruplets [a, b, c, d] such that a + b + c + d == target and all indices are distinct.
+"""Given an array nums, return all unique quadruplets [a, b, c, d] such that a + b + c + d == target and all indices are distinct."""
 
 from collections import InlineArray
 

@@ -1,5 +1,7 @@
-### Last word length
-### Return the length of the last word in a given space-separated string
+"""
+Last word length
+Return the length of the last word in a given space-separated string
+"""
 
 
 def last_word_length(s: String) -> Int:

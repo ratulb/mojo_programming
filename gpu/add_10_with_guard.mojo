@@ -1,7 +1,8 @@
-
-### Add 10
-### Implement a kernel that adds 10 to each position of vector a and stores it in vector out.
-### More threads than data — guard against out-of-bounds access.
+"""
+Add 10
+Implement a kernel that adds 10 to each position of vector a and stores it in vector out.
+More threads than data — guard against out-of-bounds access.
+"""
 
 from gpu.host import DeviceContext
 from memory import UnsafePointer

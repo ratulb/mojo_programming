@@ -1,5 +1,7 @@
-### Merge Itervals
-### Merge overlapping intervals
+"""
+Merge Itervals
+Merge overlapping intervals
+"""
 
 
 @parameter

@@ -1,5 +1,7 @@
-### Merge nums2 into nums1 (in-place)
-### Given two sorted arrays nums1 (size m + n, with m valid elements followed by n zeros) and nums2 (size n), merge them in-place into nums1 as one sorted array.
+"""
+Merge nums2 into nums1 (in-place)
+Given two sorted arrays nums1 (size m + n, with m valid elements followed by n zeros) and nums2 (size n), merge them in-place into nums1 as one sorted array.
+"""
 
 
 def merge(mut nums1: List[Int], nums2: List[Int]):

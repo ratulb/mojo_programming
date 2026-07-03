@@ -1,5 +1,7 @@
-### Find First/Last
-### Find first and last index of a target value in a sorted array
+"""
+Find First/Last
+Find first and last index of a target value in a sorted array
+"""
 
 
 def find_first_last(arr: List[Int], target: Int) -> (Int, Int):

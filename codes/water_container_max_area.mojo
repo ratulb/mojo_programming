@@ -1,4 +1,4 @@
-### Given an array of line heights, find the two lines that form the container holding the most water.
+"""Given an array of line heights, find the two lines that form the container holding the most water."""
 
 
 def max_area(heights: List[Int]) -> Int:

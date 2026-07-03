@@ -1,5 +1,7 @@
-### Histogram
-### Program to compute histogram of a 1D array
+"""
+Histogram
+Program to compute histogram of a 1D array
+"""
 
 from gpu.host import DeviceContext, HostBuffer, DeviceBuffer
 from gpu import thread_idx, block_idx, block_dim

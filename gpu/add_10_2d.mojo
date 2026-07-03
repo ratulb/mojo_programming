@@ -1,5 +1,7 @@
-### Add a constant 10
-### Implement a kernel that adds 10 to each position of 2d matrix a and stores it in out 2d matrix.
+"""
+Add a constant 10
+Implement a kernel that adds 10 to each position of 2d matrix a and stores it in out 2d matrix.
+"""
 
 
 from gpu.host import DeviceContext

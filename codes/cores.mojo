@@ -1,5 +1,7 @@
-### Check device core
-### Check physical and logical cores of the device
+"""
+Check device core
+Check physical and logical cores of the device
+"""
 
 from sys import num_physical_cores, num_logical_cores
 

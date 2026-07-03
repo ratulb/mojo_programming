@@ -1,5 +1,7 @@
-### Dumb matrix multiplication
-### Simulate the CPU-style triple for-loop truly dumb matrix multiplication
+"""
+Dumb matrix multiplication
+Simulate the CPU-style triple for-loop truly dumb matrix multiplication
+"""
 
 from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim

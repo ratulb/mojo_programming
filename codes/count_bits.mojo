@@ -1,5 +1,7 @@
-### Count 1s For Each Entry
-### Return an array where each element at index i (0 ≤ i ≤ n) is the number of 1's in the binary representation of i.
+"""
+Count 1s For Each Entry
+Return an array where each element at index i (0 ≤ i ≤ n) is the number of 1's in the binary representation of i.
+"""
 
 
 def count_bits(n: Int) -> List[Int]:

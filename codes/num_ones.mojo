@@ -1,4 +1,4 @@
-### Count the number of set bits (Hamming weight) in the binary representation of a positive integer n.
+"""Count the number of set bits (Hamming weight) in the binary representation of a positive integer n."""
 
 def count_bits(mut num: Int) -> Int:
 	result = 0

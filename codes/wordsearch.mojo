@@ -1,5 +1,7 @@
-### Word Search
-### Check if a word can be formed in a grid by sequentially adjacent (non-repeating) horizontal or vertical letters.
+"""
+Word Search
+Check if a word can be formed in a grid by sequentially adjacent (non-repeating) horizontal or vertical letters.
+"""
 
 from collections import Set
 

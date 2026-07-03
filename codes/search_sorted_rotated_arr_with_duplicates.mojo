@@ -1,6 +1,8 @@
-### Search in a rotated sorted array that may contain duplicates
-### Generic function to find the index of a target element in a rotated sorted list.
-### Works for any type that implements ComparableCollectionElement (e.g., Int, Float, etc.).
+"""
+Search in a rotated sorted array that may contain duplicates
+Generic function to find the index of a target element in a rotated sorted list.
+Works for any type that implements ComparableCollectionElement (e.g., Int, Float, etc.).
+"""
 
 # Define an alias for types that support comparison operations.
 comptime ItemType = ComparableCollectionElement

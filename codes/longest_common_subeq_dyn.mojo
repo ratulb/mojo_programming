@@ -1,5 +1,7 @@
-### Longest Common Subsequence Dynamic
-### Return the length of the longest common subsequence between two strings, or 0 if none exists
+"""
+Longest Common Subsequence Dynamic
+Return the length of the longest common subsequence between two strings, or 0 if none exists
+"""
 
 
 def longest_subseq(mut text1: String, mut text2: String) raises -> Int:

@@ -1,5 +1,7 @@
-### Combination sum
-### Find all unique combinations of numbers from candidates (reusable unlimited times) that sum to target.
+"""
+Combination sum
+Find all unique combinations of numbers from candidates (reusable unlimited times) that sum to target.
+"""
 
 
 def combination_sum(candidates: List[Int], target: Int) -> List[List[Int]]:

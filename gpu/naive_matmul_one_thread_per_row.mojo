@@ -1,5 +1,7 @@
-### Dumb matrix multiplication
-### Simulate the CPU-style matrix multiplication with 1 GPU thread per row
+"""
+Dumb matrix multiplication
+Simulate the CPU-style matrix multiplication with 1 GPU thread per row
+"""
 
 from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim

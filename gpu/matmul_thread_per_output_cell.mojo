@@ -1,5 +1,7 @@
-### Dumb matrix multiplication
-### Use one one GPU thread for each column of the output matrix
+"""
+Dumb matrix multiplication
+Use one one GPU thread for each column of the output matrix
+"""
 
 from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim

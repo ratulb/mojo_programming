@@ -1,5 +1,7 @@
-### Matrix multiplication 1 GPU thread per output column
-### Simulate the CPU-style dumb matrix multiplication 1 thread per output column
+"""
+Matrix multiplication 1 GPU thread per output column
+Simulate the CPU-style dumb matrix multiplication 1 thread per output column
+"""
 
 from gpu.host import DeviceContext, HostBuffer
 from gpu import thread_idx, block_idx, block_dim
