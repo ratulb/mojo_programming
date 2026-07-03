@@ -1,4 +1,5 @@
-"""Two Sum Problem:
+"""
+Two Sum Problem
 Given an array of integers `nums` and a target value `target`,
 return the indices of two numbers such that they add up to `target`.
 """
