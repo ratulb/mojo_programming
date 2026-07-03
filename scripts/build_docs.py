@@ -40,69 +40,62 @@ def find_mojo_file(stem):
 def parse_mojo_headers(filepath):
     """Extract (title, description, header_line_count) from a .mojo file.
 
-    Supports two formats:
-      1. ### Title           (repo convention, preferred)
-         ### Description
-      2. \"\"\"Title            (Mojo docstring convention)
-         Description
-         \"\"\"
+    Reads a Mojo module-level docstring (triple quotes):
+      - first non-empty line inside is the title
+      - remaining lines form the description
     Returns (title, description, header_line_count). header_line_count is the
-    number of lines at the top of the file consumed by the header block.
+    number of lines consumed by the docstring block.
     """
     with open(filepath) as f:
         raw_lines = f.readlines()
 
-    # Try ### convention first
-    hash_count = 0
-    for line in raw_lines:
-        if line.strip().startswith("###"):
-            hash_count += 1
-        else:
-            break
+    if not raw_lines or not raw_lines[0].strip().startswith('"""'):
+        return ("", "", 0)
 
-    if hash_count > 0:
-        parts = []
-        for i in range(hash_count):
-            parts.append(raw_lines[i].strip().replace("###", "", 1).strip())
-        title = parts[0]
-        desc = "\n\n".join(parts[1:]) if len(parts) > 1 else ""
-        return (title, desc, hash_count)
+    doc_lines = []
+    i = 1  # skip opening """
+    if len(raw_lines[0].strip()) > 3:
+        # title on same line as opening """
+        rest = raw_lines[0].strip()[3:]
+        if rest.endswith('"""'):
+            rest = rest[:-3]
+        if rest:
+            doc_lines.append(rest)
+        # if it also closed on the same line, we're done
+        if raw_lines[0].strip().endswith('"""'):
+            return _docstring_result(doc_lines, 1)
+    elif raw_lines[0].strip() == '"""':
+        pass  # opening on its own line
+    else:
+        return ("", "", 0)
 
-    # Try Mojo module-level docstring convention
-    if raw_lines and raw_lines[0].strip().startswith('"""'):
-        title_line = None
-        doc_lines = []
-        content_start = 0
-        first = raw_lines[0].strip()
+    for j in range(i, len(raw_lines)):
+        s = raw_lines[j].strip()
+        if s == '"""':
+            return _docstring_result(doc_lines, j + 1)
+        doc_lines.append(raw_lines[j].rstrip())
 
-        if len(first) > 3:
-            # Title on same line as opening """
-            title_line = first[3:].strip()
-            if first.endswith('"""') and len(first) > 3:
-                whole = first[3:-3].strip()
-                parts = whole.split("\n", 1)
-                title = parts[0]
-                desc = parts[1].strip() if len(parts) > 1 else ""
-                return (title, desc, 1)
-            content_start = 1
-        else:
-            content_start = 1
+    return _docstring_result(doc_lines, len(raw_lines))
 
-        for i in range(content_start, len(raw_lines)):
-            s = raw_lines[i].strip()
-            if s == '"""':
-                desc = "\n".join(doc_lines).strip()
-                return (title_line or "", desc, i + 1)
-            if title_line is None:
-                title_line = s
+
+def _docstring_result(lines, line_count):
+    """Split docstring lines into (title, description, line_count).
+
+    First non-empty line is the title; the rest is the description.
+    """
+    title = ""
+    desc_lines = []
+    for l in lines:
+        if not title:
+            stripped = l.strip()
+            if stripped:
+                title = stripped
             else:
-                doc_lines.append(raw_lines[i].rstrip())
-
-        desc = "\n".join(doc_lines).strip()
-        return (title_line or "", desc, len(raw_lines))
-
-    # No headers found
-    return ("", "", 0)
+                desc_lines.append(l)
+        else:
+            desc_lines.append(l)
+    desc = "\n".join(desc_lines).strip()
+    return (title, desc, line_count)
 
 
 def read_mojo_title(filepath):
