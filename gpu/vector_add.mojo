@@ -1,4 +1,4 @@
-### Vector Add (GPU + CPU)
+### Vector Add(Flexible Kernel with Grid-Stride Loop)
 ### Demonstrates a vector addition kernel with grid-stride loops, SIMD vectorization,
 ### and loop unrolling — runnable on both CPU and GPU (when available).
 

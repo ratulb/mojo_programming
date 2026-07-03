@@ -62,7 +62,7 @@ Mojo Concepts:
   - simd_select
   - cores
 
-GPU Puzzles:
+GPU programming:
   - add_10
   - add_10_2d
   - add_10_2dlayout
