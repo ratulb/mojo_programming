@@ -1,90 +1,57 @@
 # AGENTS.md
 
-⚠️ **Outdated project.** Uses the legacy `magic`/`mojoproject.toml` system from early Mojo (max-nightly channel). These commands will not work with current Mojo tooling. This repo is kept as a historical learning reference.
+⚠️ **Historical learning repo.** Originally built with the legacy `magic`/`mojoproject.toml` system (max-nightly channel). Now uses **pixi** for Mojo tooling. Old `magic` commands will not work.
 
-## Multi-project layout
+## Toolchain
 
-Each directory with a `mojoproject.toml` was its own `magic` project with a separate environment and lockfile.
+| Tool | Purpose |
+|------|---------|
+| `pixi` | Mojo + Python environment manager (`pixi.toml` / `pixi.lock`) |
+| `mojo` | Mojo compiler (v2024+) |
+| `mdbook` v0.5.3 | Documentation site generator |
+| `python3` + `pyyaml` | Doc generation script |
 
-| Directory | What | Original tool |
-|-----------|------|---------------|
-| `codes/` | LeetCode-style algorithm problems, each in one `.mojo` file. Tests in `codes/test/` | `magic run mojo` |
-| `gpu/` | GPU programming examples (matmul, broadcast, layouts) | `magic run mojo` |
-| `cuda/histogram/` | CUDA histogram example (standalone, still buildable) | `make` (uses `nvcc`) |
+## Commands (run from repo root)
 
-## Original commands (for reference, run from project subdirectory)
+| Task | Command |
+|------|---------|
+| Run a single Mojo file | `pixi run mojo codes/two_sum.mojo` |
+| Run a test file | `pixi run mojo codes/test/test_two_sum.mojo` |
+| Build a binary | `pixi run mojo build codes/two_sum.mojo` |
+| Regenerate docs from `.mojo` files | `python3 scripts/build_docs.py` |
+| Build the mdBook site | `mdbook build` |
+| Regenerate + build | `python3 scripts/build_docs.py && mdbook build` |
+| Preview docs locally | `python3 scripts/build_docs.py && mdbook serve` |
+| Build CUDA histogram | `make -C cuda/histogram` |
 
-- `magic run mojo file.mojo` — run a single Mojo file
-- `magic run mojo build file.mojo` — build a binary
-- `magic run mojo test/test_two_sum.mojo` — run a single test file
-- `make` / `make clean` — build / clean the CUDA histogram (in `cuda/histogram/`)
+## Directory layout
 
-## Testing conventions (historical)
+- `codes/` — LeetCode-style algorithm problems, each in one `.mojo` file. Tests in `codes/test/` (one file per problem).
+- `gpu/` — GPU programming examples (matmul, broadcast, layouts) with `.ipynb` notebooks.
+- `mojo_kernels/` — Mojo GPU kernel examples.
+- `cuda/histogram/` — Standalone CUDA example, buildable with `make` + `nvcc`.
+- `scripts/build_docs.py` — Reads `categories.yml` + `.mojo` files, generates `src/` (mdBook source). `src/` is gitignored.
+- `theme/custom.css` — Greenish gradient styling (committed).
+- `pixi.toml` — Defines `mojo` and `python >=3.12` deps.
 
-- Tests in `codes/test/`, one file per problem (e.g. `test_two_sum.mojo`).
-- Tests use `def` (not `fn`) and import with `from <module> import *`.
-- Assertions from the Mojo `testing` module (`assert_equal`, `assert_true`, `assert_false`, `assert_raises`).
+## Testing conventions
+
+- Tests in `codes/test/`, import with `from <module> import *`.
+- Use `def` (not `fn`) for test functions.
+- Assertions from `std.testing`: `assert_equal`, `assert_true`, `assert_false`, `assert_raises`.
+
+## Doc generation conventions
+
+- The first `###` line becomes the page title, subsequent `###` lines become the description (joined as paragraphs). Everything after the `###` block is shown as code.
+- When adding a new `.mojo` file, add its stem (without extension) to the appropriate category in `categories.yml`.
+- Code fences in generated docs use ` ```python ` (historic workaround — mdBook's highlighter didn't support Mojo at the time).
+- The site auto-deploys to GitHub Pages on push to `main` (via `.github/workflows/github-pages.yml`).
+
+## Stale / legacy files to ignore
+
+
+- `codes/generate_docs.mojo` — old Mojo-based doc generator; `scripts/build_docs.py` is the active one.
 
 ## Sparse clone
 
 `cuda-clone.sh` checks out only the `cuda/` folder via git sparse-checkout.
-
-## Current architecture
-
-The project uses mdBook for documentation (migrated from MkDocs Material).
-
-### Project structure
-
-```
-root/
-├── book.toml           # mdBook config (committed)
-├── pixi.toml           # Mojo project config
-├── categories.yml      # Maps .mojo files → left-nav categories
-├── scripts/
-│   └── build_docs.py   # Generates mdBook site from .mojo files
-├── src/                # Generated markdown (gitignored)
-│   ├── SUMMARY.md      # Table of contents (auto-generated)
-│   ├── introduction.md # Landing page
-│   └── codes/ gpu/ ... # Per-category .md files
-├── theme/
-│   └── custom.css      # Greenish gradient styling (committed)
-├── docs/               # Built HTML site (gitignored)
-├── codes/              # Algorithm problem .mojo files
-├── gpu/                # GPU example .mojo files
-└── mojo_kernels/       # Kernel .mojo files
-```
-
-### Commands
-
-| Task | Command |
-|------|---------|
-| Run a Mojo file | `pixi run mojo codes/two_sum.mojo` |
-| Generate site content | `python3 scripts/build_docs.py` |
-| Build site | `mdbook build` |
-| Generate + build | `python3 scripts/build_docs.py && mdbook build` |
-| Preview locally | `python3 scripts/build_docs.py && mdbook serve` |
-| Build CUDA histogram | `make -C cuda/histogram` |
-
-### Conventions
-
-- **`### Title`** and **`### Description`** as lines 1–2 of each `.mojo` file drive the auto-generated docs.
-- When adding a new `.mojo` file, add its stem (without extension) to the appropriate category in `categories.yml`.
-- The site auto-deploys to GitHub Pages on push to `main` via `.github/workflows/github-pages.yml`.
-
-### Docs site
-
-- Built with **mdBook** (v0.5.3), deployed to GitHub Pages.
-- Navy default theme with `theme/custom.css` greenish gradient override.
-- Left nav uses nested SUMMARY.md sections for category browsing.
-- Landing page lists categories with problem counts.
-- Each code page embeds the full source and links back to GitHub.
-- Default-theme: `navy`, preferred-dark-theme: `navy`.
-
-### Gradient CSS decision log
-
-- Palette: `linear-gradient(120deg, #0650b1, rgb(0, 128, 0))`
-- `html` gets the gradient with `background-attachment: fixed`
-- `.sidebar`, `#menu-bar`, `.page-wrapper` — transparent
-- `.content` keeps `var(--bg)` for readability
-- Text on gradient: `#d4d4d8` / `#e6edf3` with `text-shadow`
-- Code blocks keep native dark background

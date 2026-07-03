@@ -57,7 +57,7 @@ def read_mojo_description(filepath):
         for line in f:
             if line.strip().startswith("###"):
                 extras.append(line.strip().replace("###", "").strip())
-    return extras[1] if len(extras) > 1 else ""
+    return "\n\n".join(extras[1:]) if len(extras) > 1 else ""
 
 
 def strip_initial_hash3(lines):
