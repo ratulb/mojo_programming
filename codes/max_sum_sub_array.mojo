@@ -44,10 +44,13 @@ def max_sum_sub_array(nums: List[Int]) -> Int:
     return max_sum
 
 
-def main():
+from std.testing import assert_true
+
+
+def main() raises:
     nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
     max_sum = max_sum_sub_array(nums)
-    debug_assert(max_sum == 6, "Assertion failed")
+    assert_true(max_sum == 6, "Assertion failed")
     nums = [5, 4, -1, 7, 8]
     max_sum = max_sum_sub_array(nums)
-    debug_assert(max_sum == 23, "Assertion failed")
+    assert_true(max_sum == 23, "Assertion failed")
