@@ -133,7 +133,9 @@ def normalize(triplets: List[Triplet]) -> List[Tuple[Int, Int, Int]]:
 
 
 # Remove adjacent duplicates from a sorted list of value-triplets
-def dedup_sorted(vals: List[Tuple[Int, Int, Int]]) -> List[Tuple[Int, Int, Int]]:
+def dedup_sorted(
+    vals: List[Tuple[Int, Int, Int]]
+) -> List[Tuple[Int, Int, Int]]:
     if len(vals) == 0:
         return List[Tuple[Int, Int, Int]]()
     var result = List[Tuple[Int, Int, Int]]()
