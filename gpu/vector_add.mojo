@@ -7,8 +7,8 @@ memory and the ALUs, not the arithmetic itself.  A scalar load/store instruction
 wider instructions — `LDG.E.64`, `LDG.E.128` — that transfer 64 or 128 bits in a
 single op, cutting instruction count by 2-4× and improving throughput.
 
-The NVIDIA blog post "CUDA Pro Tip: Increase Performance with Vectorized Memory
-Access" lays out the basic technique in CUDA C++: cast an `int*` to `int2*` or
+The NVIDIA blog post [CUDA Pro Tip: Increase Performance with Vectorized Memory
+Access](https://developer.nvidia.com/blog/cuda-pro-tip-write-flexible-kernels-grid-stride-loops/) lays out the basic technique in CUDA C++: cast an `int*` to `int2*` or
 `int4*` and the compiler generates the wider loads.  A scalar copy loop that
 processes one element per thread becomes 2× (int2) or 4× (int4) fewer instructions,
 directly raising bandwidth utilisation.  The key requirement is alignment — device
@@ -46,37 +46,37 @@ This Mojo kernel goes one step further.
     Global memory:  [ e0 │ e1 │ e2 │ e3 │ e4 │ e5 │ e6 │ e7 │ ... │ eN ]
                             │
               ┌─────────────┴──────────────────┐
-              │  Grid-stride loop (outer)       │
-              │  thread t starts at             │
-              │  t × CHUNK_SIZE and advances    │
-              │  by grid_dim × block_dim chunks │
+              │  Grid-stride loop (outer)      │
+              │  thread t starts at            │
+              │  t × CHUNK_SIZE and advances   │
+              │  by grid_dim × block_dim chunks│
               └─────────────┬──────────────────┘
                             │
-              ┌─────────────┴──────────────────┐
-              │  CHUNK_SIZE per iteration       │
-              │  ┌──── simd_vectors_per_thread ────┐
-              │  │  vector 0 │ vector 1 │ ...      │
-              │  │ ┌──────┐  ┌──────┐  ┌──────┐   │
-              │  │ │ SIMD │  │ SIMD │  │ SIMD │   │
-              │  │ │ WWWW │  │ WWWW │  │ WWWW │   │
-              │  │ └──────┘  └──────┘  └──────┘   │
-              │  └─────────────────────────────────┘
-              │  Each SIMD block = simd_width elements
-              │  loaded/stored as one unit
-              └─────────────┬──────────────────┘
+              ┌─────────────┴─────────────────────────┐
+              │  CHUNK_SIZE per iteration             │
+              │  ┌──── simd_vectors_per_thread ────┐  │
+              │  │  vector 0 │ vector 1 │ ...      │  │
+              │  │ ┌──────┐  ┌──────┐  ┌──────┐    │  │
+              │  │ │ SIMD │  │ SIMD │  │ SIMD │    │  │
+              │  │ │ WWWW │  │ WWWW │  │ WWWW │    │  │
+              │  │ └──────┘  └──────┘  └──────┘    │  │
+              │  └─────────────────────────────────┘  │
+              │  Each SIMD block = simd_width elements│
+              │  loaded/stored as one unit            │
+              └─────────────┬─────────────────────────┘
                             │
               ┌─────────────┴──────────────────┐
-              │  Wide load / store:             │
-              │  a.load[width=4](i)             │
-              │  → LDG.E.128 (4 × float32)      │
-              │                                 │
-              │  result.store[width=4](i, ...)   │
-              │  → STG.E.128 (4 × float32)      │
-              └─────────────────────────────────┘
+              │  Wide load / store:            │
+              │  a.load[width=4](i)            │
+              │  → LDG.E.128 (4 × float32)     │
+              │                                │
+              │  result.store[width=4](i, ...) │
+              │  → STG.E.128 (4 × float32)     │
+              └────────────────────────────────┘
 
 ━━━ Running ━━━
 
-    pixi run mojo gpu/vector_add.mojo
+    pixi run mojo -I . gpu/vector_add.mojo
 
 The kernel fills two random vectors (or uses a seed for reproducibility), adds
 them on CPU for reference, then on GPU (if one is available), and asserts
