@@ -1,8 +1,86 @@
 """
-Vector Add(Flexible Kernel with Grid-Stride Loop)
-Demonstrates a vector addition kernel with Grid-Stride loops, SIMD vectorization,
-and loop unrolling — runnable on both CPU and GPU (when available).
-See [Grid-stride](https://developer.nvidia.com/blog/cuda-pro-tip-write-flexible-kernels-grid-stride-loops/) loop
+Vectorized Memory Access & SIMD Grid-Stride Add.
+
+Most GPU kernels are bandwidth bound: the bottleneck is moving bytes between global
+memory and the ALUs, not the arithmetic itself.  A scalar load/store instruction
+(`LDG.E` / `STG.E` in CUDA) moves 32 bits per operation.  Modern GPUs also support
+wider instructions — `LDG.E.64`, `LDG.E.128` — that transfer 64 or 128 bits in a
+single op, cutting instruction count by 2-4× and improving throughput.
+
+The NVIDIA blog post "CUDA Pro Tip: Increase Performance with Vectorized Memory
+Access" lays out the basic technique in CUDA C++: cast an `int*` to `int2*` or
+`int4*` and the compiler generates the wider loads.  A scalar copy loop that
+processes one element per thread becomes 2× (int2) or 4× (int4) fewer instructions,
+directly raising bandwidth utilisation.  The key requirement is alignment — device
+memory is naturally aligned to the vector width.
+
+This Mojo kernel goes one step further.
+
+━━━ What this kernel does ━━━
+
+  • Uses Mojo's native SIMD intrinsics (`load[width=N]` / `store[width=N]`) for
+    vectorised memory access.  The SIMD width is auto-detected from the data type
+    (`simd_width_of[dtype]()`), so the code adapts to float32 (width 4), float64
+    (width 2), etc.
+
+  • Each thread processes `simd_vectors_per_thread × simd_width` elements per grid
+    step — a compile-time unrolled block of SIMD vectors.  The blog post stops at
+    one vectorised element per thread per iteration; here a single thread moves
+    16 float32 values at once (e.g. 4 vectors × width 4).
+
+  • A grid-stride outer loop makes the kernel grid-size-agnostic: each thread
+    strides across the array by `grid_dim × block_dim`, so the same kernel works
+    whether you launch 16 blocks or 1600.
+
+  • A scalar tail loop handles leftover elements that don't fill a full SIMD
+    vector, without warping the fast path.
+
+  • Runs on both CPU (`DeviceContext(api="cpu")`) and GPU (when an accelerator
+    is available), comparing results with `assert_almost_equal`.
+
+  • A companion CUDA implementation lives in `gpu/vector_add.cu`, showing the
+    same ideas — float4 vectorised loads and `#pragma unroll` — in native CUDA C++.
+
+━━━ Data-flow diagram ━━━
+
+    Global memory:  [ e0 │ e1 │ e2 │ e3 │ e4 │ e5 │ e6 │ e7 │ ... │ eN ]
+                            │
+              ┌─────────────┴──────────────────┐
+              │  Grid-stride loop (outer)       │
+              │  thread t starts at             │
+              │  t × CHUNK_SIZE and advances    │
+              │  by grid_dim × block_dim chunks │
+              └─────────────┬──────────────────┘
+                            │
+              ┌─────────────┴──────────────────┐
+              │  CHUNK_SIZE per iteration       │
+              │  ┌──── simd_vectors_per_thread ────┐
+              │  │  vector 0 │ vector 1 │ ...      │
+              │  │ ┌──────┐  ┌──────┐  ┌──────┐   │
+              │  │ │ SIMD │  │ SIMD │  │ SIMD │   │
+              │  │ │ WWWW │  │ WWWW │  │ WWWW │   │
+              │  │ └──────┘  └──────┘  └──────┘   │
+              │  └─────────────────────────────────┘
+              │  Each SIMD block = simd_width elements
+              │  loaded/stored as one unit
+              └─────────────┬──────────────────┘
+                            │
+              ┌─────────────┴──────────────────┐
+              │  Wide load / store:             │
+              │  a.load[width=4](i)             │
+              │  → LDG.E.128 (4 × float32)      │
+              │                                 │
+              │  result.store[width=4](i, ...)   │
+              │  → STG.E.128 (4 × float32)      │
+              └─────────────────────────────────┘
+
+━━━ Running ━━━
+
+    pixi run mojo gpu/vector_add.mojo
+
+The kernel fills two random vectors (or uses a seed for reproducibility), adds
+them on CPU for reference, then on GPU (if one is available), and asserts
+element-wise equality within a tolerance.
 """
 
 from std.gpu.host import DeviceContext, HostBuffer, DeviceAttribute
