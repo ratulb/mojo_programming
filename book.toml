@@ -12,3 +12,4 @@ build-dir = "docs"
 additional-css = ["theme/custom.css"]
 default-theme = "navy"
 preferred-dark-theme = "navy"
+fold.enable = true
