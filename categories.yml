@@ -15,6 +15,7 @@ Arrays & Hashing:
   - remove_duplicates_sorted_arr
   - merge_shorted_arr_in_place
   - sum_1d_tensor
+  - rpn
 
 Strings:
   - atoi
