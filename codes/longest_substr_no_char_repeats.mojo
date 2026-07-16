@@ -31,8 +31,9 @@ def len_longest_substr_no_char_repeats(ascii_s: String) raises -> Int:
     """
     var s = ascii_s.as_bytes()
     var n = len(s)
-    if n == 0:
-        return 0
+    if n == 0 or n == 1:
+        # Early return without going thru ceremonies
+        return n
 
     # Seed the window with the first character.
     var seen = Set(s[0])
