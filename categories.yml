@@ -20,6 +20,7 @@ Arrays & Hashing:
 Strings:
   - atoi
   - longest_substr_no_char_repeats
+  - longest_unique_char_subarray
   - gen_all_sub_strings
   - longest_palidromic_substr
   - interleave_string
