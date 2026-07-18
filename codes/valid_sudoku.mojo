@@ -48,6 +48,7 @@ from std.testing import assert_false, assert_true, TestSuite
 #  Validator
 # ═══════════════════════════════════════════════════════════════
 
+
 def valid_sudoku(board: List[List[String]]) -> Bool:
     """Check whether a 9x9 Sudoku board obeys the three validity rules.
 
@@ -103,6 +104,7 @@ def valid_sudoku(board: List[List[String]]) -> Bool:
 
 # ── valid boards ────────────────────────────────────────────
 
+
 def test_valid_example() raises:
     var board: List[List[String]] = [
         ["5", "3", ".", ".", "7", ".", ".", ".", "."],
@@ -150,6 +152,7 @@ def test_full_valid_board() raises:
 
 # ── invalid boards ──────────────────────────────────────────
 
+
 def test_invalid_duplicate_in_row() raises:
     var board: List[List[String]] = [
         ["8", "3", ".", ".", "7", ".", ".", ".", "."],
@@ -195,7 +198,7 @@ def test_invalid_duplicate_in_subbox() raises:
         [".", ".", ".", ".", "8", ".", ".", "7", "9"],
     ]
     # Keep board from example 1 but insert duplicate 3 in top-left sub-box.
-    board[0][1] = String("3")   # already 3 at (1,2), sub-box (0,0)
+    board[0][1] = String("3")  # already 3 at (1,2), sub-box (0,0)
     board[1][2] = String("3")
     assert_false(valid_sudoku(board^))
 
