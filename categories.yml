@@ -16,6 +16,7 @@ Arrays & Hashing:
   - merge_shorted_arr_in_place
   - sum_1d_tensor
   - rpn
+  - group_anagrams
 
 Strings:
   - atoi
