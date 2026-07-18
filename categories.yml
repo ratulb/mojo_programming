@@ -29,6 +29,7 @@ Strings:
   - last_word_length
   - all_anagrams
   - wordsearch
+  - valid_sudoku
 
 Sliding window:
   - min_window_substr
