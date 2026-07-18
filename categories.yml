@@ -17,6 +17,7 @@ Arrays & Hashing:
   - sum_1d_tensor
   - rpn
   - group_anagrams
+  - top_k_freq_elems
 
 Strings:
   - atoi
