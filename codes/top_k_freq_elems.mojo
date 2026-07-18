@@ -88,7 +88,7 @@ def top_k(nums: List[Int], k: Int) -> List[Int]:
     """Top `k` frequent elements via bucket sort.
 
     1. Build a frequency dict.
-    2. Use the frequency as an index into a bucket array (`occurences`).
+    2. Use the frequency as an index into a bucket array (`bucket`).
        A number appearing `f` times is placed in bucket `f`.
     3. Walk buckets from highest frequency downward, collecting elements
        until `k` are gathered.
@@ -106,19 +106,19 @@ def top_k(nums: List[Int], k: Int) -> List[Int]:
     # Bucket array: index = frequency, value = list of elements with that freq.
     # NOTE: `List[List[Int]]` with `fill` shares the inner list across all slots,
     # so we must build each bucket independently to avoid cross-bucket aliasing.
-    var occurences = List[List[Int]](capacity=len(nums) + 1)
+    var bucket = List[List[Int]](capacity=len(nums) + 1)
     for _ in range(len(nums) + 1):
-        occurences.append(List[Int]())
+        bucket.append(List[Int]())
     for item in freqs.items():
         var num = item.key
         var index = item.value
-        occurences[index].append(num)
+        bucket[index].append(num)
 
     var result = List[Int](capacity=k)
 
     # Walk from highest possible frequency down to 1.
-    for right in range(len(occurences) - 1, 0, -1):
-        for n in occurences[right]:
+    for right in range(len(bucket) - 1, 0, -1):
+        for n in bucket[right]:
             result.append(n)
             if len(result) == k:
                 return result^
