@@ -18,6 +18,7 @@ Arrays & Hashing:
   - rpn
   - group_anagrams
   - top_k_freq_elems
+  - longest_consecutive_seq
 
 Strings:
   - atoi
