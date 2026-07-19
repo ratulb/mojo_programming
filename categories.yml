@@ -30,6 +30,7 @@ Strings:
   - all_anagrams
   - wordsearch
   - valid_sudoku
+  - str_encode_decode
 
 Sliding window:
   - min_window_substr
