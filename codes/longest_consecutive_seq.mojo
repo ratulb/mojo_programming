@@ -50,6 +50,10 @@ def longest_consecutive_seq(nums: List[Int]) -> List[Int]:
         # Only start a new sequence if n-1 is absent — otherwise n is
         # part of a block already being handled from a smaller start.
         if n - 1 not in uniques:
+            # If the current longest sequence already starts at `n`,
+            # this block has already been explored — skip redundant work.
+            if longest and longest[0] == n:
+                continue
             var curr = [n]
             var next = n + 1
             while next in uniques:
