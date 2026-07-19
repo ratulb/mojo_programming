@@ -28,7 +28,7 @@ def reverse(s: String) -> String:
     Works on full Unicode codepoints (not raw bytes), so multi-byte
     characters are preserved correctly.
     """
-    var codepoints = List[Codepoint](capacity=s.byte_length())
+    var codepoints = List[Codepoint](capacity=s.count_codepoints())
     for code in s.codepoints():
         codepoints.append(code)
 
