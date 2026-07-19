@@ -32,6 +32,8 @@ Strings:
   - wordsearch
   - valid_sudoku
   - str_encode_decode
+  - reverse_str
+  - reverse_vowels
 
 Sliding window:
   - min_window_substr
