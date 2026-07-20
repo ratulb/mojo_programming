@@ -58,6 +58,7 @@ Dynamic Programming:
   - longest_common_subeq_dyn
   - combination_sum
   - permutation_arr
+  - permutation_str
 
 Bit Manipulation & Math:
   - num_ones
