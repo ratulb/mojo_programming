@@ -6,19 +6,17 @@ is `k[encoded_string]` where the content inside brackets is repeated
 `k` times.  Input is always well-formed; digits appear only as repeat
 counts.  Nested encoding is supported.
 
-**Algorithm** — O(n · k) where k is the repeat factor.
+Two implementations are provided — both O(n · k):
 
-  Use a codepoint stack.  When a `]` is encountered:
-    1. Pop from the stack until `[` is found — this recovers the
-       encoded section (characters are popped in reverse, so we
-       prepend to rebuild the correct order).
-    2. Pop the `[` separator.
-    3. Pop consecutive ASCII digits — these form the repeat count.
-    4. Expand the section `count` times and push the result back
-       onto the stack.
+  • `decode_str` — character stack.  Push codepoints until `]`;
+    unwind the innermost bracket, expand, and push the result
+    back.  Handles nesting naturally because expanded content is
+    available before the next `]` is processed.
 
-  After processing the entire string, the stack contains the fully
-  decoded output.
+  • `decode_str_two_stack` — count + string stacks.  Walk the
+    input with a byte pointer; push (current_string, count) onto
+    stacks at `[`; pop and append count times at `]`.  Avoids
+    unwinding character-by-character from the stack.
 
 Example:
 
@@ -32,16 +30,16 @@ from std.testing import assert_equal, TestSuite
 
 
 # ═══════════════════════════════════════════════════════════════
-#  Implementation
+#  Approach 1 — character stack
 # ═══════════════════════════════════════════════════════════════
 
 def decode_str(s: String) raises -> String:
-    """Decode a `k[encoded_string]` pattern into its expanded form.
+    """Decode using a single codepoint stack.
 
-    Uses a stack-based approach: push codepoints until `]` is found,
-    then unwind the innermost bracket to decode one level.  Nested
-    brackets are handled automatically because the expanded content
-    is pushed back onto the stack before the next `]` is processed.
+    Push characters until `]`.  On `]`, pop back to `[` to recover
+    the section, read the repeat count from the digits before `[`,
+    expand the section, and push the expanded result back onto the
+    stack.  After the full pass the stack holds the decoded string.
     """
     var chars = s.codepoints()
     if len(chars) == 0 or len(chars) == 1:
@@ -82,59 +80,173 @@ def decode_str(s: String) raises -> String:
 
 
 # ═══════════════════════════════════════════════════════════════
+#  Approach 2 — count + string stacks
+# ═══════════════════════════════════════════════════════════════
+
+def decode_str_two_stack(s: String) raises -> String:
+    """Decode using count and string stacks (LeetCode 394 style).
+
+    Walk the input byte-by-byte:
+      • digit → accumulate the full multi-digit number and push it.
+      • `[`  → push the current string onto the stack; reset.
+      • `]`  → pop count and previous string; append current count
+               times; result becomes the new current string.
+      • else → append the byte as a codepoint to the current string.
+    """
+    var bytes = s.as_bytes()
+    var n = len(bytes)
+    if n == 0 or n == 1:
+        return s
+
+    var count_stack = List[Int]()
+    var str_stack = List[String]()
+    var current = String()
+    var i = 0
+    comptime ascii_zero = UInt8(48)
+
+    while i < n:
+        var b = bytes[i]
+
+        if ascii_zero <= b <= UInt8(57):  # '0' … '9'
+            var num = 0
+            while i < n and ascii_zero <= bytes[i] <= UInt8(57):
+                num = num * 10 + Int(bytes[i]) - Int(ascii_zero)
+                i += 1
+            count_stack.append(num)
+
+        elif b == UInt8(Int(Codepoint.ord("["))):
+            str_stack.append(current^)
+            current = String()
+            i += 1
+
+        elif b == UInt8(Int(Codepoint.ord("]"))):
+            var times = count_stack.pop()
+            var prev = str_stack.pop()
+            for _ in range(times):
+                prev += current
+            current = prev^
+            i += 1
+
+        else:
+            current.append(Codepoint(b))
+            i += 1
+
+    return current
+
+
+# ═══════════════════════════════════════════════════════════════
 #  Tests
 # ═══════════════════════════════════════════════════════════════
 
-def test_simple_repeat() raises:
+# ── character-stack approach ────────────────────────────────
+
+def test_cs_simple_repeat() raises:
     assert_equal(decode_str("3[a]"), "aaa")
 
 
-def test_example_1() raises:
+def test_cs_example_1() raises:
     assert_equal(decode_str("3[a]2[bc]"), "aaabcbc")
 
 
-def test_example_2_nested() raises:
+def test_cs_example_2_nested() raises:
     assert_equal(decode_str("3[a2[c]]"), "accaccacc")
 
 
-def test_example_3() raises:
+def test_cs_example_3() raises:
     assert_equal(decode_str("2[abc]3[cd]ef"), "abcabccdcdcdef")
 
 
-def test_single_char_no_repeat() raises:
+def test_cs_single_char_no_repeat() raises:
     assert_equal(decode_str("a"), "a")
 
 
-def test_empty_string() raises:
+def test_cs_empty_string() raises:
     assert_equal(decode_str(""), "")
 
 
-def test_no_brackets() raises:
+def test_cs_no_brackets() raises:
     assert_equal(decode_str("abcdef"), "abcdef")
 
 
-def test_repeat_single_char() raises:
+def test_cs_repeat_single_char() raises:
     assert_equal(decode_str("5[x]"), "xxxxx")
 
 
-def test_double_nesting() raises:
+def test_cs_double_nesting() raises:
     assert_equal(decode_str("2[3[a]]"), "aaaaaa")
 
 
-def test_multiple_groups() raises:
+def test_cs_multiple_groups() raises:
     assert_equal(decode_str("2[a]3[b]4[c]"), "aabbbcccc")
 
 
-def test_trailing_literal() raises:
+def test_cs_trailing_literal() raises:
     assert_equal(decode_str("2[ab]c"), "ababc")
 
 
-def test_leading_literal() raises:
+def test_cs_leading_literal() raises:
     assert_equal(decode_str("x4[y]z"), "xyyyyz")
 
 
-def test_nested_with_literals() raises:
+def test_cs_nested_with_literals() raises:
     assert_equal(decode_str("2[a3[b]c]"), "abbbcabbbc")
+
+
+# ── two-stack approach ──────────────────────────────────────
+
+def test_ts_example_1() raises:
+    assert_equal(decode_str_two_stack("3[a]2[bc]"), "aaabcbc")
+
+
+def test_ts_example_2_nested() raises:
+    assert_equal(decode_str_two_stack("3[a2[c]]"), "accaccacc")
+
+
+def test_ts_example_3() raises:
+    assert_equal(decode_str_two_stack("2[abc]3[cd]ef"), "abcabccdcdcdef")
+
+
+def test_ts_empty_string() raises:
+    assert_equal(decode_str_two_stack(""), "")
+
+
+def test_ts_single_char() raises:
+    assert_equal(decode_str_two_stack("a"), "a")
+
+
+def test_ts_repeat() raises:
+    assert_equal(decode_str_two_stack("5[x]"), "xxxxx")
+
+
+def test_ts_nested() raises:
+    assert_equal(decode_str_two_stack("2[3[a]]"), "aaaaaa")
+
+
+def test_ts_multi_digit_count() raises:
+    assert_equal(decode_str_two_stack("12[a]"), "aaaaaaaaaaaa")
+
+
+def test_ts_large_expansion() raises:
+    assert_equal(decode_str_two_stack("3[ab]"), "ababab")
+
+
+def test_ts_leading_trailing_literals() raises:
+    assert_equal(decode_str_two_stack("x4[y]z"), "xyyyyz")
+
+
+# ── cross-verification ──────────────────────────────────────
+
+def test_both_implementations_agree() raises:
+    var inputs = List[String]()
+    inputs.append(String("3[a]2[bc]"))
+    inputs.append(String("3[a2[c]]"))
+    inputs.append(String("2[abc]3[cd]ef"))
+    inputs.append(String("5[x]"))
+    inputs.append(String("2[3[a]]"))
+    inputs.append(String("x4[y]z"))
+    inputs.append(String("2[a3[b]c]"))
+    for s in inputs:
+        assert_equal(decode_str(s), decode_str_two_stack(s))
 
 
 def main() raises:
