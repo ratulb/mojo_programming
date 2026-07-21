@@ -1,5 +1,5 @@
 """
-Permutations.
+Permutations
 
 Given an array of distinct integers `nums`, return all possible
 permutations.  The answer may be returned in any order.

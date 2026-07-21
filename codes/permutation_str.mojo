@@ -1,5 +1,5 @@
 """
-Permutations of a String.
+Permutations of a String
 
 Given an ASCII string `word`, return all possible permutations of its
 characters.  The answer may be returned in any order.
