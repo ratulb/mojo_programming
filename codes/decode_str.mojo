@@ -43,12 +43,11 @@ def decode_str(s: String) raises -> String:
     brackets are handled automatically because the expanded content
     is pushed back onto the stack before the next `]` is processed.
     """
-    var chars = [code for code in s.codepoints()]
-    var length = len(chars)
-    if length == 0 or length == 1:
+    var chars = s.codepoints()
+    if len(chars) == 0 or len(chars) == 1:
         return s
 
-    var stack = List[Codepoint](capacity=length)
+    var stack = List[Codepoint](capacity=len(chars))
 
     for ch in chars:
         if ch == Codepoint.ord("]"):
