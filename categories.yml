@@ -59,6 +59,7 @@ Dynamic Programming:
   - combination_sum
   - permutation_arr
   - permutation_str
+  - longest_increasing_sub_seq
 
 Bit Manipulation & Math:
   - num_ones
