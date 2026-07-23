@@ -32,6 +32,7 @@ from std.testing import assert_equal, assert_false, assert_true, TestSuite
 #  Implementation
 # ═══════════════════════════════════════════════════════════════
 
+
 def gen_all_subsets(mut nums: List[Int]) -> List[List[Int]]:
     """All subsets of `nums` (power set), with duplicate handling.
 
@@ -39,6 +40,29 @@ def gen_all_subsets(mut nums: List[Int]) -> List[List[Int]]:
     every existing subset by appending the element.  On duplicates,
     only extend subsets created since the previous occurrence to
     avoid generating identical subsets.
+
+    Trace through [1, 2, 2]
+    ┌─┬─────┬───────┬───────────┬──────────────────┬──────────┬─────────────────────────┐
+    │i│nums[│start_i│end before │Subsets extended (│New       │Result after             │
+    │ │i]   │dx     │loop       │j range)          │subsets   │                         │
+    ├─┼─────┼───────┼───────────┼──────────────────┼──────────┼─────────────────────────┤
+    │0│1    │0      │1          │[0..0] → []       │[1]       │[[], [1]]                │
+    ├─┼─────┼───────┼───────────┼──────────────────┼──────────┼─────────────────────────┤
+    │1│2    │0      │2          │[0..1] → [], [1]  │[2], [1,2]│[[], [1], [2], [1,2]]    │
+    ├─┼─────┼───────┼───────────┼──────────────────┼──────────┼─────────────────────────┤
+    │2│2    │end=2  │4          │[2..3] → [2], [1, │[2,2], [1,│[[], [1], [2], [1,2], [2,│
+    │ │     │       │           │2]                │2,2]      │2], [1,2,2]]             │
+    └─┴─────┴───────┴───────────┴──────────────────┴──────────┴─────────────────────────┘
+
+     At i=2 the duplicate 2 is found. start_idx = end = 2 — we only extend subsets at
+     index ≥ 2, i.e. [2] and [1,2], the subsets that were created when the first 2 was
+     processed. We skip [] and [1] because extending them would produce [2] and [1,2]
+     again — exactly the duplicates we want to avoid.
+
+     If we didn't do this and extended all 4 existing subsets at i=2, we'd get [[], [1], [
+     2], [1,2], *[2]*, *[1,2]*, [2,2], [1,2,2]] — 8 entries with [2] and [1,2] appearing
+     twice.
+
     """
     sort(nums)
     var result = List[List[Int]](capacity=2 ** len(nums))
@@ -60,10 +84,10 @@ def gen_all_subsets(mut nums: List[Int]) -> List[List[Int]]:
     return result^
 
 
-
 # ═══════════════════════════════════════════════════════════════
 #  Tests
 # ═══════════════════════════════════════════════════════════════
+
 
 def test_example_with_duplicates() raises:
     var nums: List[Int] = [1, 2, 2]

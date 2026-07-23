@@ -22,33 +22,11 @@ Example:
 from std.testing import assert_equal, assert_false, assert_true, TestSuite
 
 
-# ═══════════════════════════════════════════════════════════════
-#  Helpers
-# ═══════════════════════════════════════════════════════════════
-
-def _backtrack(
-    mut nums: List[Int],
-    start: Int,
-    mut subset: List[Int],
-    mut result: List[List[Int]],
-):
-    """Recursive helper — appends every node of the recursion tree.
-
-    At each call, the current `subset` is a valid subset and is
-    appended to `result`.  Then we try adding each remaining element
-    and recurse.
-    """
-    result.append(subset.copy())
-
-    for i in range(start, len(nums)):
-        subset.append(nums[i])
-        _backtrack(nums, i + 1, subset, result)
-        _ = subset.pop()
-
 
 # ═══════════════════════════════════════════════════════════════
 #  Approach 1 — iterative
 # ═══════════════════════════════════════════════════════════════
+
 
 def gen_all_subsets(mut nums: List[Int]) -> List[List[Int]]:
     """All subsets via iterative extension (no recursion).
@@ -74,6 +52,29 @@ def gen_all_subsets(mut nums: List[Int]) -> List[List[Int]]:
 #  Approach 2 — recursive (no capturing)
 # ═══════════════════════════════════════════════════════════════
 
+def backtrack(
+    nums: List[Int],
+    start: Int,
+    mut subset: List[Int],
+    mut result: List[List[Int]],
+):
+    """Recursive helper — appends every node of the recursion tree.
+
+    At each call, the current `subset` is a valid subset and is
+    appended to `result`.  Then we try adding each remaining element
+    and recurse.
+    """
+    if start > len(nums):
+        return
+    result.append(subset.copy())
+
+    for i in range(start, len(nums)):
+        subset.append(nums[i])
+        backtrack(nums, i + 1, subset, result)
+        _ = subset.pop()
+
+
+
 def gen_all_subsets_recursive(mut nums: List[Int]) -> List[List[Int]]:
     """All subsets via recursive backtracking.
 
@@ -84,13 +85,14 @@ def gen_all_subsets_recursive(mut nums: List[Int]) -> List[List[Int]]:
     sort(nums)
     var result = List[List[Int]](capacity=2 ** len(nums))
     var subset = List[Int]()
-    _backtrack(nums, 0, subset, result)
+    backtrack(nums, 0, subset, result)
     return result^
 
 
 # ═══════════════════════════════════════════════════════════════
 #  Tests
 # ═══════════════════════════════════════════════════════════════
+
 
 def _check_power_set(result: List[List[Int]], nums: List[Int]) raises:
     """Assert that `result` is a valid power set of `nums`."""
@@ -104,6 +106,7 @@ def _check_power_set(result: List[List[Int]], nums: List[Int]) raises:
 
 
 # ── iterative ───────────────────────────────────────────────
+
 
 def test_iter_example_three_elements() raises:
     var nums: List[Int] = [1, 2, 3]
@@ -135,6 +138,7 @@ def test_iter_four_elements() raises:
 
 # ── recursive ───────────────────────────────────────────────
 
+
 def test_rec_example_three_elements() raises:
     var nums: List[Int] = [1, 2, 3]
     var result = gen_all_subsets_recursive(nums)
@@ -165,6 +169,7 @@ def test_rec_four_elements() raises:
 
 # ── cross-verification ──────────────────────────────────────
 
+
 def test_both_agree_empty() raises:
     var a = List[Int]()
     var r1 = gen_all_subsets(a)
@@ -178,8 +183,10 @@ def test_both_agree_single() raises:
     var r1 = gen_all_subsets(a)
     var b: List[Int] = [5]
     var r2 = gen_all_subsets_recursive(b)
-    for x in r1: assert_true(x in r2)
-    for x in r2: assert_true(x in r1)
+    for x in r1:
+        assert_true(x in r2)
+    for x in r2:
+        assert_true(x in r1)
 
 
 def test_both_agree_two() raises:
@@ -195,8 +202,10 @@ def test_both_agree_three() raises:
     var r1 = gen_all_subsets(a)
     var b: List[Int] = [1, 2, 3]
     var r2 = gen_all_subsets_recursive(b)
-    for x in r1: assert_true(x in r2)
-    for x in r2: assert_true(x in r1)
+    for x in r1:
+        assert_true(x in r2)
+    for x in r2:
+        assert_true(x in r1)
 
 
 def test_both_agree_four() raises:
