@@ -7,14 +7,17 @@ duplicate subsets.
 
 **Algorithm** — O(2ⁿ · n) time, O(2ⁿ · n) space (output size).
 
-  Sort the array, then recursively backtrack: at each step, choose
-  whether to include the current element (or skip duplicates within
-  the same recursion level).  Each call appends the current subset
-  to the result list before returning.
+  Sort the array, then build subsets iteratively.  Start with a
+  result containing only the empty subset.  For each element in
+  the sorted array, extend every existing subset by appending the
+  current element and add the new subsets to the result.
 
-  Duplicates are skipped with `if i > start and nums[i] == nums[i-1]`
-  — this ensures that within a single level of recursion, the same
-  value is only picked once as the first element of a new subset.
+  To avoid generating duplicate subsets when the input contains
+  duplicate values, track the number of subsets that existed
+  *before* processing the first occurrence of a value.  When the
+  same value appears again, only extend the subsets that were
+  created since the previous occurrence, not the ones that already
+  included an earlier copy.
 
 Example:
 
@@ -32,10 +35,10 @@ from std.testing import assert_equal, assert_false, assert_true, TestSuite
 def gen_all_subsets(mut nums: List[Int]) -> List[List[Int]]:
     """All subsets of `nums` (power set), with duplicate handling.
 
-    The input is sorted first so that duplicates are adjacent.
-    Uses iterative building: start with `[[]]`, then for each
-    element (skipping duplicates at the same level), extend
-    existing subsets with the new element.
+    Sort first, then build iteratively.  For each element, extend
+    every existing subset by appending the element.  On duplicates,
+    only extend subsets created since the previous occurrence to
+    avoid generating identical subsets.
     """
     sort(nums)
     var result = List[List[Int]](capacity=2 ** len(nums))
