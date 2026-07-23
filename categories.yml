@@ -61,6 +61,7 @@ Dynamic Programming:
   - permutation_str
   - longest_increasing_sub_seq
   - decode_str
+  - gen_all_subsets
 
 Bit Manipulation & Math:
   - num_ones
