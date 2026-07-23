@@ -62,6 +62,7 @@ Dynamic Programming:
   - longest_increasing_sub_seq
   - decode_str
   - gen_all_subsets
+  - gen_all_subsets_no_duplicates
 
 Bit Manipulation & Math:
   - num_ones
